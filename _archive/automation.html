@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomous Workflows — STACKLY Command Center</title>
+  <meta name="description" content="Orchestrate and monitor autonomous event-driven enterprise workflows and AI agents.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <div class="site-preloader" id="dashPreloader">
+    <div class="preloader-brand">
+      <div class="preloader-symbol"><span></span><span></span><span></span><span></span></div>
+      <span class="preloader-title">STACKLY</span>
+    </div>
+    <div class="preloader-track"><div class="preloader-progress"></div></div>
+    <span class="preloader-status">Initializing workspace...</span>
+  </div>
+
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./dashboard.html" class="dash-sidebar__brand">
+        <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">ENTERPRISE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav">
+      <a href="./dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Overview</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>Projects</span>
+      </a>
+      <a href="./automation.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">bolt</span>
+        <span>Automation</span>
+      </a>
+      <a href="./users.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">group</span>
+        <span>Users</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./contact.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-400);">
+        <span class="material-symbols-outlined">home</span>
+        <span>Back to Website</span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="dash-main-area">
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle"><span class="material-symbols-outlined">menu</span></button>
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#667085;">search</span>
+          <input type="text" placeholder="Search workflows by trigger, condition...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn">
+            <div class="dash-user-avatar">SK</div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name">Shobitha</span>
+              <span class="dash-user-role">Lead Architect</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#838e9e;">expand_more</span>
+          </button>
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <a href="./profile.html"><span class="material-symbols-outlined">person</span><span>Operator Profile</span></a>
+            <a href="./settings.html"><span class="material-symbols-outlined">tune</span><span>Preferences</span></a>
+            <div class="dash-dropdown-divider"></div>
+            <a href="./login.html" style="color:#f87171;"><span class="material-symbols-outlined">logout</span><span>Sign Out</span></a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-content">
+      <div class="dash-page-header">
+        <div>
+          <h1>Autonomous Workflow Engine</h1>
+          <p>Configure state-machine pipelines, AI decision gates, and event triggers across enterprise systems.</p>
+        </div>
+
+        <div class="dash-header-actions">
+          <button class="btn btn--bronze btn--sm" onclick="alert('Create Automation wizard launched (front-end demo).');">
+            <span class="material-symbols-outlined">add</span>
+            <span>Create Automation</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="dash-panel">
+        <div class="dash-panel-header">
+          <h3 class="dash-panel-title">Active Autonomous Pipelines</h3>
+          <span class="mono" style="font-size:0.75rem; color:var(--bronze-300);">5 CORE WORKFLOWS · 99.98% SUCCESS RATE</span>
+        </div>
+
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Workflow Name</th>
+                <th>Trigger Event</th>
+                <th>Last Executed</th>
+                <th>Next Scheduled Run</th>
+                <th>Status</th>
+                <th>Toggle Engine</th>
+                <th>Inspect</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 1. Lead Qualification -->
+              <tr>
+                <td>
+                  <strong class="workflow-name">Lead Qualification Engine</strong>
+                  <div class="mono" style="font-size:0.7rem; color:#838e9e;">WF-LEAD-QUAL-01</div>
+                </td>
+                <td>Webhook: Ingestion POST payload</td>
+                <td>2 mins ago</td>
+                <td>Event-driven (Instant)</td>
+                <td><span class="status-badge active"><span class="material-symbols-outlined" style="font-size:12px;">circle</span> Active</span></td>
+                <td>
+                  <label class="dash-toggle">
+                    <input type="checkbox" checked class="automation-toggle-switch">
+                    <span class="dash-toggle-slider"></span>
+                  </label>
+                </td>
+                <td><button class="btn btn--outline-light btn--sm" onclick="alert('Viewing execution graph for Lead Qualification.');">Trace</button></td>
+              </tr>
+
+              <!-- 2. Invoice Processing -->
+              <tr>
+                <td>
+                  <strong class="workflow-name">Invoice &amp; Tax Reconciler</strong>
+                  <div class="mono" style="font-size:0.7rem; color:#838e9e;">WF-FIN-INVOICE-02</div>
+                </td>
+                <td>Daily Cron: 02:00 UTC</td>
+                <td>6 hours ago</td>
+                <td>Tomorrow 02:00 UTC</td>
+                <td><span class="status-badge active"><span class="material-symbols-outlined" style="font-size:12px;">circle</span> Active</span></td>
+                <td>
+                  <label class="dash-toggle">
+                    <input type="checkbox" checked class="automation-toggle-switch">
+                    <span class="dash-toggle-slider"></span>
+                  </label>
+                </td>
+                <td><button class="btn btn--outline-light btn--sm" onclick="alert('Viewing execution graph for Invoice Reconciler.');">Trace</button></td>
+              </tr>
+
+              <!-- 3. Customer Follow-up -->
+              <tr>
+                <td>
+                  <strong class="workflow-name">Customer Inactivity Handler</strong>
+                  <div class="mono" style="font-size:0.7rem; color:#838e9e;">WF-CRM-ENGAGE-03</div>
+                </td>
+                <td>Account inactivity &gt; 14 days</td>
+                <td>42 mins ago</td>
+                <td>In 18 mins</td>
+                <td><span class="status-badge active"><span class="material-symbols-outlined" style="font-size:12px;">circle</span> Active</span></td>
+                <td>
+                  <label class="dash-toggle">
+                    <input type="checkbox" checked class="automation-toggle-switch">
+                    <span class="dash-toggle-slider"></span>
+                  </label>
+                </td>
+                <td><button class="btn btn--outline-light btn--sm" onclick="alert('Viewing execution graph for Inactivity Handler.');">Trace</button></td>
+              </tr>
+
+              <!-- 4. Report Generation -->
+              <tr>
+                <td>
+                  <strong class="workflow-name">Weekly Enterprise Telemetry Digest</strong>
+                  <div class="mono" style="font-size:0.7rem; color:#838e9e;">WF-OPS-REPORT-04</div>
+                </td>
+                <td>Weekly Cron: Sun 23:59 UTC</td>
+                <td>2 days ago</td>
+                <td>Sun 23:59 UTC</td>
+                <td><span class="status-badge active"><span class="material-symbols-outlined" style="font-size:12px;">circle</span> Active</span></td>
+                <td>
+                  <label class="dash-toggle">
+                    <input type="checkbox" checked class="automation-toggle-switch">
+                    <span class="dash-toggle-slider"></span>
+                  </label>
+                </td>
+                <td><button class="btn btn--outline-light btn--sm" onclick="alert('Viewing execution graph for Telemetry Digest.');">Trace</button></td>
+              </tr>
+
+              <!-- 5. Data Sync -->
+              <tr>
+                <td>
+                  <strong class="workflow-name">Multi-Region Data Mesh Sync</strong>
+                  <div class="mono" style="font-size:0.7rem; color:#838e9e;">WF-DATA-MESH-05</div>
+                </td>
+                <td>Debezium CDC Streaming Log</td>
+                <td>12 seconds ago</td>
+                <td>Continuous Sub-second</td>
+                <td><span class="status-badge active"><span class="material-symbols-outlined" style="font-size:12px;">circle</span> Active</span></td>
+                <td>
+                  <label class="dash-toggle">
+                    <input type="checkbox" checked class="automation-toggle-switch">
+                    <span class="dash-toggle-slider"></span>
+                  </label>
+                </td>
+                <td><button class="btn btn--outline-light btn--sm" onclick="alert('Viewing execution graph for Data Mesh Sync.');">Trace</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="./js/dashboard.js"></script>
+</body>
+</html>

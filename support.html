@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help &amp; Enterprise Support — STACKLY SaaS & Technology</title>
+  <meta name="description" content="Dedicated 24/7 technical support, knowledge base documentation, FAQ accordions, and incident ticketing.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">WORKSPACE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="User Navigation">
+      <span class="dash-nav-section-title">Core Workspace</span>
+      <a href="./user-dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./overview.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Overview</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>My Projects</span>
+        <span class="dash-nav-badge">8</span>
+      </a>
+      <a href="./tasks.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+
+      <span class="dash-nav-section-title">Communication</span>
+      <a href="./notifications.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">notifications</span>
+        <span>Notifications</span>
+        <span class="dash-nav-badge" style="background:rgba(239,68,68,0.2); color:#fca5a5; border-color:rgba(239,68,68,0.3);">3 New</span>
+      </a>
+      <a href="./activity.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">history</span>
+        <span>Recent Activity</span>
+      </a>
+
+      <span class="dash-nav-section-title">Platform &amp; Finance</span>
+      <a href="./billing.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span>Billing</span>
+      </a>
+      <a href="./subscription.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">credit_card</span>
+        <span>Subscription</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+
+      <span class="dash-nav-section-title">Account</span>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+      <a href="./support.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Website</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN SCROLLABLE CONTENT AREA ==================== -->
+  <div class="dash-main-area">
+
+    <!-- Top Sticky Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./user-dashboard.html">Workspace</a>
+          <span class="sep">/</span>
+          <span class="current">Help &amp; Support</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" placeholder="Search documentation, guides, FAQs...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <a href="./notifications.html" class="dash-action-btn" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot"></span>
+        </a>
+
+        <a href="./support.html" class="dash-action-btn" aria-label="Help and Support">
+          <span class="material-symbols-outlined">help_outline</span>
+        </a>
+
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open user profile menu">
+            <div class="dash-user-avatar">
+              <span data-user-initials>SH</span>
+            </div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Shobitha</span>
+              <span class="dash-user-email" data-user-email>shobitha@gmail.com</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Shobitha</strong>
+              <span data-user-email>shobitha@gmail.com</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;" data-user-plan>Professional Tier</div>
+            </div>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <span>My Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Account Settings</span>
+            </a>
+            <a href="./billing.html">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <span>Billing &amp; Invoices</span>
+            </a>
+            <a href="./subscription.html">
+              <span class="material-symbols-outlined">credit_card</span>
+              <span>Subscription</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Deep Scrollable Support Content -->
+    <main class="dash-content">
+
+      <!-- Header & Support Action -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1.25rem;">
+        <div>
+          <span class="mono" style="font-size:0.75rem; color:var(--bronze-300); letter-spacing:0.1em; text-transform:uppercase;">Dedicated Engineering Desk</span>
+          <h1 style="font-size:1.85rem; color:#fff; font-weight:700; margin:0.25rem 0 0.5rem 0;">Help Center &amp; Support</h1>
+          <p style="font-size:0.9rem; color:#94a3b8; margin:0;">24/7 dedicated solutions engineering, architecture guidelines, and ticket triage.</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="openTicketModal">
+          <span class="material-symbols-outlined" style="font-size:18px;">support_agent</span>
+          <span>Submit Support Ticket</span>
+        </button>
+      </div>
+
+      <!-- Quick Knowledge Base Cards (4 Cards) -->
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1.25rem; margin-bottom:2rem;">
+        <div class="dash-panel" style="margin-bottom:0; text-align:center; padding:1.5rem;">
+          <div style="width:48px; height:48px; border-radius:10px; background:rgba(184,130,79,0.12); color:var(--bronze-300); display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
+            <span class="material-symbols-outlined" style="font-size:24px;">menu_book</span>
+          </div>
+          <h3 style="font-size:1.05rem; color:#fff; margin-bottom:0.35rem;">API Reference</h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem; line-height:1.4;">Comprehensive REST &amp; gRPC endpoints documentation.</p>
+          <a href="#" class="btn btn-secondary" style="width:100%; justify-content:center; font-size:0.75rem;">Browse Docs</a>
+        </div>
+
+        <div class="dash-panel" style="margin-bottom:0; text-align:center; padding:1.5rem;">
+          <div style="width:48px; height:48px; border-radius:10px; background:rgba(74,222,128,0.1); color:#4ade80; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
+            <span class="material-symbols-outlined" style="font-size:24px;">schema</span>
+          </div>
+          <h3 style="font-size:1.05rem; color:#fff; margin-bottom:0.35rem;">Architecture Guides</h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem; line-height:1.4;">Zero-trust microservices and multi-region patterns.</p>
+          <a href="#" class="btn btn-secondary" style="width:100%; justify-content:center; font-size:0.75rem;">View Patterns</a>
+        </div>
+
+        <div class="dash-panel" style="margin-bottom:0; text-align:center; padding:1.5rem;">
+          <div style="width:48px; height:48px; border-radius:10px; background:rgba(59,130,246,0.1); color:#60a5fa; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
+            <span class="material-symbols-outlined" style="font-size:24px;">forum</span>
+          </div>
+          <h3 style="font-size:1.05rem; color:#fff; margin-bottom:0.35rem;">Developer Forum</h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem; line-height:1.4;">Community Q&amp;A and peer solutions exchange.</p>
+          <a href="#" class="btn btn-secondary" style="width:100%; justify-content:center; font-size:0.75rem;">Join Discussion</a>
+        </div>
+
+        <div class="dash-panel" style="margin-bottom:0; text-align:center; padding:1.5rem;">
+          <div style="width:48px; height:48px; border-radius:10px; background:rgba(168,85,247,0.1); color:#c084fc; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
+            <span class="material-symbols-outlined" style="font-size:24px;">wifi_tethering</span>
+          </div>
+          <h3 style="font-size:1.05rem; color:#fff; margin-bottom:0.35rem;">Status Dashboard</h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem; line-height:1.4;">Live multi-region cluster uptime and incidents.</p>
+          <a href="./overview.html" class="btn btn-secondary" style="width:100%; justify-content:center; font-size:0.75rem;">Cluster Status</a>
+        </div>
+      </div>
+
+      <!-- FAQ Accordion -->
+      <section class="dash-panel" style="margin-bottom:2rem;">
+        <div class="dash-panel-header">
+          <div>
+            <h3 style="font-size:1.15rem; color:#fff; margin:0 0 4px 0;">Frequently Asked Technical Questions</h3>
+            <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Answers to common architectural, billing, and API questions.</p>
+          </div>
+        </div>
+
+        <div class="faq-accordion">
+          <!-- Q1 -->
+          <div class="faq-card is-open">
+            <button type="button" class="faq-header">
+              <span>How do I configure Anycast IP multi-region routing?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-content">
+              Anycast routing is enabled automatically across all Professional and Business Tier clusters. Ingress traffic routes dynamically to the nearest edge POP (us-east-1, eu-central-1, or ap-southeast-1) with sub-25ms latency guarantees.
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="faq-card">
+            <button type="button" class="faq-header">
+              <span>What is the automated key rotation policy for Zero-Trust Vault?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-content">
+              STACKLY cryptographic keys are managed within dedicated FIPS 140-2 Level 3 hardware security modules. Automatic key rotation triggers every 30 days without breaking existing active sessions or decrypting database archives.
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="faq-card">
+            <button type="button" class="faq-header">
+              <span>How are overage charges calculated for API volume?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-content">
+              Your Professional Tier includes 10,000,000 monthly invocations. Overage requests are billed at $12 per additional 1,000,000 requests and billed automatically on your monthly billing invoice date.
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="faq-card">
+            <button type="button" class="faq-header">
+              <span>How do I invite additional developers to my workspace?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-content">
+              Navigate to Settings &rarr; Account or Team RBAC to invite members via email. Invited team members are prompted to set up mandatory Two-Factor Authentication before accessing cluster secrets.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Support Tickets Table -->
+      <section class="dash-panel" style="padding:0; overflow:hidden; margin-bottom:1rem;">
+        <div style="padding:1.5rem 1.75rem; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h3 style="font-size:1.15rem; color:#fff; margin:0 0 4px 0;">My Active Support Tickets</h3>
+            <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Track ticket status and responses from our solutions architects.</p>
+          </div>
+        </div>
+
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Ticket ID</th>
+                <th>Subject</th>
+                <th>Priority</th>
+                <th>Category</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong class="mono" style="color:var(--bronze-300);">TCK-8421</strong></td>
+                <td><strong style="color:#fff;">Dedicated IP Whitelist Request for CI/CD Runner</strong></td>
+                <td><span class="dash-badge badge-review">Medium</span></td>
+                <td><span>Infrastructure</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Yesterday</span></td>
+                <td><span class="dash-badge badge-active">In Review</span></td>
+                <td><button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;">View Thread</button></td>
+              </tr>
+              <tr>
+                <td><strong class="mono" style="color:var(--bronze-300);">TCK-7910</strong></td>
+                <td><strong style="color:#fff;">SOC-2 Type II Custom Vendor Questionnaire Verification</strong></td>
+                <td><span class="dash-badge badge-active">High</span></td>
+                <td><span>Compliance</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Oct 02</span></td>
+                <td><span class="dash-badge badge-active" style="color:#4ade80;">Resolved</span></td>
+                <td><button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;">Archive</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Submit Ticket Modal -->
+  <div class="dash-modal" id="ticketModal">
+    <div class="dash-modal-dialog">
+      <div class="dash-modal-header">
+        <h3>Submit Technical Support Ticket</h3>
+        <button type="button" class="dash-modal-close-btn" id="closeTicketModal">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <form id="newTicketForm">
+        <div class="dash-modal-body">
+          <div class="dash-form-group">
+            <label class="dash-form-label" for="ticketSubject">Issue Subject</label>
+            <input type="text" class="dash-form-input" id="ticketSubject" placeholder="e.g. Latency increase on eu-central-1 endpoint" required>
+          </div>
+          <div class="dash-form-row col-2">
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="ticketCategory">Category</label>
+              <select class="dash-form-select" id="ticketCategory">
+                <option value="Cluster Performance">Cluster Performance</option>
+                <option value="API & Webhooks">API &amp; Webhooks</option>
+                <option value="Security & IAM">Security &amp; IAM</option>
+                <option value="Billing & Invoicing">Billing &amp; Invoicing</option>
+              </select>
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="ticketSeverity">Severity</label>
+              <select class="dash-form-select" id="ticketSeverity">
+                <option value="Low">P3 Low — General Question</option>
+                <option value="Medium" selected>P2 Medium — Minor Degradation</option>
+                <option value="High">P1 High — Production Impaired</option>
+                <option value="Critical">P0 Critical — Total Service Outage</option>
+              </select>
+            </div>
+          </div>
+          <div class="dash-form-group">
+            <label class="dash-form-label" for="ticketDesc">Technical Details &amp; Steps to Reproduce</label>
+            <textarea class="dash-form-textarea" id="ticketDesc" rows="4" placeholder="Include error logs, HTTP response codes, and affected request IDs..." required></textarea>
+          </div>
+        </div>
+        <div class="dash-modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelTicketModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="material-symbols-outlined" style="font-size:18px;">send</span>
+            <span>Submit Ticket</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('user');
+
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+
+      function showToast(msg) {
+        const c = document.getElementById('dashToastContainer');
+        const t = document.createElement('div');
+        t.className = 'dash-toast';
+        t.innerHTML = `<span class="material-symbols-outlined" style="color:var(--bronze-400);">check_circle</span><span>${msg}</span>`;
+        c.appendChild(t);
+        setTimeout(() => t.remove(), 3500);
+      }
+
+      // FAQ Accordion Toggle
+      document.querySelectorAll('.faq-header').forEach(header => {
+        header.addEventListener('click', function () {
+          const card = this.closest('.faq-card');
+          card.classList.toggle('is-open');
+        });
+      });
+
+      // Ticket Modal
+      const modal = document.getElementById('ticketModal');
+      const openBtn = document.getElementById('openTicketModal');
+      const closeBtn = document.getElementById('closeTicketModal');
+      const cancelBtn = document.getElementById('cancelTicketModal');
+      const form = document.getElementById('newTicketForm');
+
+      if (openBtn) openBtn.addEventListener('click', () => modal.classList.add('is-open'));
+      if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('is-open'));
+      if (cancelBtn) cancelBtn.addEventListener('click', () => modal.classList.remove('is-open'));
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const sub = document.getElementById('ticketSubject').value.trim();
+          modal.classList.remove('is-open');
+          form.reset();
+          showToast(`Ticket "${sub}" submitted. Our team will respond shortly.`);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

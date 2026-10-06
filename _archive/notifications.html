@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification Center — STACKLY Command Center</title>
+  <meta name="description" content="Operational notification hub for critical cluster alerts, project milestones, security scans, and team events.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+  <style>
+    .notif-card-item {
+      background-color: #13171d;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+    }
+    .notif-card-item:hover {
+      border-color: rgba(184,130,79,0.3);
+    }
+    .notif-card-item.is-unread {
+      background-color: #181d24;
+      border-left: 3px solid var(--bronze-400);
+    }
+    .notif-type-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background-color: rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .notif-body h4 {
+      font-size: 0.95rem;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
+    }
+    .notif-body p {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="dashboard-body">
+
+  <div class="site-preloader" id="dashPreloader">
+    <div class="preloader-brand">
+      <div class="preloader-symbol"><span></span><span></span><span></span><span></span></div>
+      <span class="preloader-title">STACKLY</span>
+    </div>
+    <div class="preloader-track"><div class="preloader-progress"></div></div>
+    <span class="preloader-status">Initializing workspace...</span>
+  </div>
+
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./dashboard.html" class="dash-sidebar__brand">
+        <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">ENTERPRISE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav">
+      <a href="./dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Overview</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>Projects</span>
+      </a>
+      <a href="./automation.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">bolt</span>
+        <span>Automation</span>
+      </a>
+      <a href="./users.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">group</span>
+        <span>Users</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./contact.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-400);">
+        <span class="material-symbols-outlined">home</span>
+        <span>Back to Website</span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="dash-main-area">
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle"><span class="material-symbols-outlined">menu</span></button>
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#667085;">search</span>
+          <input type="text" placeholder="Search notification events...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn">
+            <div class="dash-user-avatar">SK</div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name">Shobitha</span>
+              <span class="dash-user-role">Lead Architect</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#838e9e;">expand_more</span>
+          </button>
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <a href="./profile.html"><span class="material-symbols-outlined">person</span><span>Operator Profile</span></a>
+            <a href="./settings.html"><span class="material-symbols-outlined">tune</span><span>Preferences</span></a>
+            <div class="dash-dropdown-divider"></div>
+            <a href="./login.html" style="color:#f87171;"><span class="material-symbols-outlined">logout</span><span>Sign Out</span></a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-content">
+      <div class="dash-page-header">
+        <div>
+          <h1>Notification &amp; Incident Center</h1>
+          <p>Real-time audit log of system events, architectural milestones, and cluster health alerts.</p>
+        </div>
+
+        <div class="dash-header-actions">
+          <button class="btn btn--outline-light btn--sm" id="markAllReadBtn">
+            <span class="material-symbols-outlined">done_all</span>
+            <span>Mark All as Read</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Notification Filter Tabs -->
+      <div class="time-filter-group" style="margin-bottom: 2rem;">
+        <button class="time-filter-btn is-active" onclick="alert('Viewing: All');">All (8)</button>
+        <button class="time-filter-btn" onclick="alert('Viewing: Unread');">Unread (2)</button>
+        <button class="time-filter-btn" onclick="alert('Viewing: Projects');">Projects (3)</button>
+        <button class="time-filter-btn" onclick="alert('Viewing: System');">System (2)</button>
+        <button class="time-filter-btn" onclick="alert('Viewing: Security');">Security (1)</button>
+      </div>
+
+      <!-- Notifications List -->
+      <div style="max-width: 900px;">
+        
+        <!-- 1. System Failover (Unread) -->
+        <div class="notif-card-item is-unread">
+          <div class="notif-type-icon" style="color:#4ade80;">
+            <span class="material-symbols-outlined">cloud_sync</span>
+          </div>
+          <div class="notif-body">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px;">
+              <span class="mono" style="font-size:0.6875rem; color:var(--bronze-300);">SYSTEM INFRASTRUCTURE · UNREAD</span>
+              <span class="mono" style="font-size:0.6875rem; color:#838e9e;">12 MINUTES AGO</span>
+            </div>
+            <h4>Multi-Region EKS Failover Drill Concluded Successfully</h4>
+            <p>Cluster Frankfurt-01 replicated 100% of telemetry traffic to Dublin within 640ms. Zero dropped packets observed across 42,000 active sessions.</p>
+          </div>
+        </div>
+
+        <!-- 2. AI Intelligence (Unread) -->
+        <div class="notif-card-item is-unread">
+          <div class="notif-type-icon" style="color:var(--bronze-400);">
+            <span class="material-symbols-outlined">psychology</span>
+          </div>
+          <div class="notif-body">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px;">
+              <span class="mono" style="font-size:0.6875rem; color:var(--bronze-300);">AI COGNITIVE ENGINE · UNREAD</span>
+              <span class="mono" style="font-size:0.6875rem; color:#838e9e;">45 MINUTES AGO</span>
+            </div>
+            <h4>Autonomous Inference Weights v4.8 Propagated</h4>
+            <p>The updated fine-tuned model checkpoint for customs document parsing has passed deterministic regression tests and is live in staging.</p>
+          </div>
+        </div>
+
+        <!-- 3. Security Check (Read) -->
+        <div class="notif-card-item">
+          <div class="notif-type-icon" style="color:#60a5fa;">
+            <span class="material-symbols-outlined">verified_user</span>
+          </div>
+          <div class="notif-body">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px;">
+              <span class="mono" style="font-size:0.6875rem; color:#838e9e;">SECURITY POSTURE</span>
+              <span class="mono" style="font-size:0.6875rem; color:#838e9e;">2 HOURS AGO</span>
+            </div>
+            <h4>SOC2 Automated Telemetry Audit: 100% Compliant</h4>
+            <p>Continuous compliance scan evaluated 214 infrastructure controls. Zero critical or medium risks logged.</p>
+          </div>
+        </div>
+
+        <!-- 4. Project Milestone (Read) -->
+        <div class="notif-card-item">
+          <div class="notif-type-icon" style="color:var(--bronze-300);">
+            <span class="material-symbols-outlined">folder_special</span>
+          </div>
+          <div class="notif-body">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px;">
+              <span class="mono" style="font-size:0.6875rem; color:#838e9e;">PROJECT MILESTONE</span>
+              <span class="mono" style="font-size:0.6875rem; color:#838e9e;">4 HOURS AGO</span>
+            </div>
+            <h4>Meridian Capital Sprint 04 Signed Off</h4>
+            <p>Payment settlement sub-millisecond benchmarking report confirmed 8.2ms latency SLA.</p>
+          </div>
+        </div>
+
+        <!-- 5. Team Access (Read) -->
+        <div class="notif-card-item">
+          <div class="notif-type-icon" style="color:#838e9e;">
+            <span class="material-symbols-outlined">person_pin</span>
+          </div>
+          <div class="notif-body">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px;">
+              <span class="mono" style="font-size:0.6875rem; color:#838e9e;">IDENTITY &amp; ACCESS</span>
+              <span class="mono" style="font-size:0.6875rem; color:#838e9e;">YESTERDAY</span>
+            </div>
+            <h4>Operator Added: David Adeyemi</h4>
+            <p>Assigned to Model Deployer RBAC role by Root Admin Shobitha.</p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="./js/dashboard.js"></script>
+</body>
+</html>

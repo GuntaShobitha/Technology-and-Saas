@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Command Center Overview — STACKLY</title>
+  <meta name="description" content="STACKLY Enterprise Command Center. Telemetry, active projects, autonomous workflows, and system health.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- Dashboard Preloader -->
+  <div class="site-preloader" id="dashPreloader">
+    <div class="preloader-brand">
+      <div class="preloader-symbol">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <span class="preloader-title">STACKLY</span>
+    </div>
+    <div class="preloader-track"><div class="preloader-progress"></div></div>
+    <span class="preloader-status">Initializing workspace...</span>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./dashboard.html" class="dash-sidebar__brand">
+        <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">ENTERPRISE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="Dashboard Sidebar">
+      <a href="./dashboard.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Overview</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>Projects</span>
+      </a>
+      <a href="./automation.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">bolt</span>
+        <span>Automation</span>
+      </a>
+      <a href="./users.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">group</span>
+        <span>Users</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./contact.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-400);">
+        <span class="material-symbols-outlined">home</span>
+        <span>Back to Website</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main View Area -->
+  <div class="dash-main-area">
+    
+    <!-- Topbar -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle Sidebar">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#667085;">search</span>
+          <input type="text" placeholder="Search telemetry, projects, APIs...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <!-- Notifications button & popover -->
+        <div style="position: relative;">
+          <button class="dash-action-btn" id="dashNotifBtn" aria-label="View notifications">
+            <span class="material-symbols-outlined" style="font-size:20px;">notifications</span>
+            <span class="dash-badge-dot"></span>
+          </button>
+
+          <div class="dash-notif-popover" id="dashNotifPopover">
+            <div class="dash-notif-header">
+              <h4>System Alerts</h4>
+              <a href="./notifications.html" style="font-size:0.75rem; color:var(--bronze-400);">View All</a>
+            </div>
+            <div class="dash-notif-list">
+              <div class="dash-notif-item is-unread">
+                <span class="material-symbols-outlined" style="color:#4ade80; font-size:18px;">check_circle</span>
+                <div class="dash-notif-content">
+                  <h5>Multi-Region EKS Failover Successful</h5>
+                  <p>Cluster Frankfurt-01 replicated 100% of traffic to Dublin without packet drop.</p>
+                  <div class="dash-notif-time">12 MINUTES AGO</div>
+                </div>
+              </div>
+              <div class="dash-notif-item is-unread">
+                <span class="material-symbols-outlined" style="color:var(--bronze-400); font-size:18px;">psychology</span>
+                <div class="dash-notif-content">
+                  <h5>AI Swarm Model Updated</h5>
+                  <p>Inference checkpoint v4.8 deployed to customer document extraction.</p>
+                  <div class="dash-notif-time">45 MINUTES AGO</div>
+                </div>
+              </div>
+              <div class="dash-notif-item">
+                <span class="material-symbols-outlined" style="color:#60a5fa; font-size:18px;">info</span>
+                <div class="dash-notif-content">
+                  <h5>Monthly Security Scan Clean</h5>
+                  <p>Zero critical CVE vulnerabilities detected in container registry.</p>
+                  <div class="dash-notif-time">2 HOURS AGO</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="./contact.html" class="dash-action-btn" aria-label="Help Center">
+          <span class="material-symbols-outlined" style="font-size:20px;">help_outline</span>
+        </a>
+
+        <!-- User Profile Dropdown -->
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn">
+            <div class="dash-user-avatar">SK</div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name">Shobitha</span>
+              <span class="dash-user-role">Lead Architect</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#838e9e;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <a href="./profile.html">
+              <span class="material-symbols-outlined">person</span>
+              <span>Operator Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Preferences</span>
+            </a>
+            <a href="./contact.html">
+              <span class="material-symbols-outlined">contact_support</span>
+              <span>Support Desk</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <a href="./login.html" style="color: #f87171;">
+              <span class="material-symbols-outlined">logout</span>
+              <span>Sign Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Workspace -->
+    <main class="dash-content">
+      
+      <!-- Page Header -->
+      <div class="dash-page-header">
+        <div>
+          <h1>Good morning, Shobitha</h1>
+          <p>Here’s what’s happening with your enterprise platform today.</p>
+        </div>
+
+        <div class="dash-header-actions">
+          <button class="btn btn--outline-light btn--sm" id="exportReportBtn">
+            <span class="material-symbols-outlined">download</span>
+            <span>Export Report</span>
+          </button>
+          <button class="btn btn--bronze btn--sm" id="openNewProjectModal">
+            <span class="material-symbols-outlined">add</span>
+            <span>Create Project</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Metric Cards (5 Cards) -->
+      <div class="dash-kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Gross Revenue</span>
+            <div class="kpi-icon"><span class="material-symbols-outlined">payments</span></div>
+          </div>
+          <div class="kpi-value">$1,482,900</div>
+          <div class="kpi-trend positive">
+            <span class="material-symbols-outlined" style="font-size:14px;">trending_up</span>
+            <span>+18.4% vs last period</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Active Users</span>
+            <div class="kpi-icon"><span class="material-symbols-outlined">group</span></div>
+          </div>
+          <div class="kpi-value">42,850</div>
+          <div class="kpi-trend positive">
+            <span class="material-symbols-outlined" style="font-size:14px;">trending_up</span>
+            <span>+12.3% YoY</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Active Projects</span>
+            <div class="kpi-icon"><span class="material-symbols-outlined">folder_open</span></div>
+          </div>
+          <div class="kpi-value">28</div>
+          <div class="kpi-trend neutral">
+            <span class="material-symbols-outlined" style="font-size:14px;">timelapse</span>
+            <span>4 nearing release</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Conversion Rate</span>
+            <div class="kpi-icon"><span class="material-symbols-outlined">conversion_path</span></div>
+          </div>
+          <div class="kpi-value">4.86%</div>
+          <div class="kpi-trend positive">
+            <span class="material-symbols-outlined" style="font-size:14px;">trending_up</span>
+            <span>+0.8% MoM</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">System Health</span>
+            <div class="kpi-icon"><span class="material-symbols-outlined">monitoring</span></div>
+          </div>
+          <div class="kpi-value">99.98%</div>
+          <div class="kpi-trend positive">
+            <span class="material-symbols-outlined" style="font-size:14px;">check_circle</span>
+            <span>All nodes operational</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Graph Panel with Dynamic 7D/30D/90D/1Y Interactive Switching -->
+      <div class="dash-panel">
+        <div class="dash-panel-header">
+          <div>
+            <span class="mono" style="font-size:0.7rem; color:var(--bronze-300);">ENTERPRISE TELEMETRY &amp; REVENUE TRAJECTORY</span>
+            <div style="display:flex; align-items:baseline; gap:0.75rem; margin-top: 4px;">
+              <h2 class="dash-panel-title" id="chartLiveMetric" style="font-size:1.85rem; font-family:var(--font-display);">$542,800</h2>
+              <span style="font-size:0.8125rem; color:#4ade80;">+24.2% annualized growth</span>
+            </div>
+          </div>
+
+          <div class="time-filter-group">
+            <button class="time-filter-btn" data-timeframe="7D">7D</button>
+            <button class="time-filter-btn is-active" data-timeframe="30D">30D</button>
+            <button class="time-filter-btn" data-timeframe="90D">90D</button>
+            <button class="time-filter-btn" data-timeframe="1Y">1Y</button>
+          </div>
+        </div>
+
+        <div class="svg-chart-container" id="telemetryChartContainer">
+          <!-- Dynamic SVG injected via js/dashboard.js -->
+        </div>
+      </div>
+
+      <!-- Split Row: Projects Overview Table + STACKLY Intelligence AI Card -->
+      <div style="display: grid; grid-template-columns: 2fr 1.1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+        
+        <!-- Project Table Panel -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <h3 class="dash-panel-title">Active Project Deliveries</h3>
+            <a href="./projects.html" class="mono" style="font-size:0.75rem; color:var(--bronze-400);">View All (28)</a>
+          </div>
+
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Project Name</th>
+                  <th>Client</th>
+                  <th>Status</th>
+                  <th>Progress</th>
+                  <th>Owner</th>
+                </tr>
+              </thead>
+              <tbody id="projectsTableBody">
+                <tr>
+                  <td><strong>Meridian Payment Settlement</strong></td>
+                  <td>Meridian Capital</td>
+                  <td><span class="status-badge active"><span class="material-symbols-outlined" style="font-size:12px;">circle</span> Active</span></td>
+                  <td>
+                    <div class="progress-bar-wrap">
+                      <div class="progress-bar-fill" style="width: 82%;"></div>
+                    </div>
+                  </td>
+                  <td>Shobitha</td>
+                </tr>
+                <tr>
+                  <td><strong>Kinetix Clinical Data Mesh</strong></td>
+                  <td>Kinetix Health</td>
+                  <td><span class="status-badge in-progress"><span class="material-symbols-outlined" style="font-size:12px;">timelapse</span> In Review</span></td>
+                  <td>
+                    <div class="progress-bar-wrap">
+                      <div class="progress-bar-fill" style="width: 95%;"></div>
+                    </div>
+                  </td>
+                  <td>Marcus Chen</td>
+                </tr>
+                <tr>
+                  <td><strong>Nexus Manifest Event Stream</strong></td>
+                  <td>Nexus Freight</td>
+                  <td><span class="status-badge active"><span class="material-symbols-outlined" style="font-size:12px;">circle</span> Active</span></td>
+                  <td>
+                    <div class="progress-bar-wrap">
+                      <div class="progress-bar-fill" style="width: 64%;"></div>
+                    </div>
+                  </td>
+                  <td>Sophia L.</td>
+                </tr>
+                <tr>
+                  <td><strong>OmniRetail Real-Time Inventory</strong></td>
+                  <td>OmniRetail Group</td>
+                  <td><span class="status-badge pending"><span class="material-symbols-outlined" style="font-size:12px;">hourglass_top</span> Planning</span></td>
+                  <td>
+                    <div class="progress-bar-wrap">
+                      <div class="progress-bar-fill" style="width: 30%;"></div>
+                    </div>
+                  </td>
+                  <td>David A.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- AI Insights Card -->
+        <div class="ai-insight-card">
+          <div class="ai-insight-badge">
+            <span class="material-symbols-outlined" style="font-size:16px;">psychology</span>
+            <span>STACKLY Intelligence</span>
+          </div>
+          <h3>Infrastructure Optimization Advisory</h3>
+          <p>
+            "Cluster EU-North-1 experienced a 34% drop in API call density. Recommending dynamic down-scaling of 6 standby worker nodes to save ~$1,420 monthly without SLA risk."
+          </p>
+          <div style="background-color: rgba(0,0,0,0.3); border-radius: 6px; padding: 1rem; margin-bottom: 1.25rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom: 4px;">
+              <span class="mono" style="color:#838e9e;">ESTIMATED SAVINGS</span>
+              <span class="mono" style="color:#4ade80;">$17,040 / YR</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem;">
+              <span class="mono" style="color:#838e9e;">CONFIDENCE SCORE</span>
+              <span class="mono" style="color:var(--bronze-300);">99.2%</span>
+            </div>
+          </div>
+          <button class="btn btn--bronze btn--sm" style="width:100%;" onclick="alert('Autonomous action approved: node pools scheduled for down-scale during low-traffic windows.');">
+            Approve Optimization
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Bottom Split: Recent Activity & System Performance -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        
+        <!-- Activity Feed -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <h3 class="dash-panel-title">Recent Operational Activity</h3>
+            <span class="mono" style="font-size:0.72rem; color:#838e9e;">LAST 24 HOURS</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <div style="display:flex; gap:0.85rem; font-size:0.85rem;">
+              <span class="material-symbols-outlined" style="color:#4ade80; font-size:18px;">cloud_sync</span>
+              <div>
+                <div><strong>Kafka Topic Rebalanced:</strong> Partition offset synced for Meridian payments.</div>
+                <div class="mono" style="font-size:0.6875rem; color:#838e9e;">18m ago · Automated</div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:0.85rem; font-size:0.85rem;">
+              <span class="material-symbols-outlined" style="color:var(--bronze-400); font-size:18px;">person_add</span>
+              <div>
+                <div><strong>Operator Granted Access:</strong> David Adeyemi added to Production Security Role.</div>
+                <div class="mono" style="font-size:0.6875rem; color:#838e9e;">1h 12m ago · Shobitha</div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:0.85rem; font-size:0.85rem;">
+              <span class="material-symbols-outlined" style="color:#60a5fa; font-size:18px;">verified_user</span>
+              <div>
+                <div><strong>Continuous Compliance Audit:</strong> SOC2 Type II automated check passed (214/214).</div>
+                <div class="mono" style="font-size:0.6875rem; color:#838e9e;">3h 40m ago · Security Bot</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hardware & Cluster Telemetry Meters -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <h3 class="dash-panel-title">System Infrastructure Meters</h3>
+            <span class="status-badge active"><span class="material-symbols-outlined" style="font-size:12px;">circle</span> NORMAL</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:1.25rem;">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.8125rem; margin-bottom: 0.35rem;">
+                <span>Global API P99 Latency</span>
+                <span class="mono" style="color:#4ade80;">8.2ms / target 15ms</span>
+              </div>
+              <div class="progress-bar-wrap" style="max-width:100%; height:8px;">
+                <div class="progress-bar-fill" style="width: 55%; background-color:#4ade80;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.8125rem; margin-bottom: 0.35rem;">
+                <span>Distributed CPU Core Utilization</span>
+                <span class="mono" style="color:var(--bronze-300);">32% across 1,920 Cores</span>
+              </div>
+              <div class="progress-bar-wrap" style="max-width:100%; height:8px;">
+                <div class="progress-bar-fill" style="width: 32%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.8125rem; margin-bottom: 0.35rem;">
+                <span>NVMe Database Storage Allocated</span>
+                <span class="mono" style="color:var(--paper-sand);">68% of 40 TB</span>
+              </div>
+              <div class="progress-bar-wrap" style="max-width:100%; height:8px;">
+                <div class="progress-bar-fill" style="width: 68%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Create Project Modal Dialog -->
+  <div class="dash-modal" id="newProjectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="dash-modal-dialog">
+      <div class="dash-modal-header">
+        <h3 id="modalTitle">Create New Enterprise Project</h3>
+        <button id="closeNewProjectModal" class="btn--text" style="color:#cbd5e1;"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <form id="newProjectForm">
+        <div class="dash-modal-body">
+          <div class="dash-form-group">
+            <label class="dash-form-label">Project Name</label>
+            <input type="text" name="projectName" class="dash-form-input" placeholder="e.g. Apex Global Trading Engine" required>
+          </div>
+          <div class="dash-form-group">
+            <label class="dash-form-label">Client Name</label>
+            <input type="text" name="clientName" class="dash-form-input" placeholder="e.g. Apex Holdings LLC" required>
+          </div>
+          <div class="dash-form-group">
+            <label class="dash-form-label">Architecture Lead</label>
+            <select name="leadArchitect" class="dash-form-select">
+              <option value="Shobitha">Shobitha (Lead Architect)</option>
+              <option value="Marcus Chen">Marcus Chen (VP Cloud)</option>
+              <option value="David Adeyemi">David Adeyemi (Director AI)</option>
+              <option value="Dr. Sophia L.">Dr. Sophia Lindqvist (Cryptography)</option>
+            </select>
+          </div>
+          <div class="dash-form-group">
+            <label class="dash-form-label">SLA Tier</label>
+            <select name="slaTier" class="dash-form-select">
+              <option>Tier 1: 99.99% Availability (&lt; 15ms P99)</option>
+              <option>Tier 2: 99.95% Availability (&lt; 30ms P99)</option>
+              <option>Mission-Critical Defense Tier (Post-Quantum)</option>
+            </select>
+          </div>
+        </div>
+        <div class="dash-modal-footer">
+          <button type="button" class="btn btn--outline-light btn--sm" id="cancelNewProjectModal">Cancel</button>
+          <button type="submit" class="btn btn--bronze btn--sm">Deploy Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="./js/dashboard.js"></script>
+</body>
+</html>

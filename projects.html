@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Projects — STACKLY SaaS & Technology</title>
+  <meta name="description" content="Manage and orchestrate enterprise projects, microservices, and deployments across cloud clusters.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">WORKSPACE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="User Navigation">
+      <span class="dash-nav-section-title">Core Workspace</span>
+      <a href="./user-dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./overview.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Overview</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">folder</span>
+        <span>My Projects</span>
+        <span class="dash-nav-badge">8 Active</span>
+      </a>
+      <a href="./tasks.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+
+      <span class="dash-nav-section-title">Communication</span>
+      <a href="./notifications.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">notifications</span>
+        <span>Notifications</span>
+        <span class="dash-nav-badge" style="background:rgba(239,68,68,0.2); color:#fca5a5; border-color:rgba(239,68,68,0.3);">3 New</span>
+      </a>
+      <a href="./activity.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">history</span>
+        <span>Recent Activity</span>
+      </a>
+
+      <span class="dash-nav-section-title">Platform &amp; Finance</span>
+      <a href="./billing.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span>Billing</span>
+      </a>
+      <a href="./subscription.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">credit_card</span>
+        <span>Subscription</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+
+      <span class="dash-nav-section-title">Account</span>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+      <a href="./support.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Website</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN SCROLLABLE CONTENT AREA ==================== -->
+  <div class="dash-main-area">
+
+    <!-- Top Sticky Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./user-dashboard.html">Workspace</a>
+          <span class="sep">/</span>
+          <span class="current">My Projects</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" id="projectSearchInput" placeholder="Filter projects by title, stack, or owner...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <a href="./notifications.html" class="dash-action-btn" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot"></span>
+        </a>
+
+        <a href="./support.html" class="dash-action-btn" aria-label="Help and Support">
+          <span class="material-symbols-outlined">help_outline</span>
+        </a>
+
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open user profile menu">
+            <div class="dash-user-avatar">
+              <span data-user-initials>SH</span>
+            </div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Shobitha</span>
+              <span class="dash-user-email" data-user-email>shobitha@gmail.com</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Shobitha</strong>
+              <span data-user-email>shobitha@gmail.com</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;" data-user-plan>Professional Tier</div>
+            </div>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <span>My Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Account Settings</span>
+            </a>
+            <a href="./billing.html">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <span>Billing &amp; Invoices</span>
+            </a>
+            <a href="./subscription.html">
+              <span class="material-symbols-outlined">credit_card</span>
+              <span>Subscription</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Deep Scrollable Projects Content -->
+    <main class="dash-content">
+
+      <!-- Header & Action Controls -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1.25rem;">
+        <div>
+          <span class="mono" style="font-size:0.75rem; color:var(--bronze-300); letter-spacing:0.1em; text-transform:uppercase;">Engineering Pipelines</span>
+          <h1 style="font-size:1.85rem; color:#fff; font-weight:700; margin:0.25rem 0 0.5rem 0;">Project Management Hub</h1>
+          <p style="font-size:0.9rem; color:#94a3b8; margin:0;">Track build pipelines, deployment sprints, and team resource quotas across your architecture.</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="openCreateProjectModal">
+          <span class="material-symbols-outlined" style="font-size:18px;">add</span>
+          <span>Create New Project</span>
+        </button>
+      </div>
+
+      <!-- Filters & Category Navigation -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;">
+        <div class="filter-pill-bar" id="projectFilterGroup">
+          <button type="button" class="filter-pill is-active" data-filter="all">All Projects (8)</button>
+          <button type="button" class="filter-pill" data-filter="active">Active (5)</button>
+          <button type="button" class="filter-pill" data-filter="completed">Completed (2)</button>
+          <button type="button" class="filter-pill" data-filter="on-hold">On Hold (1)</button>
+          <button type="button" class="filter-pill" data-filter="archived">Archived (0)</button>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:#94a3b8;">
+          <span>Sort by:</span>
+          <select class="dash-form-select" style="padding:0.35rem 0.75rem; width:auto; font-size:0.8rem;" id="projectSort">
+            <option value="recent">Recently Updated</option>
+            <option value="progress">Highest Progress</option>
+            <option value="priority">Priority Tier</option>
+            <option value="deadline">Approaching Deadline</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Large, Scrollable Projects Grid -->
+      <div class="projects-grid" id="projectsContainer" style="gap:1.5rem; margin-bottom:2.5rem;">
+        
+        <!-- Project 1 -->
+        <div class="project-card" data-category="active">
+          <div>
+            <div class="project-card-header">
+              <span class="dash-badge badge-active">Active</span>
+              <span class="mono" style="font-size:0.75rem; color:var(--bronze-300);">P1 Critical</span>
+            </div>
+            <h3 class="project-card-title">Autonomous AI Swarm</h3>
+            <p class="project-card-desc">Distributed agent workflows orchestrating dynamic container re-provisioning and continuous inference telemetry.</p>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Python</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">gRPC</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">PyTorch</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-progress-label">
+              <span>Sprint Progress</span>
+              <span class="mono">88%</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:88%;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#64748b; margin-top:0.6rem;">
+              <span>Created: Sep 12, 2026</span>
+              <span>Deadline: Oct 12, 2026</span>
+            </div>
+            <div class="project-card-meta">
+              <div class="avatar-stack">
+                <span>AL</span>
+                <span>MK</span>
+                <span>SH</span>
+              </div>
+              <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.65rem;">View Specs</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card" data-category="active">
+          <div>
+            <div class="project-card-header">
+              <span class="dash-badge badge-active">Active</span>
+              <span class="mono" style="font-size:0.75rem; color:#4ade80;">P2 Medium</span>
+            </div>
+            <h3 class="project-card-title">Multi-Region K8s Cluster</h3>
+            <p class="project-card-desc">Zero-downtime rolling deploys across AWS EKS clusters located in us-east-1, eu-central-1, and ap-southeast-1.</p>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Terraform</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Kubernetes</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Helm</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-progress-label">
+              <span>Sprint Progress</span>
+              <span class="mono">72%</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:72%;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#64748b; margin-top:0.6rem;">
+              <span>Created: Sep 20, 2026</span>
+              <span>Deadline: Oct 18, 2026</span>
+            </div>
+            <div class="project-card-meta">
+              <div class="avatar-stack">
+                <span>RC</span>
+                <span>SH</span>
+              </div>
+              <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.65rem;">View Specs</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card" data-category="active">
+          <div>
+            <div class="project-card-header">
+              <span class="dash-badge badge-active">Active</span>
+              <span class="mono" style="font-size:0.75rem; color:var(--bronze-300);">P1 High</span>
+            </div>
+            <h3 class="project-card-title">Zero-Trust Vault Engine</h3>
+            <p class="project-card-desc">Hardware security module integration with automated 30-day TLS cert issuance and KMS encryption key rotation.</p>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Rust</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">OpenSSL</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Vault</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-progress-label">
+              <span>Sprint Progress</span>
+              <span class="mono">94%</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:94%;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#64748b; margin-top:0.6rem;">
+              <span>Created: Aug 15, 2026</span>
+              <span>Deadline: Oct 08, 2026</span>
+            </div>
+            <div class="project-card-meta">
+              <div class="avatar-stack">
+                <span>JD</span>
+                <span>EL</span>
+              </div>
+              <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.65rem;">View Specs</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card" data-category="active">
+          <div>
+            <div class="project-card-header">
+              <span class="dash-badge badge-active">Active</span>
+              <span class="mono" style="font-size:0.75rem; color:#60a5fa;">P2 Normal</span>
+            </div>
+            <h3 class="project-card-title">Kafka Real-Time Stream</h3>
+            <p class="project-card-desc">High-throughput event sourcing pipeline processing over 250,000 telemetry messages per second.</p>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Apache Kafka</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Go</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-progress-label">
+              <span>Sprint Progress</span>
+              <span class="mono">65%</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:65%;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#64748b; margin-top:0.6rem;">
+              <span>Created: Sep 01, 2026</span>
+              <span>Deadline: Oct 25, 2026</span>
+            </div>
+            <div class="project-card-meta">
+              <div class="avatar-stack">
+                <span>MK</span>
+                <span>AL</span>
+              </div>
+              <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.65rem;">View Specs</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card" data-category="completed">
+          <div>
+            <div class="project-card-header">
+              <span class="dash-badge badge-active">Completed</span>
+              <span class="mono" style="font-size:0.75rem; color:#4ade80;">P1 Verified</span>
+            </div>
+            <h3 class="project-card-title">SOC-2 Continuous Audit</h3>
+            <p class="project-card-desc">Automated compliance scanner verifying IAM boundaries, cryptographic at-rest storage, and WORM log streaming.</p>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">TypeScript</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">AWS CloudTrail</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-progress-label">
+              <span>Sprint Progress</span>
+              <span class="mono">100%</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:100%; background:#4ade80;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#64748b; margin-top:0.6rem;">
+              <span>Created: Jul 10, 2026</span>
+              <span>Completed: Oct 02, 2026</span>
+            </div>
+            <div class="project-card-meta">
+              <div class="avatar-stack">
+                <span>SH</span>
+                <span>JD</span>
+              </div>
+              <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.65rem;">Audit Report</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card" data-category="active">
+          <div>
+            <div class="project-card-header">
+              <span class="dash-badge badge-active">Active</span>
+              <span class="mono" style="font-size:0.75rem; color:var(--bronze-300);">P2 Medium</span>
+            </div>
+            <h3 class="project-card-title">Edge CDN Routing Engine</h3>
+            <p class="project-card-desc">Cloudflare worker mesh caching dynamic GraphQL queries and reducing serverless backend cold starts.</p>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Cloudflare</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">V8 Isolates</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-progress-label">
+              <span>Sprint Progress</span>
+              <span class="mono">58%</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:58%;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#64748b; margin-top:0.6rem;">
+              <span>Created: Sep 18, 2026</span>
+              <span>Deadline: Nov 01, 2026</span>
+            </div>
+            <div class="project-card-meta">
+              <div class="avatar-stack">
+                <span>RC</span>
+                <span>EL</span>
+              </div>
+              <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.65rem;">View Specs</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 7 -->
+        <div class="project-card" data-category="completed">
+          <div>
+            <div class="project-card-header">
+              <span class="dash-badge badge-active">Completed</span>
+              <span class="mono" style="font-size:0.75rem; color:#4ade80;">P3 Maintenance</span>
+            </div>
+            <h3 class="project-card-title">Distributed Cache Invalidation</h3>
+            <p class="project-card-desc">Multi-region pub/sub protocol notifying edge POPs upon database entity updates within 4ms.</p>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Redis 7</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Lua</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-progress-label">
+              <span>Sprint Progress</span>
+              <span class="mono">100%</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:100%; background:#4ade80;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#64748b; margin-top:0.6rem;">
+              <span>Created: Aug 01, 2026</span>
+              <span>Completed: Sep 28, 2026</span>
+            </div>
+            <div class="project-card-meta">
+              <div class="avatar-stack">
+                <span>MK</span>
+                <span>JD</span>
+              </div>
+              <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.65rem;">Inspect Metrics</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 8 -->
+        <div class="project-card" data-category="on-hold">
+          <div>
+            <div class="project-card-header">
+              <span class="dash-badge badge-review">On Hold</span>
+              <span class="mono" style="font-size:0.75rem; color:#eab308;">Awaiting GPU Quota</span>
+            </div>
+            <h3 class="project-card-title">Neural Vector Indexer</h3>
+            <p class="project-card-desc">HNSW high-dimensional cosine similarity indexer running on dedicated Nvidia H100 instances.</p>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">Milvus</span>
+              <span class="mono" style="font-size:0.7rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:3px; color:#cbd5e1;">CUDA</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-progress-label">
+              <span>Sprint Progress</span>
+              <span class="mono">34%</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:34%; background:#eab308;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#64748b; margin-top:0.6rem;">
+              <span>Created: Sep 24, 2026</span>
+              <span>Deadline: Nov 30, 2026</span>
+            </div>
+            <div class="project-card-meta">
+              <div class="avatar-stack">
+                <span>AL</span>
+                <span>SH</span>
+              </div>
+              <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.65rem;">Resume Pipeline</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Create Project Modal -->
+  <div class="dash-modal" id="createProjectModal">
+    <div class="dash-modal-dialog">
+      <div class="dash-modal-header">
+        <h3>Create New Cloud Project</h3>
+        <button type="button" class="dash-modal-close-btn" id="closeCreateProjectModal">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <form id="newProjectForm">
+        <div class="dash-modal-body">
+          <div class="dash-form-group">
+            <label class="dash-form-label" for="newProjName">Project Title</label>
+            <input type="text" class="dash-form-input" id="newProjName" placeholder="e.g. Distributed Consensus Engine" required>
+          </div>
+          <div class="dash-form-group">
+            <label class="dash-form-label" for="newProjDesc">Architecture Description</label>
+            <textarea class="dash-form-textarea" id="newProjDesc" rows="3" placeholder="Explain the service boundaries and goals..."></textarea>
+          </div>
+          <div class="dash-form-row col-2">
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="newProjPriority">Priority Tier</label>
+              <select class="dash-form-select" id="newProjPriority">
+                <option value="P1 Critical">P1 Critical</option>
+                <option value="P1 High">P1 High</option>
+                <option value="P2 Medium" selected>P2 Medium</option>
+                <option value="P3 Low">P3 Low</option>
+              </select>
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="newProjStack">Primary Technology</label>
+              <input type="text" class="dash-form-input" id="newProjStack" placeholder="Go, Rust, Docker, K8s">
+            </div>
+          </div>
+        </div>
+        <div class="dash-modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelCreateProjectBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="material-symbols-outlined" style="font-size:18px;">rocket_launch</span>
+            <span>Provision Workspace</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('user');
+
+      // Mobile Drawer Toggle
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+
+      // User Menu Dropdown Toggle
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+
+      function showToast(msg) {
+        const c = document.getElementById('dashToastContainer');
+        const t = document.createElement('div');
+        t.className = 'dash-toast';
+        t.innerHTML = `<span class="material-symbols-outlined" style="color:var(--bronze-400);">check_circle</span><span>${msg}</span>`;
+        c.appendChild(t);
+        setTimeout(() => t.remove(), 3500);
+      }
+
+      // Filter Projects
+      const filterBtns = document.querySelectorAll('#projectFilterGroup .filter-pill');
+      const cards = document.querySelectorAll('.project-card');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(b => b.classList.remove('is-active'));
+          this.classList.add('is-active');
+          const filter = this.getAttribute('data-filter');
+          cards.forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Search Projects
+      const search = document.getElementById('projectSearchInput');
+      if (search) {
+        search.addEventListener('input', function () {
+          const q = this.value.toLowerCase().trim();
+          cards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(q) ? 'flex' : 'none';
+          });
+        });
+      }
+
+      // Modal Controls
+      const modal = document.getElementById('createProjectModal');
+      const openBtn = document.getElementById('openCreateProjectModal');
+      const closeBtn = document.getElementById('closeCreateProjectModal');
+      const cancelBtn = document.getElementById('cancelCreateProjectBtn');
+      const form = document.getElementById('newProjectForm');
+
+      if (openBtn) openBtn.addEventListener('click', () => modal.classList.add('is-open'));
+      if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('is-open'));
+      if (cancelBtn) cancelBtn.addEventListener('click', () => modal.classList.remove('is-open'));
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const title = document.getElementById('newProjName').value.trim();
+          modal.classList.remove('is-open');
+          form.reset();
+          showToast(`Project "${title}" provisioned successfully!`);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

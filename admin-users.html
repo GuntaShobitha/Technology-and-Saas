@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Directory &amp; Access Governance — STACKLY Admin</title>
+  <meta name="description" content="Enterprise user directory, identity governance, access tiers, and role assignments across all tenant organizations.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR (ADMIN) ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300); background:rgba(184,130,79,0.15); padding:2px 6px; border-radius:3px;">ADMIN</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="Admin Navigation">
+      <span class="dash-nav-section-title">Core Operations</span>
+      <a href="./admin-dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">space_dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./admin-users.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">manage_accounts</span>
+        <span>Users</span>
+        <span class="dash-nav-badge">14.2k</span>
+      </a>
+      <a href="./admin-customers.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">corporate_fare</span>
+        <span>Customers</span>
+      </a>
+      <a href="./admin-projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder_special</span>
+        <span>Projects</span>
+      </a>
+      <a href="./admin-tasks.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">assignment</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./admin-subscriptions.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">card_membership</span>
+        <span>Subscriptions</span>
+      </a>
+      <a href="./admin-payments.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span>Payments</span>
+      </a>
+
+      <span class="dash-nav-section-title">Platform &amp; Intelligence</span>
+      <a href="./admin-analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./admin-reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">analytics</span>
+        <span>Reports</span>
+      </a>
+      <a href="./admin-content.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">newspaper</span>
+        <span>Content</span>
+      </a>
+      <a href="./admin-notifications.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">campaign</span>
+        <span>Notifications</span>
+      </a>
+      <a href="./admin-integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+
+      <span class="dash-nav-section-title">Security &amp; Health</span>
+      <a href="./admin-security.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">security</span>
+        <span>Security</span>
+      </a>
+      <a href="./admin-logs.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">reorder</span>
+        <span>System Logs</span>
+      </a>
+      <a href="./admin-settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./user-dashboard.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">switch_account</span>
+        <span>Customer View</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout Session</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN SCROLLABLE WORKSPACE ==================== -->
+  <div class="dash-main-area">
+    
+    <!-- Top Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <div>
+          <div class="dash-breadcrumb">
+            <a href="./admin-dashboard.html">Admin</a>
+            <span class="separator">/</span>
+            <span class="current">User Directory</span>
+          </div>
+          <h1 class="dash-page-title">Identity &amp; Access Governance</h1>
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined">search</span>
+          <input type="search" placeholder="Search 14,250 identities, emails, tenant domains..." aria-label="Search users" id="userDirectorySearch">
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.4rem; padding:0.35rem 0.75rem; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25); border-radius:9999px;">
+          <span class="pulse-dot pulse-dot--cyan" style="background:#22c55e; box-shadow:0 0 8px #22c55e;"></span>
+          <span class="mono" style="font-size:0.75rem; color:#4ade80;">IAM Active</span>
+        </div>
+
+        <!-- Dynamic Profile Dropdown -->
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-expanded="false">
+            <div class="dash-avatar" data-user-initials>AD</div>
+            <div class="dash-user-meta hide-mobile">
+              <span class="dash-user-name" data-user-name>Admin</span>
+              <span class="dash-user-role" data-user-email>admin@nexi.tech</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:1.1rem; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown-menu" id="dashUserDropdown">
+            <div style="padding:0.75rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+              <div style="font-weight:600; font-size:0.875rem;" data-user-name>Admin</div>
+              <div class="mono" style="font-size:0.75rem; color:#64748b;" data-user-email>admin@nexi.tech</div>
+            </div>
+            <a href="./admin-settings.html" class="dash-dropdown-item">
+              <span class="material-symbols-outlined">admin_panel_settings</span>
+              <span>Platform Config</span>
+            </a>
+            <a href="./user-dashboard.html" class="dash-dropdown-item">
+              <span class="material-symbols-outlined">switch_account</span>
+              <span>Switch to User View</span>
+            </a>
+            <div style="border-top:1px solid rgba(255,255,255,0.06); margin:0.25rem 0;"></div>
+            <button type="button" class="dash-dropdown-item" data-action="logout" style="width:100%; text-align:left; color:#f87171;">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="dash-content-container">
+
+      <!-- Action Banner -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <h2 style="font-size:1.35rem; font-weight:700; color:#fff;">Global User Registry</h2>
+          <p style="color:#94a3b8; font-size:0.875rem; margin-top:2px;">Manage cross-tenant identities, RBAC privilege elevation, and session tokens.</p>
+        </div>
+        <div style="display:flex; gap:0.75rem;">
+          <button class="btn btn--secondary btn--sm" id="btnExportUsers">
+            <span class="material-symbols-outlined" style="font-size:1rem;">download</span>
+            <span>Export CSV</span>
+          </button>
+          <button class="btn btn--bronze btn--sm" id="btnInviteUser" onclick="document.getElementById('inviteUserModal').classList.add('is-open')">
+            <span class="material-symbols-outlined" style="font-size:1rem;">person_add</span>
+            <span>Provision User</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Metrics Row -->
+      <div class="dash-kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom:1.75rem;">
+        <div class="dash-kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Registered</span>
+            <div class="kpi-icon-wrap"><span class="material-symbols-outlined">group</span></div>
+          </div>
+          <div class="kpi-value mono">14,250</div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive"><span class="material-symbols-outlined">trending_up</span>+12.4%</span>
+            <span class="kpi-subtext">vs last 30 days</span>
+          </div>
+        </div>
+
+        <div class="dash-kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Active Concurrent</span>
+            <div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.1); color:#4ade80;"><span class="material-symbols-outlined">radio_button_checked</span></div>
+          </div>
+          <div class="kpi-value mono">3,892</div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive"><span class="material-symbols-outlined">trending_up</span>+5.8%</span>
+            <span class="kpi-subtext">peak load today</span>
+          </div>
+        </div>
+
+        <div class="dash-kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Enterprise Admins</span>
+            <div class="kpi-icon-wrap" style="background:rgba(204,160,114,0.15); color:var(--bronze-300);"><span class="material-symbols-outlined">security</span></div>
+          </div>
+          <div class="kpi-value mono">48</div>
+          <div class="kpi-footer">
+            <span class="kpi-trend neutral">MFA Enforced</span>
+            <span class="kpi-subtext">100% compliance</span>
+          </div>
+        </div>
+
+        <div class="dash-kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Suspended Accounts</span>
+            <div class="kpi-icon-wrap" style="background:rgba(239,68,68,0.1); color:#f87171;"><span class="material-symbols-outlined">block</span></div>
+          </div>
+          <div class="kpi-value mono">12</div>
+          <div class="kpi-footer">
+            <span class="kpi-trend negative"><span class="material-symbols-outlined">warning</span>Quarantined</span>
+            <span class="kpi-subtext">policy review</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Tabs & Controls -->
+      <div class="dash-card" style="margin-bottom:1.5rem; padding:1.25rem 1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div class="filter-pill-bar" role="tablist">
+            <button class="filter-pill is-active" data-filter="all">All (14,250)</button>
+            <button class="filter-pill" data-filter="active">Active (13,810)</button>
+            <button class="filter-pill" data-filter="enterprise">Enterprise (842)</button>
+            <button class="filter-pill" data-filter="admin">Administrators (48)</button>
+            <button class="filter-pill" data-filter="suspended">Suspended (12)</button>
+          </div>
+
+          <div style="display:flex; gap:0.75rem; align-items:center;">
+            <select class="dash-input" style="width:160px; padding:0.45rem 0.75rem; font-size:0.82rem;" aria-label="Filter by role">
+              <option value="">All Roles</option>
+              <option value="admin">Global Admin</option>
+              <option value="tenant">Tenant Admin</option>
+              <option value="developer">Developer</option>
+              <option value="auditor">Auditor</option>
+            </select>
+            <select class="dash-input" style="width:160px; padding:0.45rem 0.75rem; font-size:0.82rem;" aria-label="Sort users">
+              <option value="newest">Joined: Newest</option>
+              <option value="active">Last Active</option>
+              <option value="name">Name: A-Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comprehensive Users Directory Table -->
+      <div class="dash-card" style="padding:0; overflow:hidden;">
+        <div class="dash-table-wrap">
+          <table class="dash-table" aria-label="Registered platform users">
+            <thead>
+              <tr>
+                <th style="width:40px;"><input type="checkbox" aria-label="Select all users"></th>
+                <th>User / Identity</th>
+                <th>Role</th>
+                <th>Tenant Organization</th>
+                <th>Plan Tier</th>
+                <th>2FA Security</th>
+                <th>Last Active</th>
+                <th>Status</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr>
+                <td><input type="checkbox" aria-label="Select user"></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <div class="dash-avatar" style="background:#b8824f;">SJ</div>
+                    <div>
+                      <strong style="color:#fff; font-size:0.875rem;">Sarah Jenkins</strong>
+                      <div class="mono" style="font-size:0.75rem; color:#64748b;">sarah.jenkins@meridiancap.io</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:var(--bronze-300); background:rgba(184,130,79,0.15); padding:2px 8px; border-radius:4px;">Global Admin</span></td>
+                <td>Meridian Capital Inc.</td>
+                <td><span class="mono" style="font-weight:600; color:#fff;">Enterprise Plus</span></td>
+                <td><span style="display:inline-flex; align-items:center; gap:4px; color:#4ade80; font-size:0.8rem;"><span class="material-symbols-outlined" style="font-size:14px;">key</span> FIDO2 Hardware</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">2 mins ago</span></td>
+                <td><span class="status-badge is-active">Active</span></td>
+                <td style="text-align:right;">
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="User Details"><span class="material-symbols-outlined" style="font-size:16px;">visibility</span></button>
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="Reset MFA"><span class="material-symbols-outlined" style="font-size:16px;">lock_reset</span></button>
+                </td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr>
+                <td><input type="checkbox" aria-label="Select user"></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <div class="dash-avatar" style="background:#0ea5e9;">DL</div>
+                    <div>
+                      <strong style="color:#fff; font-size:0.875rem;">David Liang</strong>
+                      <div class="mono" style="font-size:0.75rem; color:#64748b;">dliang@apexlogistics.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#60a5fa; background:rgba(96,165,250,0.15); padding:2px 8px; border-radius:4px;">Tenant Admin</span></td>
+                <td>Apex Logistics Group</td>
+                <td><span class="mono" style="font-weight:600; color:#fff;">Enterprise</span></td>
+                <td><span style="display:inline-flex; align-items:center; gap:4px; color:#4ade80; font-size:0.8rem;"><span class="material-symbols-outlined" style="font-size:14px;">verified_user</span> Authenticator</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">14 mins ago</span></td>
+                <td><span class="status-badge is-active">Active</span></td>
+                <td style="text-align:right;">
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="User Details"><span class="material-symbols-outlined" style="font-size:16px;">visibility</span></button>
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="Reset MFA"><span class="material-symbols-outlined" style="font-size:16px;">lock_reset</span></button>
+                </td>
+              </tr>
+
+              <!-- Row 3 -->
+              <tr>
+                <td><input type="checkbox" aria-label="Select user"></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <div class="dash-avatar" style="background:#8b5cf6;">EM</div>
+                    <div>
+                      <strong style="color:#fff; font-size:0.875rem;">Elena Rostova</strong>
+                      <div class="mono" style="font-size:0.75rem; color:#64748b;">elena.r@finnovate.de</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#c084fc; background:rgba(192,132,252,0.15); padding:2px 8px; border-radius:4px;">Developer</span></td>
+                <td>Finnovate AG</td>
+                <td><span class="mono" style="font-weight:600; color:#fff;">Pro SaaS</span></td>
+                <td><span style="display:inline-flex; align-items:center; gap:4px; color:#4ade80; font-size:0.8rem;"><span class="material-symbols-outlined" style="font-size:14px;">verified_user</span> Authenticator</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">45 mins ago</span></td>
+                <td><span class="status-badge is-active">Active</span></td>
+                <td style="text-align:right;">
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="User Details"><span class="material-symbols-outlined" style="font-size:16px;">visibility</span></button>
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="Reset MFA"><span class="material-symbols-outlined" style="font-size:16px;">lock_reset</span></button>
+                </td>
+              </tr>
+
+              <!-- Row 4 -->
+              <tr>
+                <td><input type="checkbox" aria-label="Select user"></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <div class="dash-avatar" style="background:#10b981;">MK</div>
+                    <div>
+                      <strong style="color:#fff; font-size:0.875rem;">Marcus Vance</strong>
+                      <div class="mono" style="font-size:0.75rem; color:#64748b;">m.vance@vancetech.io</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#34d399; background:rgba(52,211,153,0.15); padding:2px 8px; border-radius:4px;">Billing Lead</span></td>
+                <td>Vance Cloud Systems</td>
+                <td><span class="mono" style="font-weight:600; color:#fff;">Business</span></td>
+                <td><span style="display:inline-flex; align-items:center; gap:4px; color:#facc15; font-size:0.8rem;"><span class="material-symbols-outlined" style="font-size:14px;">sms</span> SMS Fallback</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">1 hour ago</span></td>
+                <td><span class="status-badge is-active">Active</span></td>
+                <td style="text-align:right;">
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="User Details"><span class="material-symbols-outlined" style="font-size:16px;">visibility</span></button>
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="Reset MFA"><span class="material-symbols-outlined" style="font-size:16px;">lock_reset</span></button>
+                </td>
+              </tr>
+
+              <!-- Row 5 -->
+              <tr>
+                <td><input type="checkbox" aria-label="Select user"></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <div class="dash-avatar" style="background:#f59e0b;">AP</div>
+                    <div>
+                      <strong style="color:#fff; font-size:0.875rem;">Ananya Patel</strong>
+                      <div class="mono" style="font-size:0.75rem; color:#64748b;">ananya@omnisynth.co</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#fbbf24; background:rgba(251,191,36,0.15); padding:2px 8px; border-radius:4px;">Security Auditor</span></td>
+                <td>OmniSynth Data Corp</td>
+                <td><span class="mono" style="font-weight:600; color:#fff;">Enterprise Plus</span></td>
+                <td><span style="display:inline-flex; align-items:center; gap:4px; color:#4ade80; font-size:0.8rem;"><span class="material-symbols-outlined" style="font-size:14px;">key</span> FIDO2 Hardware</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">3 hours ago</span></td>
+                <td><span class="status-badge is-active">Active</span></td>
+                <td style="text-align:right;">
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="User Details"><span class="material-symbols-outlined" style="font-size:16px;">visibility</span></button>
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="Reset MFA"><span class="material-symbols-outlined" style="font-size:16px;">lock_reset</span></button>
+                </td>
+              </tr>
+
+              <!-- Row 6 -->
+              <tr>
+                <td><input type="checkbox" aria-label="Select user"></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <div class="dash-avatar" style="background:#ef4444;">TR</div>
+                    <div>
+                      <strong style="color:#fff; font-size:0.875rem;">Thomas Reed</strong>
+                      <div class="mono" style="font-size:0.75rem; color:#64748b;">treed@flagged-domain.net</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#f87171; background:rgba(239,68,68,0.15); padding:2px 8px; border-radius:4px;">Developer</span></td>
+                <td>External Contractor</td>
+                <td><span class="mono" style="font-weight:600; color:#fff;">Starter</span></td>
+                <td><span style="display:inline-flex; align-items:center; gap:4px; color:#f87171; font-size:0.8rem;"><span class="material-symbols-outlined" style="font-size:14px;">gpp_bad</span> Suspended</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">3 days ago</span></td>
+                <td><span class="status-badge is-inactive" style="background:rgba(239,68,68,0.2); color:#fca5a5;">Suspended</span></td>
+                <td style="text-align:right;">
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="Review Incident"><span class="material-symbols-outlined" style="font-size:16px;">policy</span></button>
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px; color:#4ade80;" title="Restore Account"><span class="material-symbols-outlined" style="font-size:16px;">check_circle</span></button>
+                </td>
+              </tr>
+
+              <!-- Row 7 -->
+              <tr>
+                <td><input type="checkbox" aria-label="Select user"></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <div class="dash-avatar" style="background:#6366f1;">KW</div>
+                    <div>
+                      <strong style="color:#fff; font-size:0.875rem;">Karin Weber</strong>
+                      <div class="mono" style="font-size:0.75rem; color:#64748b;">k.weber@neurostream.io</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#a5b4fc; background:rgba(99,102,241,0.15); padding:2px 8px; border-radius:4px;">DevOps Lead</span></td>
+                <td>NeuroStream Intelligence</td>
+                <td><span class="mono" style="font-weight:600; color:#fff;">Enterprise</span></td>
+                <td><span style="display:inline-flex; align-items:center; gap:4px; color:#4ade80; font-size:0.8rem;"><span class="material-symbols-outlined" style="font-size:14px;">verified_user</span> Authenticator</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">5 hours ago</span></td>
+                <td><span class="status-badge is-active">Active</span></td>
+                <td style="text-align:right;">
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="User Details"><span class="material-symbols-outlined" style="font-size:16px;">visibility</span></button>
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="Reset MFA"><span class="material-symbols-outlined" style="font-size:16px;">lock_reset</span></button>
+                </td>
+              </tr>
+
+              <!-- Row 8 -->
+              <tr>
+                <td><input type="checkbox" aria-label="Select user"></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <div class="dash-avatar" style="background:#ec4899;">ZS</div>
+                    <div>
+                      <strong style="color:#fff; font-size:0.875rem;">Zane Sterling</strong>
+                      <div class="mono" style="font-size:0.75rem; color:#64748b;">zsterling@quantumcloud.co</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#f472b6; background:rgba(244,114,182,0.15); padding:2px 8px; border-radius:4px;">Architect</span></td>
+                <td>Quantum Cloud Labs</td>
+                <td><span class="mono" style="font-weight:600; color:#fff;">Enterprise Plus</span></td>
+                <td><span style="display:inline-flex; align-items:center; gap:4px; color:#4ade80; font-size:0.8rem;"><span class="material-symbols-outlined" style="font-size:14px;">key</span> FIDO2 Hardware</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">Yesterday</span></td>
+                <td><span class="status-badge is-active">Active</span></td>
+                <td style="text-align:right;">
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="User Details"><span class="material-symbols-outlined" style="font-size:16px;">visibility</span></button>
+                  <button class="btn btn--secondary btn--sm" style="padding:4px 8px;" title="Reset MFA"><span class="material-symbols-outlined" style="font-size:16px;">lock_reset</span></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:1.25rem 1.5rem; border-top:1px solid rgba(255,255,255,0.06); flex-wrap:wrap; gap:1rem;">
+          <div style="color:#94a3b8; font-size:0.85rem;">
+            Showing <strong style="color:#fff;">1</strong> to <strong style="color:#fff;">8</strong> of <strong style="color:#fff;">14,250</strong> identities
+          </div>
+          <div style="display:flex; gap:0.4rem; align-items:center;">
+            <button class="btn btn--secondary btn--sm" style="padding:0.35rem 0.65rem;" disabled>&laquo; Prev</button>
+            <button class="btn btn--bronze btn--sm" style="padding:0.35rem 0.75rem;">1</button>
+            <button class="btn btn--secondary btn--sm" style="padding:0.35rem 0.75rem;">2</button>
+            <button class="btn btn--secondary btn--sm" style="padding:0.35rem 0.75rem;">3</button>
+            <span style="color:#64748b; padding:0 0.25rem;">...</span>
+            <button class="btn btn--secondary btn--sm" style="padding:0.35rem 0.75rem;">1,782</button>
+            <button class="btn btn--secondary btn--sm" style="padding:0.35rem 0.65rem;">Next &raquo;</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Modal: Provision User -->
+  <div class="dash-modal" id="inviteUserModal">
+    <div class="dash-modal-backdrop" onclick="document.getElementById('inviteUserModal').classList.remove('is-open')"></div>
+    <div class="dash-modal-dialog">
+      <div class="dash-modal-header">
+        <h3 class="dash-modal-title">Provision New Identity</h3>
+        <button class="dash-modal-close" onclick="document.getElementById('inviteUserModal').classList.remove('is-open')" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="inviteUserForm" onsubmit="event.preventDefault(); alert('Identity successfully provisioned and activation invite sent.'); document.getElementById('inviteUserModal').classList.remove('is-open');">
+        <div class="dash-modal-body">
+          <div class="dash-form-group">
+            <label class="dash-label">Full Name</label>
+            <input type="text" class="dash-input" required placeholder="e.g. Jordan Blake">
+          </div>
+          <div class="dash-form-group">
+            <label class="dash-label">Corporate Email Address</label>
+            <input type="email" class="dash-input" required placeholder="jordan.blake@enterprise.com">
+          </div>
+          <div class="dash-form-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="dash-form-group">
+              <label class="dash-label">Role Assignment</label>
+              <select class="dash-input">
+                <option value="tenant">Tenant Admin</option>
+                <option value="developer">Developer</option>
+                <option value="auditor">Compliance Auditor</option>
+                <option value="admin">Global System Admin</option>
+              </select>
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-label">Target Tenant</label>
+              <select class="dash-input">
+                <option>Meridian Capital Inc.</option>
+                <option>Apex Logistics Group</option>
+                <option>Finnovate AG</option>
+                <option>Vance Cloud Systems</option>
+              </select>
+            </div>
+          </div>
+          <div class="dash-form-group" style="margin-top:0.5rem;">
+            <label style="display:flex; align-items:center; gap:0.5rem; color:#cbd5e1; font-size:0.85rem; cursor:pointer;">
+              <input type="checkbox" checked> Enforce Hardware FIDO2 / Authenticator MFA on first login
+            </label>
+          </div>
+        </div>
+        <div class="dash-modal-footer">
+          <button type="button" class="btn btn--secondary btn--sm" onclick="document.getElementById('inviteUserModal').classList.remove('is-open')">Cancel</button>
+          <button type="submit" class="btn btn--bronze btn--sm">Send Provisioning Invite</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('admin');
+
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+    });
+  </script>
+</body>
+</html>

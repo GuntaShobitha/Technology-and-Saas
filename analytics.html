@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics &amp; Telemetry — STACKLY SaaS & Technology</title>
+  <meta name="description" content="Dedicated enterprise analytics workspace. Throughput histograms, API volume, sprint velocity, and resource telemetry.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">WORKSPACE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="User Navigation">
+      <span class="dash-nav-section-title">Core Workspace</span>
+      <a href="./user-dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./overview.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Overview</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>My Projects</span>
+        <span class="dash-nav-badge">8</span>
+      </a>
+      <a href="./tasks.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+
+      <span class="dash-nav-section-title">Communication</span>
+      <a href="./notifications.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">notifications</span>
+        <span>Notifications</span>
+        <span class="dash-nav-badge" style="background:rgba(239,68,68,0.2); color:#fca5a5; border-color:rgba(239,68,68,0.3);">3 New</span>
+      </a>
+      <a href="./activity.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">history</span>
+        <span>Recent Activity</span>
+      </a>
+
+      <span class="dash-nav-section-title">Platform &amp; Finance</span>
+      <a href="./billing.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span>Billing</span>
+      </a>
+      <a href="./subscription.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">credit_card</span>
+        <span>Subscription</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+
+      <span class="dash-nav-section-title">Account</span>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+      <a href="./support.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Website</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN SCROLLABLE CONTENT AREA ==================== -->
+  <div class="dash-main-area">
+
+    <!-- Top Sticky Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./user-dashboard.html">Workspace</a>
+          <span class="sep">/</span>
+          <span class="current">Analytics</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" placeholder="Search analytics metrics, endpoints, queries...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <a href="./notifications.html" class="dash-action-btn" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot"></span>
+        </a>
+
+        <a href="./support.html" class="dash-action-btn" aria-label="Help and Support">
+          <span class="material-symbols-outlined">help_outline</span>
+        </a>
+
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open user profile menu">
+            <div class="dash-user-avatar">
+              <span data-user-initials>SH</span>
+            </div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Shobitha</span>
+              <span class="dash-user-email" data-user-email>shobitha@gmail.com</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Shobitha</strong>
+              <span data-user-email>shobitha@gmail.com</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;" data-user-plan>Professional Tier</div>
+            </div>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <span>My Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Account Settings</span>
+            </a>
+            <a href="./billing.html">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <span>Billing &amp; Invoices</span>
+            </a>
+            <a href="./subscription.html">
+              <span class="material-symbols-outlined">credit_card</span>
+              <span>Subscription</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Deep Scrollable Analytics Content -->
+    <main class="dash-content">
+
+      <!-- Header & Timeline Filter -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1.25rem;">
+        <div>
+          <span class="mono" style="font-size:0.75rem; color:var(--bronze-300); letter-spacing:0.1em; text-transform:uppercase;">Telemetry &amp; Workload Intelligence</span>
+          <h1 style="font-size:1.85rem; color:#fff; font-weight:700; margin:0.25rem 0 0.5rem 0;">Productivity &amp; Infrastructure Analytics</h1>
+          <p style="font-size:0.9rem; color:#94a3b8; margin:0;">In-depth performance curves, API invocation volume, and microservice consumption trends.</p>
+        </div>
+        
+        <div class="filter-pill-bar" id="analyticsTimeFilter">
+          <button type="button" class="filter-pill is-active" data-timeline="weekly">Weekly (7D)</button>
+          <button type="button" class="filter-pill" data-timeline="monthly">Monthly (30D)</button>
+          <button type="button" class="filter-pill" data-timeline="quarterly">Quarterly (90D)</button>
+        </div>
+      </div>
+
+      <!-- KPI Summary Cards -->
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1.25rem; margin-bottom:2rem;">
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Total API Calls</span>
+            <div class="kpi-icon-wrap" style="background:rgba(184,130,79,0.15); color:var(--bronze-300);">
+              <span class="material-symbols-outlined">sync_alt</span>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpiApiTotal">8,421,900</div>
+          <div class="kpi-comparison">
+            <span class="kpi-trend positive">+14.2%</span>
+            <span>vs previous period</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">p99 Ingress Latency</span>
+            <div class="kpi-icon-wrap" style="background:rgba(74,222,128,0.1); color:#4ade80;">
+              <span class="material-symbols-outlined">speed</span>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpiLatency">18.4 ms</div>
+          <div class="kpi-comparison">
+            <span class="kpi-trend positive">-2.1 ms</span>
+            <span>SLA threshold: 50ms</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Sprint Task Velocity</span>
+            <div class="kpi-icon-wrap" style="background:rgba(59,130,246,0.1); color:#60a5fa;">
+              <span class="material-symbols-outlined">task_alt</span>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpiVelocity">92.4%</div>
+          <div class="kpi-comparison">
+            <span class="kpi-trend positive">+4.8%</span>
+            <span>74 tasks merged</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Compute Efficiency</span>
+            <div class="kpi-icon-wrap" style="background:rgba(168,85,247,0.1); color:#c084fc;">
+              <span class="material-symbols-outlined">memory</span>
+            </div>
+          </div>
+          <div class="kpi-value">96.8%</div>
+          <div class="kpi-comparison">
+            <span class="kpi-trend neutral">Balanced</span>
+            <span>Zero OOM throttling</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Large Interactive Chart 1: API & Ingress Throughput Histogram -->
+      <section class="dash-panel" style="margin-bottom:2rem;">
+        <div class="dash-panel-header">
+          <div>
+            <h3 style="font-size:1.25rem; color:#fff; margin:0 0 4px 0;">API Request Volume &amp; Ingress Throughput</h3>
+            <p style="font-size:0.85rem; color:#94a3b8; margin:0;">Real-time HTTPS requests per second routed across global Anycast mesh.</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:#cbd5e1;">
+              <span style="width:12px; height:12px; background:#cca072; border-radius:2px;"></span>
+              <span>200 OK Requests</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:#cbd5e1;">
+              <span style="width:12px; height:12px; background:#f87171; border-radius:2px;"></span>
+              <span>4xx / 5xx Errors (<0.01%)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="svg-chart-container" style="height:320px;">
+          <svg viewBox="0 0 900 320" preserveAspectRatio="none" id="mainAnalyticsSvg">
+            <!-- Grid Lines -->
+            <line x1="60" y1="40" x2="880" y2="40" class="chart-grid-line"></line>
+            <line x1="60" y1="100" x2="880" y2="100" class="chart-grid-line"></line>
+            <line x1="60" y1="160" x2="880" y2="160" class="chart-grid-line"></line>
+            <line x1="60" y1="220" x2="880" y2="220" class="chart-grid-line"></line>
+            <line x1="60" y1="280" x2="880" y2="280" class="chart-grid-line"></line>
+
+            <!-- Y-Axis Values -->
+            <text x="20" y="45" class="chart-axis-label">12M</text>
+            <text x="20" y="105" class="chart-axis-label">9M</text>
+            <text x="20" y="165" class="chart-axis-label">6M</text>
+            <text x="20" y="225" class="chart-axis-label">3M</text>
+            <text x="20" y="285" class="chart-axis-label">0M</text>
+
+            <defs>
+              <linearGradient id="analyticsMainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#cca072" stop-opacity="0.35"></stop>
+                <stop offset="100%" stop-color="#cca072" stop-opacity="0.0"></stop>
+              </linearGradient>
+            </defs>
+
+            <!-- Area Fill -->
+            <path id="analyticsAreaPath" d="M 70 230 Q 180 120, 290 170 T 520 80 T 730 110 T 870 50 L 870 280 L 70 280 Z" fill="url(#analyticsMainGrad)"></path>
+            <!-- Primary Curve -->
+            <path id="analyticsLinePath" d="M 70 230 Q 180 120, 290 170 T 520 80 T 730 110 T 870 50" fill="none" stroke="#cca072" stroke-width="3"></path>
+
+            <!-- X-Axis Labels -->
+            <text x="70" y="305" class="chart-axis-label">Mon</text>
+            <text x="200" y="305" class="chart-axis-label">Tue</text>
+            <text x="330" y="305" class="chart-axis-label">Wed</text>
+            <text x="470" y="305" class="chart-axis-label">Thu</text>
+            <text x="600" y="305" class="chart-axis-label">Fri</text>
+            <text x="730" y="305" class="chart-axis-label">Sat</text>
+            <text x="850" y="305" class="chart-axis-label">Sun</text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Two Side-by-Side Large Analytics Cards -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
+        
+        <!-- Project Performance Bar Breakdown -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <div>
+              <h3 style="font-size:1.15rem; color:#fff; margin:0 0 4px 0;">Project Throughput Distribution</h3>
+              <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Invocations and bandwidth consumed per active project.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:1.25rem;">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.4rem;">
+                <strong style="color:#fff;">Autonomous AI Swarm</strong>
+                <span class="mono" style="color:var(--bronze-300);">3.8M calls (45%)</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:45%;"></div></div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.4rem;">
+                <strong style="color:#fff;">Multi-Region K8s Cluster</strong>
+                <span class="mono" style="color:#60a5fa;">2.4M calls (28%)</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:28%; background:#60a5fa;"></div></div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.4rem;">
+                <strong style="color:#fff;">Kafka Real-Time Stream</strong>
+                <span class="mono" style="color:#4ade80;">1.5M calls (18%)</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:18%; background:#4ade80;"></div></div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.4rem;">
+                <strong style="color:#fff;">Zero-Trust Vault Engine</strong>
+                <span class="mono" style="color:#c084fc;">0.7M calls (9%)</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:9%; background:#c084fc;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task Completion & Team Velocity -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <div>
+              <h3 style="font-size:1.15rem; color:#fff; margin:0 0 4px 0;">Developer &amp; Team Workload Velocity</h3>
+              <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Tasks closed, PRs reviewed, and build commits verified.</p>
+            </div>
+          </div>
+
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Team Member</th>
+                  <th>Tasks Closed</th>
+                  <th>Velocity</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                      <span style="width:26px; height:26px; border-radius:50%; background:var(--bronze-500); color:#fff; font-size:0.7rem; display:flex; align-items:center; justify-content:center;">SH</span>
+                      <strong style="color:#fff; font-size:0.85rem;" data-user-name>Shobitha</strong>
+                    </div>
+                  </td>
+                  <td><span class="mono" style="color:#4ade80;">28 Tasks</span></td>
+                  <td><span class="mono" style="color:#cbd5e1;">98% On-Time</span></td>
+                  <td><span class="dash-badge badge-active">Lead</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                      <span style="width:26px; height:26px; border-radius:50%; background:#3b82f6; color:#fff; font-size:0.7rem; display:flex; align-items:center; justify-content:center;">RC</span>
+                      <strong style="color:#fff; font-size:0.85rem;">Marcus Chen</strong>
+                    </div>
+                  </td>
+                  <td><span class="mono" style="color:#4ade80;">22 Tasks</span></td>
+                  <td><span class="mono" style="color:#cbd5e1;">95% On-Time</span></td>
+                  <td><span class="dash-badge badge-review">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                      <span style="width:26px; height:26px; border-radius:50%; background:#10b981; color:#fff; font-size:0.7rem; display:flex; align-items:center; justify-content:center;">AL</span>
+                      <strong style="color:#fff; font-size:0.85rem;">Elena Vance</strong>
+                    </div>
+                  </td>
+                  <td><span class="mono" style="color:#4ade80;">16 Tasks</span></td>
+                  <td><span class="mono" style="color:#cbd5e1;">92% On-Time</span></td>
+                  <td><span class="dash-badge badge-review">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                      <span style="width:26px; height:26px; border-radius:50%; background:#f97316; color:#fff; font-size:0.7rem; display:flex; align-items:center; justify-content:center;">MK</span>
+                      <strong style="color:#fff; font-size:0.85rem;">Michael K.</strong>
+                    </div>
+                  </td>
+                  <td><span class="mono" style="color:#4ade80;">8 Tasks</span></td>
+                  <td><span class="mono" style="color:#cbd5e1;">88% On-Time</span></td>
+                  <td><span class="dash-badge badge-active">Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('user');
+
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+
+      // Interactive Timeline Switcher
+      const pills = document.querySelectorAll('#analyticsTimeFilter .filter-pill');
+      const area = document.getElementById('analyticsAreaPath');
+      const line = document.getElementById('analyticsLinePath');
+      const kpiApi = document.getElementById('kpiApiTotal');
+      const kpiLat = document.getElementById('kpiLatency');
+
+      pills.forEach(p => {
+        p.addEventListener('click', function () {
+          pills.forEach(b => b.classList.remove('is-active'));
+          this.classList.add('is-active');
+          const t = this.getAttribute('data-timeline');
+
+          if (t === 'weekly') {
+            area.setAttribute('d', 'M 70 230 Q 180 120, 290 170 T 520 80 T 730 110 T 870 50 L 870 280 L 70 280 Z');
+            line.setAttribute('d', 'M 70 230 Q 180 120, 290 170 T 520 80 T 730 110 T 870 50');
+            kpiApi.textContent = '8,421,900';
+            kpiLat.textContent = '18.4 ms';
+          } else if (t === 'monthly') {
+            area.setAttribute('d', 'M 70 210 Q 200 90, 360 140 T 580 60 T 750 90 T 870 35 L 870 280 L 70 280 Z');
+            line.setAttribute('d', 'M 70 210 Q 200 90, 360 140 T 580 60 T 750 90 T 870 35');
+            kpiApi.textContent = '34,810,000';
+            kpiLat.textContent = '16.8 ms';
+          } else {
+            area.setAttribute('d', 'M 70 190 Q 220 70, 400 110 T 640 45 T 790 70 T 870 25 L 870 280 L 70 280 Z');
+            line.setAttribute('d', 'M 70 190 Q 220 70, 400 110 T 640 45 T 790 70 T 870 25');
+            kpiApi.textContent = '98,400,000';
+            kpiLat.textContent = '15.2 ms';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

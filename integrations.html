@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrations Marketplace — STACKLY SaaS & Technology</title>
+  <meta name="description" content="Connect GitHub, Slack, AWS, Jira, and external OAuth pipelines directly into your STACKLY telemetry mesh.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">WORKSPACE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="User Navigation">
+      <span class="dash-nav-section-title">Core Workspace</span>
+      <a href="./user-dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./overview.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Overview</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>My Projects</span>
+        <span class="dash-nav-badge">8</span>
+      </a>
+      <a href="./tasks.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+
+      <span class="dash-nav-section-title">Communication</span>
+      <a href="./notifications.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">notifications</span>
+        <span>Notifications</span>
+        <span class="dash-nav-badge" style="background:rgba(239,68,68,0.2); color:#fca5a5; border-color:rgba(239,68,68,0.3);">3 New</span>
+      </a>
+      <a href="./activity.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">history</span>
+        <span>Recent Activity</span>
+      </a>
+
+      <span class="dash-nav-section-title">Platform &amp; Finance</span>
+      <a href="./billing.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span>Billing</span>
+      </a>
+      <a href="./subscription.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">credit_card</span>
+        <span>Subscription</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+
+      <span class="dash-nav-section-title">Account</span>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+      <a href="./support.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Website</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN SCROLLABLE CONTENT AREA ==================== -->
+  <div class="dash-main-area">
+
+    <!-- Top Sticky Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./user-dashboard.html">Workspace</a>
+          <span class="sep">/</span>
+          <span class="current">Integrations</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" id="integrationSearchInput" placeholder="Search marketplace connectors...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <a href="./notifications.html" class="dash-action-btn" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot"></span>
+        </a>
+
+        <a href="./support.html" class="dash-action-btn" aria-label="Help and Support">
+          <span class="material-symbols-outlined">help_outline</span>
+        </a>
+
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open user profile menu">
+            <div class="dash-user-avatar">
+              <span data-user-initials>SH</span>
+            </div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Shobitha</span>
+              <span class="dash-user-email" data-user-email>shobitha@gmail.com</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Shobitha</strong>
+              <span data-user-email>shobitha@gmail.com</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;" data-user-plan>Professional Tier</div>
+            </div>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <span>My Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Account Settings</span>
+            </a>
+            <a href="./billing.html">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <span>Billing &amp; Invoices</span>
+            </a>
+            <a href="./subscription.html">
+              <span class="material-symbols-outlined">credit_card</span>
+              <span>Subscription</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Deep Scrollable Integrations Content -->
+    <main class="dash-content">
+
+      <!-- Header -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1.25rem;">
+        <div>
+          <span class="mono" style="font-size:0.75rem; color:var(--bronze-300); letter-spacing:0.1em; text-transform:uppercase;">Ecosystem Connectors</span>
+          <h1 style="font-size:1.85rem; color:#fff; font-weight:700; margin:0.25rem 0 0.5rem 0;">Integrations Marketplace</h1>
+          <p style="font-size:0.9rem; color:#94a3b8; margin:0;">Seamless bidirectional sync between STACKLY microservices and your external developer tooling.</p>
+        </div>
+        <a href="./settings.html#webhooks" class="btn btn-secondary">
+          <span class="material-symbols-outlined" style="font-size:16px;">webhook</span>
+          <span>Custom Webhooks</span>
+        </a>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="filter-pill-bar" id="integrationFilters" style="margin-bottom:2rem;">
+        <button type="button" class="filter-pill is-active" data-cat="all">All Connectors (8)</button>
+        <button type="button" class="filter-pill" data-cat="connected">Connected (4)</button>
+        <button type="button" class="filter-pill" data-cat="available">Available (4)</button>
+      </div>
+
+      <!-- Integrations Cards Grid -->
+      <div class="integration-grid" id="integrationCardsGrid" style="grid-template-columns: repeat(4, 1fr); gap:1.5rem; margin-bottom:2.5rem;">
+        
+        <!-- 1. GitHub -->
+        <div class="integration-card" data-status="connected">
+          <div class="integration-card-top">
+            <div class="integ-logo" style="color:#fff;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </div>
+            <span class="dash-badge badge-active">Connected</span>
+          </div>
+          <h3>GitHub</h3>
+          <p>Sync git repositories, trigger CI/CD builds on pull requests, and automate release tags.</p>
+          <button type="button" class="btn btn-secondary integ-toggle-btn is-connected" style="width:100%; justify-content:center;">Manage Connection</button>
+        </div>
+
+        <!-- 2. Slack -->
+        <div class="integration-card" data-status="connected">
+          <div class="integration-card-top">
+            <div class="integ-logo" style="color:#e01e5a;">
+              <span class="material-symbols-outlined" style="font-size:24px;">tag</span>
+            </div>
+            <span class="dash-badge badge-active">Connected</span>
+          </div>
+          <h3>Slack</h3>
+          <p>Real-time channel broadcast alerts for cluster node failures, deployment rollouts, and SOC-2 scans.</p>
+          <button type="button" class="btn btn-secondary integ-toggle-btn is-connected" style="width:100%; justify-content:center;">Manage Connection</button>
+        </div>
+
+        <!-- 3. Google Workspace -->
+        <div class="integration-card" data-status="connected">
+          <div class="integration-card-top">
+            <div class="integ-logo" style="color:#4285f4;">
+              <span class="material-symbols-outlined" style="font-size:24px;">domain</span>
+            </div>
+            <span class="dash-badge badge-active">Connected</span>
+          </div>
+          <h3>Google Workspace</h3>
+          <p>Enterprise SAML Single Sign-On (SSO), Google Drive audit exports, and calendar notifications.</p>
+          <button type="button" class="btn btn-secondary integ-toggle-btn is-connected" style="width:100%; justify-content:center;">Manage Connection</button>
+        </div>
+
+        <!-- 4. Microsoft Teams -->
+        <div class="integration-card" data-status="connected">
+          <div class="integration-card-top">
+            <div class="integ-logo" style="color:#5059c9;">
+              <span class="material-symbols-outlined" style="font-size:24px;">groups</span>
+            </div>
+            <span class="dash-badge badge-active">Connected</span>
+          </div>
+          <h3>Microsoft Teams</h3>
+          <p>Post telemetry alert cards directly into operational channels with interactive webhook callbacks.</p>
+          <button type="button" class="btn btn-secondary integ-toggle-btn is-connected" style="width:100%; justify-content:center;">Manage Connection</button>
+        </div>
+
+        <!-- 5. Zapier -->
+        <div class="integration-card" data-status="available">
+          <div class="integration-card-top">
+            <div class="integ-logo" style="color:#ff4f00;">
+              <span class="material-symbols-outlined" style="font-size:24px;">flash_on</span>
+            </div>
+            <span class="dash-badge badge-review">Not Connected</span>
+          </div>
+          <h3>Zapier</h3>
+          <p>Trigger 5,000+ external SaaS actions on platform webhooks without writing backend code.</p>
+          <button type="button" class="btn btn-primary integ-toggle-btn" style="width:100%; justify-content:center;">Connect</button>
+        </div>
+
+        <!-- 6. Jira Software -->
+        <div class="integration-card" data-status="available">
+          <div class="integration-card-top">
+            <div class="integ-logo" style="color:#0052cc;">
+              <span class="material-symbols-outlined" style="font-size:24px;">view_kanban</span>
+            </div>
+            <span class="dash-badge badge-review">Not Connected</span>
+          </div>
+          <h3>Jira Software</h3>
+          <p>Automatically create issue tickets on SLA threshold breaches or error log spikes.</p>
+          <button type="button" class="btn btn-primary integ-toggle-btn" style="width:100%; justify-content:center;">Connect</button>
+        </div>
+
+        <!-- 7. Notion -->
+        <div class="integration-card" data-status="available">
+          <div class="integration-card-top">
+            <div class="integ-logo" style="color:#fff;">
+              <span class="material-symbols-outlined" style="font-size:24px;">description</span>
+            </div>
+            <span class="dash-badge badge-review">Not Connected</span>
+          </div>
+          <h3>Notion</h3>
+          <p>Export executive architecture specs and sprint velocity reports directly into workspace databases.</p>
+          <button type="button" class="btn btn-primary integ-toggle-btn" style="width:100%; justify-content:center;">Connect</button>
+        </div>
+
+        <!-- 8. Salesforce -->
+        <div class="integration-card" data-status="available">
+          <div class="integration-card-top">
+            <div class="integ-logo" style="color:#00a1e0;">
+              <span class="material-symbols-outlined" style="font-size:24px;">cloud</span>
+            </div>
+            <span class="dash-badge badge-review">Not Connected</span>
+          </div>
+          <h3>Salesforce CRM</h3>
+          <p>Synchronize enterprise customer contract statuses, consumption quotas, and account leads.</p>
+          <button type="button" class="btn btn-primary integ-toggle-btn" style="width:100%; justify-content:center;">Connect</button>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('user');
+
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+
+      function showToast(msg) {
+        const c = document.getElementById('dashToastContainer');
+        const t = document.createElement('div');
+        t.className = 'dash-toast';
+        t.innerHTML = `<span class="material-symbols-outlined" style="color:var(--bronze-400);">check_circle</span><span>${msg}</span>`;
+        c.appendChild(t);
+        setTimeout(() => t.remove(), 3500);
+      }
+
+      // Connect / Disconnect Toggle
+      document.querySelectorAll('.integ-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const card = this.closest('.integration-card');
+          const title = card.querySelector('h3').textContent;
+          const badge = card.querySelector('.dash-badge');
+
+          if (this.classList.contains('is-connected')) {
+            if (confirm(`Disconnect ${title} from your workspace? Active automations will pause.`)) {
+              this.classList.remove('is-connected');
+              this.className = 'btn btn-primary integ-toggle-btn';
+              this.textContent = 'Connect';
+              badge.className = 'dash-badge badge-review';
+              badge.textContent = 'Not Connected';
+              card.setAttribute('data-status', 'available');
+              showToast(`${title} disconnected.`);
+            }
+          } else {
+            this.classList.add('is-connected');
+            this.className = 'btn btn-secondary integ-toggle-btn is-connected';
+            this.textContent = 'Manage Connection';
+            badge.className = 'dash-badge badge-active';
+            badge.textContent = 'Connected';
+            card.setAttribute('data-status', 'connected');
+            showToast(`${title} connected successfully!`);
+          }
+        });
+      });
+
+      // Filter tabs
+      const filterBtns = document.querySelectorAll('#integrationFilters .filter-pill');
+      const cards = document.querySelectorAll('.integration-card');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(b => b.classList.remove('is-active'));
+          this.classList.add('is-active');
+          const cat = this.getAttribute('data-cat');
+          cards.forEach(c => {
+            c.style.display = (cat === 'all' || c.getAttribute('data-status') === cat) ? 'flex' : 'none';
+          });
+        });
+      });
+
+      // Search
+      const search = document.getElementById('integrationSearchInput');
+      if (search) {
+        search.addEventListener('input', function () {
+          const q = this.value.toLowerCase().trim();
+          cards.forEach(c => {
+            c.style.display = c.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

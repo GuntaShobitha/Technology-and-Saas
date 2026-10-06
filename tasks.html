@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Management — STACKLY SaaS & Technology</title>
+  <meta name="description" content="Sprint tasks, issue tracking, and architectural backlog across your engineering workspaces.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">WORKSPACE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="User Navigation">
+      <span class="dash-nav-section-title">Core Workspace</span>
+      <a href="./user-dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./overview.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Overview</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>My Projects</span>
+        <span class="dash-nav-badge">8</span>
+      </a>
+      <a href="./tasks.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+
+      <span class="dash-nav-section-title">Communication</span>
+      <a href="./notifications.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">notifications</span>
+        <span>Notifications</span>
+        <span class="dash-nav-badge" style="background:rgba(239,68,68,0.2); color:#fca5a5; border-color:rgba(239,68,68,0.3);">3 New</span>
+      </a>
+      <a href="./activity.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">history</span>
+        <span>Recent Activity</span>
+      </a>
+
+      <span class="dash-nav-section-title">Platform &amp; Finance</span>
+      <a href="./billing.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span>Billing</span>
+      </a>
+      <a href="./subscription.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">credit_card</span>
+        <span>Subscription</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+
+      <span class="dash-nav-section-title">Account</span>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+      <a href="./support.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Website</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN SCROLLABLE CONTENT AREA ==================== -->
+  <div class="dash-main-area">
+
+    <!-- Top Sticky Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./user-dashboard.html">Workspace</a>
+          <span class="sep">/</span>
+          <span class="current">Tasks</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" id="taskSearchInput" placeholder="Search tasks by title, project, assignee...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <a href="./notifications.html" class="dash-action-btn" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot"></span>
+        </a>
+
+        <a href="./support.html" class="dash-action-btn" aria-label="Help and Support">
+          <span class="material-symbols-outlined">help_outline</span>
+        </a>
+
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open user profile menu">
+            <div class="dash-user-avatar">
+              <span data-user-initials>SH</span>
+            </div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Shobitha</span>
+              <span class="dash-user-email" data-user-email>shobitha@gmail.com</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Shobitha</strong>
+              <span data-user-email>shobitha@gmail.com</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;" data-user-plan>Professional Tier</div>
+            </div>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <span>My Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Account Settings</span>
+            </a>
+            <a href="./billing.html">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <span>Billing &amp; Invoices</span>
+            </a>
+            <a href="./subscription.html">
+              <span class="material-symbols-outlined">credit_card</span>
+              <span>Subscription</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Deep Scrollable Tasks Content -->
+    <main class="dash-content">
+
+      <!-- Header & Quick Actions -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1.25rem;">
+        <div>
+          <span class="mono" style="font-size:0.75rem; color:var(--bronze-300); letter-spacing:0.1em; text-transform:uppercase;">Engineering Backlog</span>
+          <h1 style="font-size:1.85rem; color:#fff; font-weight:700; margin:0.25rem 0 0.5rem 0;">Task Orchestration Board</h1>
+          <p style="font-size:0.9rem; color:#94a3b8; margin:0;">Track sprint tasks, microservice migrations, and critical infrastructure tickets.</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="openNewTaskModal">
+          <span class="material-symbols-outlined" style="font-size:18px;">add_task</span>
+          <span>Create New Task</span>
+        </button>
+      </div>
+
+      <!-- Task Status Counters (5 KPI Cards) -->
+      <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap:1.25rem; margin-bottom:2rem;">
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Total Backlog</span>
+            <div class="kpi-icon-wrap">
+              <span class="material-symbols-outlined">list_alt</span>
+            </div>
+          </div>
+          <div class="kpi-value">38</div>
+          <div class="kpi-comparison"><span>Sprint 26.4 Total</span></div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Pending</span>
+            <div class="kpi-icon-wrap" style="background:rgba(234,179,8,0.1); color:#eab308;">
+              <span class="material-symbols-outlined">pending</span>
+            </div>
+          </div>
+          <div class="kpi-value">12</div>
+          <div class="kpi-comparison"><span>Queued for pickup</span></div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">In Progress</span>
+            <div class="kpi-icon-wrap" style="background:rgba(59,130,246,0.1); color:#60a5fa;">
+              <span class="material-symbols-outlined">autorenew</span>
+            </div>
+          </div>
+          <div class="kpi-value">18</div>
+          <div class="kpi-comparison"><span>Active developer branches</span></div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Completed</span>
+            <div class="kpi-icon-wrap" style="background:rgba(74,222,128,0.1); color:#4ade80;">
+              <span class="material-symbols-outlined">check_circle</span>
+            </div>
+          </div>
+          <div class="kpi-value">74</div>
+          <div class="kpi-comparison"><span>Merged &bull; Tests passed</span></div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Overdue</span>
+            <div class="kpi-icon-wrap" style="background:rgba(239,68,68,0.1); color:#f87171;">
+              <span class="material-symbols-outlined">warning</span>
+            </div>
+          </div>
+          <div class="kpi-value">2</div>
+          <div class="kpi-comparison"><span style="color:#f87171;">Action required</span></div>
+        </div>
+      </div>
+
+      <!-- Large Filterable Task Table Panel -->
+      <section class="dash-panel" style="margin-bottom:2rem; padding:0; overflow:hidden;">
+        
+        <!-- Controls Bar -->
+        <div style="padding:1.5rem 1.75rem; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div class="filter-pill-bar" id="taskStatusFilters">
+            <button type="button" class="filter-pill is-active" data-status="all">All Tasks (38)</button>
+            <button type="button" class="filter-pill" data-status="pending">Pending (12)</button>
+            <button type="button" class="filter-pill" data-status="in-progress">In Progress (18)</button>
+            <button type="button" class="filter-pill" data-status="completed">Completed (74)</button>
+            <button type="button" class="filter-pill" data-status="overdue">Overdue (2)</button>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <select class="dash-form-select" id="taskProjectFilter" style="width:auto; padding:0.35rem 0.75rem; font-size:0.8rem;">
+              <option value="all">All Projects</option>
+              <option value="AI Swarm">Autonomous AI Swarm</option>
+              <option value="K8s Cluster">Multi-Region K8s Cluster</option>
+              <option value="Vault Engine">Zero-Trust Vault Engine</option>
+              <option value="Kafka Stream">Kafka Real-Time Stream</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="dash-table-wrap">
+          <table class="dash-table" id="taskTable">
+            <thead>
+              <tr>
+                <th style="width:40px;"></th>
+                <th>Task Details</th>
+                <th>Project</th>
+                <th>Priority</th>
+                <th>Assigned</th>
+                <th>Created</th>
+                <th>Due Date</th>
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Task 1 -->
+              <tr data-status="pending" data-project="Vault Engine">
+                <td><input type="checkbox" class="task-checkbox" aria-label="Toggle task"></td>
+                <td>
+                  <strong style="color:#fff;">Rotate IAM KMS Master Keys</strong>
+                  <div style="font-size:0.75rem; color:#64748b;">Enforce 30-day cryptographic cycle</div>
+                </td>
+                <td><span class="mono" style="font-size:0.8rem; color:var(--bronze-300);">Zero-Trust Vault</span></td>
+                <td><span class="dash-badge badge-active">Critical</span></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.4rem;">
+                    <span style="width:24px; height:24px; border-radius:50%; background:var(--bronze-500); color:#fff; font-size:0.65rem; display:flex; align-items:center; justify-content:center;">SH</span>
+                    <span style="font-size:0.8rem; color:#cbd5e1;">Shobitha</span>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#64748b;">Oct 01</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#f87171;">Today</span></td>
+                <td>
+                  <div style="width:70px;">
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:20%;"></div></div>
+                  </div>
+                </td>
+                <td><span class="dash-badge badge-active">Pending</span></td>
+                <td>
+                  <button type="button" class="btn btn-secondary task-action-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;">Inspect</button>
+                </td>
+              </tr>
+
+              <!-- Task 2 -->
+              <tr data-status="in-progress" data-project="K8s Cluster">
+                <td><input type="checkbox" class="task-checkbox" aria-label="Toggle task"></td>
+                <td>
+                  <strong style="color:#fff;">Scale Redis Cache Node Pool</strong>
+                  <div style="font-size:0.75rem; color:#64748b;">Add 2 read replicas in eu-central-1</div>
+                </td>
+                <td><span class="mono" style="font-size:0.8rem; color:var(--bronze-300);">Multi-Region K8s</span></td>
+                <td><span class="dash-badge badge-review">Medium</span></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.4rem;">
+                    <span style="width:24px; height:24px; border-radius:50%; background:#3b82f6; color:#fff; font-size:0.65rem; display:flex; align-items:center; justify-content:center;">RC</span>
+                    <span style="font-size:0.8rem; color:#cbd5e1;">Marcus C.</span>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#64748b;">Oct 03</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#cbd5e1;">Tomorrow</span></td>
+                <td>
+                  <div style="width:70px;">
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:65%;"></div></div>
+                  </div>
+                </td>
+                <td><span class="dash-badge badge-review">In Progress</span></td>
+                <td>
+                  <button type="button" class="btn btn-secondary task-action-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;">Inspect</button>
+                </td>
+              </tr>
+
+              <!-- Task 3 -->
+              <tr data-status="in-progress" data-project="AI Swarm">
+                <td><input type="checkbox" class="task-checkbox" aria-label="Toggle task"></td>
+                <td>
+                  <strong style="color:#fff;">Deploy Swarm Neural Checkpoint v4.2</strong>
+                  <div style="font-size:0.75rem; color:#64748b;">Sync model weights to Frankfurt POP</div>
+                </td>
+                <td><span class="mono" style="font-size:0.8rem; color:var(--bronze-300);">Autonomous AI</span></td>
+                <td><span class="dash-badge badge-active">High</span></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.4rem;">
+                    <span style="width:24px; height:24px; border-radius:50%; background:#10b981; color:#fff; font-size:0.65rem; display:flex; align-items:center; justify-content:center;">AL</span>
+                    <span style="font-size:0.8rem; color:#cbd5e1;">Elena V.</span>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#64748b;">Oct 02</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#cbd5e1;">Oct 09</span></td>
+                <td>
+                  <div style="width:70px;">
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:80%;"></div></div>
+                  </div>
+                </td>
+                <td><span class="dash-badge badge-review">In Progress</span></td>
+                <td>
+                  <button type="button" class="btn btn-secondary task-action-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;">Inspect</button>
+                </td>
+              </tr>
+
+              <!-- Task 4 -->
+              <tr data-status="overdue" data-project="Kafka Stream">
+                <td><input type="checkbox" class="task-checkbox" aria-label="Toggle task"></td>
+                <td>
+                  <strong style="color:#fff;">Patch Log4j Vulnerability in Consumer</strong>
+                  <div style="font-size:0.75rem; color:#64748b;">Upgrade dependency to v2.22.0</div>
+                </td>
+                <td><span class="mono" style="font-size:0.8rem; color:var(--bronze-300);">Kafka Real-Time</span></td>
+                <td><span class="dash-badge badge-active" style="color:#f87171; border-color:rgba(239,68,68,0.4);">Urgent</span></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.4rem;">
+                    <span style="width:24px; height:24px; border-radius:50%; background:#f97316; color:#fff; font-size:0.65rem; display:flex; align-items:center; justify-content:center;">MK</span>
+                    <span style="font-size:0.8rem; color:#cbd5e1;">Michael K.</span>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#64748b;">Sep 28</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#f87171;">Oct 04</span></td>
+                <td>
+                  <div style="width:70px;">
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:40%; background:#f87171;"></div></div>
+                  </div>
+                </td>
+                <td><span class="dash-badge badge-active" style="color:#f87171;">Overdue</span></td>
+                <td>
+                  <button type="button" class="btn btn-secondary task-action-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem; color:#f87171;">Resolve</button>
+                </td>
+              </tr>
+
+              <!-- Task 5 -->
+              <tr data-status="completed" data-project="Vault Engine">
+                <td><input type="checkbox" checked class="task-checkbox" aria-label="Toggle task"></td>
+                <td>
+                  <strong style="color:#94a3b8; text-decoration:line-through;">Verify SOC-2 IAM Boundaries</strong>
+                  <div style="font-size:0.75rem; color:#64748b;">Zero non-compliant S3 buckets found</div>
+                </td>
+                <td><span class="mono" style="font-size:0.8rem; color:#64748b;">Zero-Trust Vault</span></td>
+                <td><span class="dash-badge badge-review">Low</span></td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.4rem;">
+                    <span style="width:24px; height:24px; border-radius:50%; background:var(--bronze-500); color:#fff; font-size:0.65rem; display:flex; align-items:center; justify-content:center;">SH</span>
+                    <span style="font-size:0.8rem; color:#64748b;">Shobitha</span>
+                  </div>
+                </td>
+                <td><span class="mono" style="font-size:0.75rem; color:#64748b;">Sep 25</span></td>
+                <td><span class="mono" style="font-size:0.75rem; color:#4ade80;">Oct 02</span></td>
+                <td>
+                  <div style="width:70px;">
+                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:100%; background:#4ade80;"></div></div>
+                  </div>
+                </td>
+                <td><span class="dash-badge badge-active" style="color:#4ade80;">Completed</span></td>
+                <td>
+                  <button type="button" class="btn btn-secondary task-action-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;">Archive</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="dash-pagination">
+          <div class="dash-pagination-info">Showing 1 to 5 of 38 backlog items</div>
+          <div class="dash-pagination-btns">
+            <button type="button" class="page-btn is-active">1</button>
+            <button type="button" class="page-btn">2</button>
+            <button type="button" class="page-btn">3</button>
+            <button type="button" class="page-btn">&rarr;</button>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Create Task Modal -->
+  <div class="dash-modal" id="newTaskModal">
+    <div class="dash-modal-dialog">
+      <div class="dash-modal-header">
+        <h3>Create Workspace Task</h3>
+        <button type="button" class="dash-modal-close-btn" id="closeTaskModal">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <form id="newTaskForm">
+        <div class="dash-modal-body">
+          <div class="dash-form-group">
+            <label class="dash-form-label" for="taskTitle">Task Summary</label>
+            <input type="text" class="dash-form-input" id="taskTitle" placeholder="e.g. Implement TLS 1.3 handshake verification" required>
+          </div>
+          <div class="dash-form-row col-2">
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="taskProject">Associated Project</label>
+              <select class="dash-form-select" id="taskProject">
+                <option value="Autonomous AI Swarm">Autonomous AI Swarm</option>
+                <option value="Multi-Region K8s">Multi-Region K8s</option>
+                <option value="Zero-Trust Vault">Zero-Trust Vault</option>
+                <option value="Kafka Stream">Kafka Stream</option>
+              </select>
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="taskPriority">Priority</label>
+              <select class="dash-form-select" id="taskPriority">
+                <option value="Critical">Critical</option>
+                <option value="High" selected>High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+          <div class="dash-form-row col-2">
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="taskAssignee">Assignee</label>
+              <input type="text" class="dash-form-input" id="taskAssignee" value="Shobitha">
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="taskDue">Due Date</label>
+              <input type="date" class="dash-form-input" id="taskDue">
+            </div>
+          </div>
+        </div>
+        <div class="dash-modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelTaskModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="material-symbols-outlined" style="font-size:18px;">add</span>
+            <span>Enqueue Task</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('user');
+
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+
+      function showToast(msg) {
+        const c = document.getElementById('dashToastContainer');
+        const t = document.createElement('div');
+        t.className = 'dash-toast';
+        t.innerHTML = `<span class="material-symbols-outlined" style="color:var(--bronze-400);">check_circle</span><span>${msg}</span>`;
+        c.appendChild(t);
+        setTimeout(() => t.remove(), 3500);
+      }
+
+      // Checkbox Toggle Completion
+      document.querySelectorAll('.task-checkbox').forEach(cb => {
+        cb.addEventListener('change', function () {
+          const row = this.closest('tr');
+          const title = row.querySelector('strong');
+          if (this.checked) {
+            title.style.textDecoration = 'line-through';
+            title.style.color = '#94a3b8';
+            showToast('Task marked as completed!');
+          } else {
+            title.style.textDecoration = 'none';
+            title.style.color = '#fff';
+            showToast('Task restored to active!');
+          }
+        });
+      });
+
+      // Filter Status
+      const filterBtns = document.querySelectorAll('#taskStatusFilters .filter-pill');
+      const rows = document.querySelectorAll('#taskTable tbody tr');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(b => b.classList.remove('is-active'));
+          this.classList.add('is-active');
+          const st = this.getAttribute('data-status');
+          rows.forEach(r => {
+            r.style.display = (st === 'all' || r.getAttribute('data-status') === st) ? '' : 'none';
+          });
+        });
+      });
+
+      // Search
+      const search = document.getElementById('taskSearchInput');
+      if (search) {
+        search.addEventListener('input', function () {
+          const q = this.value.toLowerCase().trim();
+          rows.forEach(r => {
+            r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none';
+          });
+        });
+      }
+
+      // Modal
+      const modal = document.getElementById('newTaskModal');
+      const openBtn = document.getElementById('openNewTaskModal');
+      const closeBtn = document.getElementById('closeTaskModal');
+      const cancelBtn = document.getElementById('cancelTaskModal');
+      const form = document.getElementById('newTaskForm');
+
+      if (openBtn) openBtn.addEventListener('click', () => modal.classList.add('is-open'));
+      if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('is-open'));
+      if (cancelBtn) cancelBtn.addEventListener('click', () => modal.classList.remove('is-open'));
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const title = document.getElementById('taskTitle').value.trim();
+          modal.classList.remove('is-open');
+          form.reset();
+          showToast(`Task "${title}" queued successfully!`);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Workspace Overview — STACKLY</title>
+  <meta name="description" content="STACKLY Enterprise Customer Workspace. Operational summary, telemetry metrics, and upcoming tasks.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">WORKSPACE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="User Navigation">
+      <span class="dash-nav-section-title">Core Workspace</span>
+      <a href="./user-dashboard.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./overview.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Overview</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>My Projects</span>
+        <span class="dash-nav-badge">8</span>
+      </a>
+      <a href="./tasks.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+
+      <span class="dash-nav-section-title">Communication</span>
+      <a href="./notifications.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">notifications</span>
+        <span>Notifications</span>
+        <span class="dash-nav-badge" style="background:rgba(239,68,68,0.2); color:#fca5a5; border-color:rgba(239,68,68,0.3);">3 New</span>
+      </a>
+      <a href="./activity.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">history</span>
+        <span>Recent Activity</span>
+      </a>
+
+      <span class="dash-nav-section-title">Platform &amp; Finance</span>
+      <a href="./billing.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span>Billing</span>
+      </a>
+      <a href="./subscription.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">credit_card</span>
+        <span>Subscription</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+
+      <span class="dash-nav-section-title">Account</span>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+      <a href="./support.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Website</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN SCROLLABLE CONTENT AREA ==================== -->
+  <div class="dash-main-area">
+
+    <!-- Top Sticky Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./user-dashboard.html">Workspace</a>
+          <span class="sep">/</span>
+          <span class="current">Dashboard</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" placeholder="Search workspace, telemetry, tasks...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <!-- Notification Link -->
+        <a href="./notifications.html" class="dash-action-btn" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot"></span>
+        </a>
+
+        <!-- Help Link -->
+        <a href="./support.html" class="dash-action-btn" aria-label="Help and Support">
+          <span class="material-symbols-outlined">help_outline</span>
+        </a>
+
+        <!-- Dynamic User Profile Trigger & Dropdown -->
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open user profile menu">
+            <div class="dash-user-avatar">
+              <span data-user-initials>SH</span>
+            </div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Shobitha</span>
+              <span class="dash-user-email" data-user-email>shobitha@gmail.com</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Shobitha</strong>
+              <span data-user-email>shobitha@gmail.com</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;" data-user-plan>Professional Tier</div>
+            </div>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <span>My Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Account Settings</span>
+            </a>
+            <a href="./billing.html">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <span>Billing &amp; Invoices</span>
+            </a>
+            <a href="./subscription.html">
+              <span class="material-symbols-outlined">credit_card</span>
+              <span>Subscription</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Overview Content -->
+    <main class="dash-content">
+
+      <!-- ==================== 1. WELCOME HERO ==================== -->
+      <section class="dash-welcome-hero" style="margin-bottom:1.75rem;">
+        <div class="dash-welcome-grid">
+          <div>
+            <div class="dash-welcome-meta-pill">
+              <span class="material-symbols-outlined" style="font-size:14px;">calendar_today</span>
+              <span data-current-date>Tuesday, Oct 6, 2026</span>
+              <span style="opacity:0.4;">|</span>
+              <span class="pulse-dot pulse-dot--cyan" style="width:6px; height:6px;"></span>
+              <span>us-east-1 Operational</span>
+            </div>
+            <h1 class="dash-welcome-title">
+              Welcome back, <span data-user-name>Shobitha</span>
+            </h1>
+            <p class="dash-welcome-subtitle">
+              All 8 active service meshes are functioning with optimal latency. Here is what is happening across your cloud architecture right now.
+            </p>
+          </div>
+          <div class="dash-welcome-actions">
+            <a href="./projects.html" class="btn btn-primary">
+              <span class="material-symbols-outlined" style="font-size:18px;">add</span>
+              <span>New Project</span>
+            </a>
+            <a href="./overview.html" class="btn btn-secondary">
+              <span class="material-symbols-outlined" style="font-size:18px;">analytics</span>
+              <span>Full Overview</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 2. KEY STATISTICS (4 KPI CARDS) ==================== -->
+      <div class="dash-kpi-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom:1.75rem;">
+        <!-- KPI 1 -->
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Active Projects</span>
+            <div class="kpi-icon-wrap">
+              <span class="material-symbols-outlined">folder_open</span>
+            </div>
+          </div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-comparison">
+            <span class="kpi-trend positive">+2 this month</span>
+            <span>across 3 clusters</span>
+          </div>
+        </div>
+
+        <!-- KPI 2 -->
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Pending Tasks</span>
+            <div class="kpi-icon-wrap" style="background:rgba(234,179,8,0.1); color:#eab308;">
+              <span class="material-symbols-outlined">pending_actions</span>
+            </div>
+          </div>
+          <div class="kpi-value">12</div>
+          <div class="kpi-comparison">
+            <span class="kpi-trend neutral">4 due today</span>
+            <span>priority queue</span>
+          </div>
+        </div>
+
+        <!-- KPI 3 -->
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">API Throughput</span>
+            <div class="kpi-icon-wrap" style="background:rgba(74,222,128,0.1); color:#4ade80;">
+              <span class="material-symbols-outlined">sync_alt</span>
+            </div>
+          </div>
+          <div class="kpi-value">8.4M</div>
+          <div class="kpi-comparison">
+            <span class="kpi-trend positive">+14.2%</span>
+            <span>vs previous week</span>
+          </div>
+        </div>
+
+        <!-- KPI 4 -->
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Productivity Score</span>
+            <div class="kpi-icon-wrap" style="background:rgba(184,130,79,0.15); color:var(--bronze-300);">
+              <span class="material-symbols-outlined">speed</span>
+            </div>
+          </div>
+          <div class="kpi-value">94.8%</div>
+          <div class="kpi-comparison">
+            <span class="kpi-trend positive">+3.1%</span>
+            <span>sprint velocity</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 3. PRODUCTIVITY OVERVIEW + QUICK ACTIONS ==================== -->
+      <div style="display:grid; grid-template-columns: 2fr 1fr; gap:1.5rem; margin-bottom:1.75rem;">
+        
+        <!-- Small Productivity Chart Preview -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <div>
+              <h3 style="font-size:1.1rem; color:#fff; margin:0 0 4px 0;">Weekly Productivity Velocity</h3>
+              <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Completed sprint workloads and model inferences.</p>
+            </div>
+            <a href="./analytics.html" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.75rem;">
+              <span>Detailed Analytics &rarr;</span>
+            </a>
+          </div>
+          <div class="svg-chart-container" style="height:200px;">
+            <svg viewBox="0 0 600 200" preserveAspectRatio="none">
+              <line x1="40" y1="30" x2="580" y2="30" class="chart-grid-line"></line>
+              <line x1="40" y1="80" x2="580" y2="80" class="chart-grid-line"></line>
+              <line x1="40" y1="130" x2="580" y2="130" class="chart-grid-line"></line>
+              <line x1="40" y1="170" x2="580" y2="170" class="chart-grid-line"></line>
+
+              <!-- Smooth Area Gradient -->
+              <defs>
+                <linearGradient id="userChartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#cca072" stop-opacity="0.3"></stop>
+                  <stop offset="100%" stop-color="#cca072" stop-opacity="0.0"></stop>
+                </linearGradient>
+              </defs>
+              <path d="M 50 140 Q 120 70, 200 110 T 350 50 T 480 80 T 570 35 L 570 170 L 50 170 Z" fill="url(#userChartGrad)"></path>
+              <path d="M 50 140 Q 120 70, 200 110 T 350 50 T 480 80 T 570 35" fill="none" stroke="#cca072" stroke-width="2.5"></path>
+
+              <!-- Node Points -->
+              <circle cx="50" cy="140" r="3.5" fill="#cca072"></circle>
+              <circle cx="200" cy="110" r="3.5" fill="#cca072"></circle>
+              <circle cx="350" cy="50" r="3.5" fill="#cca072"></circle>
+              <circle cx="480" cy="80" r="3.5" fill="#cca072"></circle>
+              <circle cx="570" cy="35" r="3.5" fill="#cca072"></circle>
+
+              <!-- Labels -->
+              <text x="50" y="190" class="chart-axis-label">Mon</text>
+              <text x="135" y="190" class="chart-axis-label">Tue</text>
+              <text x="220" y="190" class="chart-axis-label">Wed</text>
+              <text x="310" y="190" class="chart-axis-label">Thu</text>
+              <text x="395" y="190" class="chart-axis-label">Fri</text>
+              <text x="480" y="190" class="chart-axis-label">Sat</text>
+              <text x="560" y="190" class="chart-axis-label">Sun</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Quick Actions & System Status Card -->
+        <div class="dash-panel" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div class="dash-panel-header" style="margin-bottom:1rem;">
+              <h3 style="font-size:1.1rem; color:#fff; margin:0;">Quick Launch</h3>
+              <span class="dash-badge badge-active">Ready</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <a href="./projects.html" class="btn btn-secondary" style="justify-content:flex-start; font-size:0.85rem;">
+                <span class="material-symbols-outlined" style="color:var(--bronze-400);">create_new_folder</span>
+                <span>Create New Project</span>
+              </a>
+              <a href="./tasks.html" class="btn btn-secondary" style="justify-content:flex-start; font-size:0.85rem;">
+                <span class="material-symbols-outlined" style="color:#4ade80;">add_task</span>
+                <span>Assign Workspace Task</span>
+              </a>
+              <a href="./reports.html" class="btn btn-secondary" style="justify-content:flex-start; font-size:0.85rem;">
+                <span class="material-symbols-outlined" style="color:#60a5fa;">summarize</span>
+                <span>Generate Compliance Report</span>
+              </a>
+              <a href="./integrations.html" class="btn btn-secondary" style="justify-content:flex-start; font-size:0.85rem;">
+                <span class="material-symbols-outlined" style="color:#f472b6;">hub</span>
+                <span>Connect External API</span>
+              </a>
+            </div>
+          </div>
+          <div style="border-top:1px solid rgba(255,255,255,0.06); padding-top:0.75rem; margin-top:1rem; font-size:0.75rem; color:#64748b; display:flex; justify-content:space-between;">
+            <span>Environment: Production</span>
+            <span class="mono" style="color:#4ade80;">Cluster 99.99% Uptime</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 4. ACTIVE PROJECTS PREVIEW ==================== -->
+      <section class="dash-panel" style="margin-bottom:1.75rem;">
+        <div class="dash-panel-header">
+          <div>
+            <h3 style="font-size:1.15rem; color:#fff; margin:0 0 4px 0;">Active Projects Preview</h3>
+            <p style="font-size:0.825rem; color:#94a3b8; margin:0;">Recently deployed applications and services.</p>
+          </div>
+          <a href="./projects.html" class="btn btn-secondary" style="font-size:0.8rem;">
+            <span>View All 8 Projects &rarr;</span>
+          </a>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.25rem;">
+          <!-- Card 1 -->
+          <div class="project-card">
+            <div>
+              <div class="project-card-header">
+                <span class="dash-badge badge-active">In Production</span>
+                <span class="mono" style="font-size:0.75rem; color:var(--bronze-300);">P1 Critical</span>
+              </div>
+              <h4 class="project-card-title">Autonomous AI Swarm</h4>
+              <p class="project-card-desc">Self-healing agent workflows across microservice mesh.</p>
+            </div>
+            <div>
+              <div class="project-progress-label">
+                <span>Progress</span>
+                <span class="mono">88%</span>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" style="width:88%;"></div>
+              </div>
+              <div class="project-card-meta">
+                <div class="avatar-stack">
+                  <span>AL</span>
+                  <span>MK</span>
+                  <span>+3</span>
+                </div>
+                <span class="mono" style="font-size:0.75rem; color:#64748b;">Due in 4 days</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="project-card">
+            <div>
+              <div class="project-card-header">
+                <span class="dash-badge badge-active">Active</span>
+                <span class="mono" style="font-size:0.75rem; color:#4ade80;">P2 Medium</span>
+              </div>
+              <h4 class="project-card-title">Multi-Region K8s Cluster</h4>
+              <p class="project-card-desc">Distributed zero-downtime deployment pipeline.</p>
+            </div>
+            <div>
+              <div class="project-progress-label">
+                <span>Progress</span>
+                <span class="mono">72%</span>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" style="width:72%;"></div>
+              </div>
+              <div class="project-card-meta">
+                <div class="avatar-stack">
+                  <span>RC</span>
+                  <span>SH</span>
+                </div>
+                <span class="mono" style="font-size:0.75rem; color:#64748b;">Due Oct 18</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="project-card">
+            <div>
+              <div class="project-card-header">
+                <span class="dash-badge badge-review">Review</span>
+                <span class="mono" style="font-size:0.75rem; color:var(--bronze-300);">P1 High</span>
+              </div>
+              <h4 class="project-card-title">Zero-Trust Vault Engine</h4>
+              <p class="project-card-desc">Cryptographic key rotation and hardware security modules.</p>
+            </div>
+            <div>
+              <div class="project-progress-label">
+                <span>Progress</span>
+                <span class="mono">94%</span>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" style="width:94%;"></div>
+              </div>
+              <div class="project-card-meta">
+                <div class="avatar-stack">
+                  <span>JD</span>
+                  <span>EL</span>
+                </div>
+                <span class="mono" style="font-size:0.75rem; color:#64748b;">Due Tomorrow</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 5. UPCOMING TASKS + RECENT ACTIVITY ==================== -->
+      <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:1.5rem; margin-bottom:1.75rem;">
+        
+        <!-- Upcoming Tasks Table -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <div>
+              <h3 style="font-size:1.1rem; color:#fff; margin:0 0 4px 0;">Upcoming Tasks</h3>
+              <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Action items assigned to your engineering queue.</p>
+            </div>
+            <a href="./tasks.html" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.75rem;">
+              <span>View All Tasks &rarr;</span>
+            </a>
+          </div>
+
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Task Title</th>
+                  <th>Priority</th>
+                  <th>Due</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong style="color:#fff; font-size:0.85rem;">Rotate IAM KMS Key</strong>
+                    <div style="font-size:0.75rem; color:#64748b;">Security Vault</div>
+                  </td>
+                  <td><span class="dash-badge badge-active" style="font-size:0.7rem;">High</span></td>
+                  <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">Today</span></td>
+                  <td><span class="dash-badge badge-active" style="font-size:0.7rem;">Pending</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong style="color:#fff; font-size:0.85rem;">Scale Redis Cache Node</strong>
+                    <div style="font-size:0.75rem; color:#64748b;">Infrastructure</div>
+                  </td>
+                  <td><span class="dash-badge badge-review" style="font-size:0.7rem;">Medium</span></td>
+                  <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">Tomorrow</span></td>
+                  <td><span class="dash-badge badge-review" style="font-size:0.7rem;">In Progress</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong style="color:#fff; font-size:0.85rem;">Review SOC-2 Posture</strong>
+                    <div style="font-size:0.75rem; color:#64748b;">Compliance</div>
+                  </td>
+                  <td><span class="dash-badge badge-active" style="font-size:0.7rem;">Urgent</span></td>
+                  <td><span class="mono" style="font-size:0.75rem; color:#94a3b8;">Oct 10</span></td>
+                  <td><span class="dash-badge badge-active" style="font-size:0.7rem;">Pending</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Activity Preview -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <div>
+              <h3 style="font-size:1.1rem; color:#fff; margin:0 0 4px 0;">Recent Activity</h3>
+              <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Live stream of workspace events.</p>
+            </div>
+            <a href="./activity.html" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.75rem;">
+              <span>Full Feed &rarr;</span>
+            </a>
+          </div>
+
+          <div class="activity-timeline" style="padding-left:1.5rem;">
+            <div class="activity-item" style="padding-bottom:1rem;">
+              <div class="activity-point" style="background:#4ade80;"></div>
+              <strong style="color:#fff; font-size:0.85rem;">EKS Worker Node Auto-Scaled</strong>
+              <div class="mono" style="font-size:0.7rem; color:#64748b;">8 minutes ago &bull; us-east-1</div>
+            </div>
+            <div class="activity-item" style="padding-bottom:1rem;">
+              <div class="activity-point" style="background:var(--bronze-400);"></div>
+              <strong style="color:#fff; font-size:0.85rem;">AI Checkpoint v4.2 Deployed</strong>
+              <div class="mono" style="font-size:0.7rem; color:#64748b;">32 minutes ago &bull; Swarm Controller</div>
+            </div>
+            <div class="activity-item" style="padding-bottom:1rem;">
+              <div class="activity-point" style="background:#60a5fa;"></div>
+              <strong style="color:#fff; font-size:0.85rem;">Monthly SLA Audit Passed</strong>
+              <div class="mono" style="font-size:0.7rem; color:#64748b;">2 hours ago &bull; Compliance Bot</div>
+            </div>
+            <div class="activity-item" style="padding-bottom:0;">
+              <div class="activity-point" style="background:#a855f7;"></div>
+              <strong style="color:#fff; font-size:0.85rem;">Slack Webhook Relinked</strong>
+              <div class="mono" style="font-size:0.7rem; color:#64748b;">4 hours ago &bull; Settings Engine</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== 6. USAGE SUMMARY ==================== -->
+      <section class="dash-panel" style="margin-bottom:1rem;">
+        <div class="dash-panel-header">
+          <div>
+            <h3 style="font-size:1.1rem; color:#fff; margin:0 0 4px 0;">Resource Usage Summary</h3>
+            <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Monthly cloud tier consumption allowances.</p>
+          </div>
+          <a href="./billing.html" class="btn btn-secondary" style="font-size:0.8rem;">
+            <span>Manage Billing &rarr;</span>
+          </a>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.5rem;">
+          <div style="background:rgba(255,255,255,0.02); padding:1rem; border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.5rem;">
+              <span style="color:#fff;">NVMe High-Speed Storage</span>
+              <span class="mono" style="color:var(--bronze-300);">642 GB / 1,000 GB</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:64.2%;"></div>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.02); padding:1rem; border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.5rem;">
+              <span style="color:#fff;">Monthly API Invocations</span>
+              <span class="mono" style="color:#4ade80;">8.4M / 10.0M</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:84%;"></div>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.02); padding:1rem; border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.5rem;">
+              <span style="color:#fff;">Developer Seats Provisioned</span>
+              <span class="mono" style="color:var(--bronze-300);">16 / 25 Seats</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width:64%;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 1. Enforce authentication & bind dynamic user data
+      Auth.requireAuth('user');
+
+      // 2. Mobile drawer toggle
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) {
+        toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+      }
+
+      // 3. User menu dropdown
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          dropdown.classList.toggle('is-open');
+        });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+    });
+  </script>
+</body>
+</html>

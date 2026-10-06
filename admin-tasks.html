@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker Queues &amp; Platform Tasks — STACKLY Admin</title>
+  <meta name="description" content="Platform asynchronous background workers, consumer groups, task execution queues, and dead-letter retry buffers.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300); background:rgba(184,130,79,0.15); padding:2px 6px; border-radius:3px;">ADMIN</span>
+    </div>
+
+    <nav class="dash-sidebar__nav">
+      <span class="dash-nav-section-title">Core Operations</span>
+      <a href="./admin-dashboard.html" class="dash-nav-item"><span class="material-symbols-outlined">space_dashboard</span><span>Dashboard</span></a>
+      <a href="./admin-users.html" class="dash-nav-item"><span class="material-symbols-outlined">manage_accounts</span><span>Users</span><span class="dash-nav-badge">14.2k</span></a>
+      <a href="./admin-customers.html" class="dash-nav-item"><span class="material-symbols-outlined">corporate_fare</span><span>Customers</span></a>
+      <a href="./admin-projects.html" class="dash-nav-item"><span class="material-symbols-outlined">folder_special</span><span>Projects</span></a>
+      <a href="./admin-tasks.html" class="dash-nav-item is-active"><span class="material-symbols-outlined">assignment</span><span>Tasks</span></a>
+      <a href="./admin-subscriptions.html" class="dash-nav-item"><span class="material-symbols-outlined">card_membership</span><span>Subscriptions</span></a>
+      <a href="./admin-payments.html" class="dash-nav-item"><span class="material-symbols-outlined">receipt_long</span><span>Payments</span></a>
+
+      <span class="dash-nav-section-title">Platform &amp; Intelligence</span>
+      <a href="./admin-analytics.html" class="dash-nav-item"><span class="material-symbols-outlined">query_stats</span><span>Analytics</span></a>
+      <a href="./admin-reports.html" class="dash-nav-item"><span class="material-symbols-outlined">analytics</span><span>Reports</span></a>
+      <a href="./admin-content.html" class="dash-nav-item"><span class="material-symbols-outlined">newspaper</span><span>Content</span></a>
+      <a href="./admin-notifications.html" class="dash-nav-item"><span class="material-symbols-outlined">campaign</span><span>Notifications</span></a>
+      <a href="./admin-integrations.html" class="dash-nav-item"><span class="material-symbols-outlined">hub</span><span>Integrations</span></a>
+
+      <span class="dash-nav-section-title">Security &amp; Health</span>
+      <a href="./admin-security.html" class="dash-nav-item"><span class="material-symbols-outlined">security</span><span>Security</span></a>
+      <a href="./admin-logs.html" class="dash-nav-item"><span class="material-symbols-outlined">reorder</span><span>System Logs</span></a>
+      <a href="./admin-settings.html" class="dash-nav-item"><span class="material-symbols-outlined">settings</span><span>Settings</span></a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./user-dashboard.html" class="dash-nav-item" style="color:var(--bronze-300);"><span class="material-symbols-outlined">switch_account</span><span>Customer View</span></a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;"><span class="material-symbols-outlined" style="color:#f87171;">logout</span><span>Logout Session</span></button>
+    </div>
+  </aside>
+
+  <div class="dash-main-area">
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle"><span class="material-symbols-outlined">menu</span></button>
+        <div>
+          <div class="dash-breadcrumb"><a href="./admin-dashboard.html">Admin</a><span class="separator">/</span><span class="current">Tasks</span></div>
+          <h1 class="dash-page-title">Platform Worker Queues</h1>
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined">search</span>
+          <input type="search" placeholder="Search tasks, execution hashes...">
+        </div>
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn">
+            <div class="dash-avatar" data-user-initials>AD</div>
+            <div class="dash-user-meta hide-mobile">
+              <span class="dash-user-name" data-user-name>Admin</span>
+              <span class="dash-user-role" data-user-email>admin@nexi.tech</span>
+            </div>
+            <span class="material-symbols-outlined">expand_more</span>
+          </button>
+          <div class="dash-dropdown-menu" id="dashUserDropdown">
+            <div style="padding:0.75rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+              <div style="font-weight:600; font-size:0.875rem;" data-user-name>Admin</div>
+              <div class="mono" style="font-size:0.75rem; color:#64748b;" data-user-email>admin@nexi.tech</div>
+            </div>
+            <a href="./admin-settings.html" class="dash-dropdown-item"><span class="material-symbols-outlined">settings</span> Platform Settings</a>
+            <a href="./user-dashboard.html" class="dash-dropdown-item"><span class="material-symbols-outlined">switch_account</span> Customer View</a>
+            <button type="button" class="dash-dropdown-item" data-action="logout" style="width:100%; text-align:left; color:#f87171;"><span class="material-symbols-outlined" style="color:#f87171;">logout</span> Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-content-container">
+      <div class="dash-kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom:1.75rem;">
+        <div class="dash-kpi-card">
+          <div class="kpi-header"><span class="kpi-title">Active Workers</span><div class="kpi-icon-wrap"><span class="material-symbols-outlined">bolt</span></div></div>
+          <div class="kpi-value mono">128 Nodes</div>
+          <div class="kpi-footer"><span class="kpi-trend positive">100% Online</span></div>
+        </div>
+        <div class="dash-kpi-card">
+          <div class="kpi-header"><span class="kpi-title">Queue Throughput</span><div class="kpi-icon-wrap" style="background:rgba(204,160,114,0.15); color:var(--bronze-300);"><span class="material-symbols-outlined">speed</span></div></div>
+          <div class="kpi-value mono">8,420 / min</div>
+          <div class="kpi-footer"><span class="kpi-trend positive">+14.2% load</span></div>
+        </div>
+        <div class="dash-kpi-card">
+          <div class="kpi-header"><span class="kpi-title">Avg Execution Time</span><div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.1); color:#4ade80;"><span class="material-symbols-outlined">timer</span></div></div>
+          <div class="kpi-value mono">142 ms</div>
+          <div class="kpi-footer"><span class="kpi-trend positive">P95: 380ms</span></div>
+        </div>
+        <div class="dash-kpi-card">
+          <div class="kpi-header"><span class="kpi-title">Dead-Letter Buffer</span><div class="kpi-icon-wrap" style="background:rgba(239,68,68,0.1); color:#f87171;"><span class="material-symbols-outlined">error</span></div></div>
+          <div class="kpi-value mono">4 Jobs</div>
+          <div class="kpi-footer"><span class="kpi-trend negative">Awaiting retry</span></div>
+        </div>
+      </div>
+
+      <div class="dash-card" style="padding:0; overflow:hidden;">
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Job Identifier</th>
+                <th>Target Queue</th>
+                <th>Tenant</th>
+                <th>Runtime</th>
+                <th>Priority</th>
+                <th>Retries</th>
+                <th>Status</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong class="mono" style="color:#fff;">task_job_99a8f4</strong><div style="font-size:0.75rem; color:#64748b;">Batch ledger reconciliation</div></td>
+                <td><span class="mono" style="color:var(--bronze-300);">redis://billing-high</span></td>
+                <td>Meridian Capital Inc.</td>
+                <td class="mono">84 ms</td>
+                <td><span class="priority-badge is-high">HIGH</span></td>
+                <td class="mono">0 / 3</td>
+                <td><span class="status-badge is-active">Completed</span></td>
+                <td style="text-align:right;"><button class="btn btn--secondary btn--sm">Log</button></td>
+              </tr>
+              <tr>
+                <td><strong class="mono" style="color:#fff;">task_job_42b10c</strong><div style="font-size:0.75rem; color:#64748b;">Fleet GPS telematics ingestion</div></td>
+                <td><span class="mono" style="color:#60a5fa;">kafka://telemetry-stream</span></td>
+                <td>Apex Logistics Group</td>
+                <td class="mono">210 ms</td>
+                <td><span class="priority-badge is-med">MED</span></td>
+                <td class="mono">0 / 3</td>
+                <td><span class="status-badge is-active">Processing</span></td>
+                <td style="text-align:right;"><button class="btn btn--secondary btn--sm">Log</button></td>
+              </tr>
+              <tr>
+                <td><strong class="mono" style="color:#fff;">task_job_83e71d</strong><div style="font-size:0.75rem; color:#64748b;">SOC-2 automated hash audit</div></td>
+                <td><span class="mono" style="color:#c084fc;">sqs://audit-compliance</span></td>
+                <td>Finnovate AG</td>
+                <td class="mono">1,420 ms</td>
+                <td><span class="priority-badge is-high">HIGH</span></td>
+                <td class="mono">0 / 3</td>
+                <td><span class="status-badge is-active">Completed</span></td>
+                <td style="text-align:right;"><button class="btn btn--secondary btn--sm">Log</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('admin');
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+    });
+  </script>
+</body>
+</html>

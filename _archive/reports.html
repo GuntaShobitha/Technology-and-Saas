@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Intelligence Reports — STACKLY</title>
+  <meta name="description" content="Generate and download audit reports for revenue, infrastructure performance, security, and automations.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <div class="site-preloader" id="dashPreloader">
+    <div class="preloader-brand">
+      <div class="preloader-symbol"><span></span><span></span><span></span><span></span></div>
+      <span class="preloader-title">STACKLY</span>
+    </div>
+    <div class="preloader-track"><div class="preloader-progress"></div></div>
+    <span class="preloader-status">Initializing workspace...</span>
+  </div>
+
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./dashboard.html" class="dash-sidebar__brand">
+        <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">ENTERPRISE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav">
+      <a href="./dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Overview</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>Projects</span>
+      </a>
+      <a href="./automation.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">bolt</span>
+        <span>Automation</span>
+      </a>
+      <a href="./users.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">group</span>
+        <span>Users</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./contact.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-400);">
+        <span class="material-symbols-outlined">home</span>
+        <span>Back to Website</span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="dash-main-area">
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle"><span class="material-symbols-outlined">menu</span></button>
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#667085;">search</span>
+          <input type="text" placeholder="Search generated reports...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn">
+            <div class="dash-user-avatar">SK</div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name">Shobitha</span>
+              <span class="dash-user-role">Lead Architect</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#838e9e;">expand_more</span>
+          </button>
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <a href="./profile.html"><span class="material-symbols-outlined">person</span><span>Operator Profile</span></a>
+            <a href="./settings.html"><span class="material-symbols-outlined">tune</span><span>Preferences</span></a>
+            <div class="dash-dropdown-divider"></div>
+            <a href="./login.html" style="color:#f87171;"><span class="material-symbols-outlined">logout</span><span>Sign Out</span></a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-content">
+      <div class="dash-page-header">
+        <div>
+          <h1>Enterprise Intelligence Reports</h1>
+          <p>Scheduled and on-demand telemetry exports, SOC2 compliance digests, and financial ledgers.</p>
+        </div>
+
+        <div class="dash-header-actions">
+          <button class="btn btn--bronze btn--sm" onclick="alert('Preparing report compilation wizard.');">
+            <span class="material-symbols-outlined">post_add</span>
+            <span>Generate Custom Report</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Report Templates Grid (6 Types) -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+        
+        <!-- 1. Revenue -->
+        <div class="dash-panel" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div class="mono" style="font-size:0.7rem; color:var(--bronze-300); margin-bottom:0.35rem;">FINANCIAL LEDGER</div>
+            <h3 class="dash-panel-title">Gross Revenue &amp; Billing Audit</h3>
+            <p style="font-size:0.8125rem; color:#98a2b3; margin-top:0.5rem; line-height:1.5;">
+              Monthly ARR reconciliations, Stripe subscription cohorts, customer churn telemetry, and tax allocations.
+            </p>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; gap:0.5rem;">
+            <button class="btn btn--outline-light btn--sm" onclick="alert('Viewing preview for Revenue Report.');">Preview</button>
+            <button class="btn btn--solid btn--sm" onclick="alert('Downloading Revenue_Audit_2026.csv');">Download CSV</button>
+          </div>
+        </div>
+
+        <!-- 2. Analytics -->
+        <div class="dash-panel" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div class="mono" style="font-size:0.7rem; color:var(--bronze-300); margin-bottom:0.35rem;">TELEMETRY DIGEST</div>
+            <h3 class="dash-panel-title">Ingestion &amp; Traffic Analytics</h3>
+            <p style="font-size:0.8125rem; color:#98a2b3; margin-top:0.5rem; line-height:1.5;">
+              Global endpoint request distribution, serialization overhead, API error codes, and consumer quotas.
+            </p>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; gap:0.5rem;">
+            <button class="btn btn--outline-light btn--sm" onclick="alert('Viewing preview for Traffic Analytics.');">Preview</button>
+            <button class="btn btn--solid btn--sm" onclick="alert('Downloading Ingestion_Telemetry.pdf');">Download PDF</button>
+          </div>
+        </div>
+
+        <!-- 3. Performance -->
+        <div class="dash-panel" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div class="mono" style="font-size:0.7rem; color:var(--bronze-300); margin-bottom:0.35rem;">INFRASTRUCTURE</div>
+            <h3 class="dash-panel-title">Cluster Performance &amp; SLAs</h3>
+            <p style="font-size:0.8125rem; color:#98a2b3; margin-top:0.5rem; line-height:1.5;">
+              99.99% availability verification, node failover logs, memory limits, and automated chaos test results.
+            </p>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; gap:0.5rem;">
+            <button class="btn btn--outline-light btn--sm" onclick="alert('Viewing preview for Cluster Performance.');">Preview</button>
+            <button class="btn btn--solid btn--sm" onclick="alert('Downloading Cluster_Performance.json');">Download JSON</button>
+          </div>
+        </div>
+
+        <!-- 4. User Audit -->
+        <div class="dash-panel" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div class="mono" style="font-size:0.7rem; color:var(--bronze-300); margin-bottom:0.35rem;">ACCESS LOGS</div>
+            <h3 class="dash-panel-title">User Activity &amp; RBAC Entitlements</h3>
+            <p style="font-size:0.8125rem; color:#98a2b3; margin-top:0.5rem; line-height:1.5;">
+              Audit trails of administrative role grants, session timestamps, and cryptographic signing actions.
+            </p>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; gap:0.5rem;">
+            <button class="btn btn--outline-light btn--sm" onclick="alert('Viewing preview for User Activity.');">Preview</button>
+            <button class="btn btn--solid btn--sm" onclick="alert('Downloading User_Audit_Log.csv');">Download CSV</button>
+          </div>
+        </div>
+
+        <!-- 5. Automation -->
+        <div class="dash-panel" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div class="mono" style="font-size:0.7rem; color:var(--bronze-300); margin-bottom:0.35rem;">WORKFLOW AUDIT</div>
+            <h3 class="dash-panel-title">Autonomous Execution Health</h3>
+            <p style="font-size:0.8125rem; color:#98a2b3; margin-top:0.5rem; line-height:1.5;">
+              State machine runtime profiling, agent step costs, retry logic logs, and dead-letter queue metrics.
+            </p>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; gap:0.5rem;">
+            <button class="btn btn--outline-light btn--sm" onclick="alert('Viewing preview for Automation Health.');">Preview</button>
+            <button class="btn btn--solid btn--sm" onclick="alert('Downloading Workflow_Executions.pdf');">Download PDF</button>
+          </div>
+        </div>
+
+        <!-- 6. Security -->
+        <div class="dash-panel" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div class="mono" style="font-size:0.7rem; color:var(--bronze-300); margin-bottom:0.35rem;">SOC2 TYPE II COMPLIANCE</div>
+            <h3 class="dash-panel-title">Zero-Trust &amp; Cryptography Audit</h3>
+            <p style="font-size:0.8125rem; color:#98a2b3; margin-top:0.5rem; line-height:1.5;">
+              Hardware HSM key rotation, TLS 1.3 cipher audit, vulnerability scans, and continuous posture compliance.
+            </p>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; gap:0.5rem;">
+            <button class="btn btn--outline-light btn--sm" onclick="alert('Viewing preview for Security Audit.');">Preview</button>
+            <button class="btn btn--solid btn--sm" onclick="alert('Downloading SOC2_Compliance_Audit.pdf');">Download PDF</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Historical Downloads Table -->
+      <div class="dash-panel">
+        <div class="dash-panel-header">
+          <h3 class="dash-panel-title">Generated Report Archive</h3>
+          <span class="mono" style="font-size:0.75rem; color:#838e9e;">STORED ENCRYPTED IN S3 GLACIER</span>
+        </div>
+
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Report File Name</th>
+                <th>Category</th>
+                <th>Generated Timestamp</th>
+                <th>Compiled By</th>
+                <th>File Size</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>STACKLY_Q3_Enterprise_Audit.pdf</strong></td>
+                <td>SOC2 Compliance</td>
+                <td>Sep 24, 2026 · 18:22 UTC</td>
+                <td>Security Bot</td>
+                <td class="mono">4.2 MB</td>
+                <td><button class="btn btn--outline-light btn--sm" onclick="alert('Downloading STACKLY_Q3_Enterprise_Audit.pdf');">Download</button></td>
+              </tr>
+              <tr>
+                <td><strong>Meridian_Financial_Settlement_Aug.csv</strong></td>
+                <td>Revenue Ledger</td>
+                <td>Sep 01, 2026 · 00:05 UTC</td>
+                <td>Shobitha</td>
+                <td class="mono">18.4 MB</td>
+                <td><button class="btn btn--outline-light btn--sm" onclick="alert('Downloading Meridian_Financial_Settlement_Aug.csv');">Download</button></td>
+              </tr>
+              <tr>
+                <td><strong>Global_Cluster_SLA_Telemetry_2026.json</strong></td>
+                <td>Performance</td>
+                <td>Aug 28, 2026 · 12:00 UTC</td>
+                <td>Marcus Chen</td>
+                <td class="mono">1.1 MB</td>
+                <td><button class="btn btn--outline-light btn--sm" onclick="alert('Downloading Global_Cluster_SLA_Telemetry_2026.json');">Download</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="./js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform Content &amp; Announcements — STACKLY Admin</title>
+  <meta name="description" content="Manage global customer announcement banners, status incident posts, release notes, and documentation portals.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300); background:rgba(184,130,79,0.15); padding:2px 6px; border-radius:3px;">ADMIN</span>
+    </div>
+
+    <nav class="dash-sidebar__nav">
+      <span class="dash-nav-section-title">Core Operations</span>
+      <a href="./admin-dashboard.html" class="dash-nav-item"><span class="material-symbols-outlined">space_dashboard</span><span>Dashboard</span></a>
+      <a href="./admin-users.html" class="dash-nav-item"><span class="material-symbols-outlined">manage_accounts</span><span>Users</span><span class="dash-nav-badge">14.2k</span></a>
+      <a href="./admin-customers.html" class="dash-nav-item"><span class="material-symbols-outlined">corporate_fare</span><span>Customers</span></a>
+      <a href="./admin-projects.html" class="dash-nav-item"><span class="material-symbols-outlined">folder_special</span><span>Projects</span></a>
+      <a href="./admin-tasks.html" class="dash-nav-item"><span class="material-symbols-outlined">assignment</span><span>Tasks</span></a>
+      <a href="./admin-subscriptions.html" class="dash-nav-item"><span class="material-symbols-outlined">card_membership</span><span>Subscriptions</span></a>
+      <a href="./admin-payments.html" class="dash-nav-item"><span class="material-symbols-outlined">receipt_long</span><span>Payments</span></a>
+
+      <span class="dash-nav-section-title">Platform &amp; Intelligence</span>
+      <a href="./admin-analytics.html" class="dash-nav-item"><span class="material-symbols-outlined">query_stats</span><span>Analytics</span></a>
+      <a href="./admin-reports.html" class="dash-nav-item"><span class="material-symbols-outlined">analytics</span><span>Reports</span></a>
+      <a href="./admin-content.html" class="dash-nav-item is-active"><span class="material-symbols-outlined">newspaper</span><span>Content</span></a>
+      <a href="./admin-notifications.html" class="dash-nav-item"><span class="material-symbols-outlined">campaign</span><span>Notifications</span></a>
+      <a href="./admin-integrations.html" class="dash-nav-item"><span class="material-symbols-outlined">hub</span><span>Integrations</span></a>
+
+      <span class="dash-nav-section-title">Security &amp; Health</span>
+      <a href="./admin-security.html" class="dash-nav-item"><span class="material-symbols-outlined">security</span><span>Security</span></a>
+      <a href="./admin-logs.html" class="dash-nav-item"><span class="material-symbols-outlined">reorder</span><span>System Logs</span></a>
+      <a href="./admin-settings.html" class="dash-nav-item"><span class="material-symbols-outlined">settings</span><span>Settings</span></a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./user-dashboard.html" class="dash-nav-item" style="color:var(--bronze-300);"><span class="material-symbols-outlined">switch_account</span><span>Customer View</span></a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;"><span class="material-symbols-outlined" style="color:#f87171;">logout</span><span>Logout Session</span></button>
+    </div>
+  </aside>
+
+  <div class="dash-main-area">
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle"><span class="material-symbols-outlined">menu</span></button>
+        <div>
+          <div class="dash-breadcrumb"><a href="./admin-dashboard.html">Admin</a><span class="separator">/</span><span class="current">Content</span></div>
+          <h1 class="dash-page-title">Broadcasts &amp; Platform CMS</h1>
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <button class="btn btn--bronze btn--sm" onclick="alert('Publish announcement dialog ready.');">
+          <span class="material-symbols-outlined" style="font-size:1rem;">add</span>
+          <span>Create Notice</span>
+        </button>
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn">
+            <div class="dash-avatar" data-user-initials>AD</div>
+            <div class="dash-user-meta hide-mobile">
+              <span class="dash-user-name" data-user-name>Admin</span>
+              <span class="dash-user-role" data-user-email>admin@nexi.tech</span>
+            </div>
+            <span class="material-symbols-outlined">expand_more</span>
+          </button>
+          <div class="dash-dropdown-menu" id="dashUserDropdown">
+            <div style="padding:0.75rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+              <div style="font-weight:600; font-size:0.875rem;" data-user-name>Admin</div>
+              <div class="mono" style="font-size:0.75rem; color:#64748b;" data-user-email>admin@nexi.tech</div>
+            </div>
+            <a href="./admin-settings.html" class="dash-dropdown-item"><span class="material-symbols-outlined">settings</span> Platform Settings</a>
+            <a href="./user-dashboard.html" class="dash-dropdown-item"><span class="material-symbols-outlined">switch_account</span> Customer View</a>
+            <button type="button" class="dash-dropdown-item" data-action="logout" style="width:100%; text-align:left; color:#f87171;"><span class="material-symbols-outlined" style="color:#f87171;">logout</span> Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-content-container">
+      <div class="dash-card" style="margin-bottom:1.75rem;">
+        <h3 style="color:#fff; font-size:1.15rem; margin-bottom:1rem;">Active In-App Announcement Banners</h3>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div style="padding:1rem; background:rgba(204,160,114,0.08); border:1px solid rgba(204,160,114,0.3); border-radius:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <span class="mono" style="font-size:0.7rem; color:var(--bronze-300); background:rgba(184,130,79,0.2); padding:2px 6px; border-radius:3px;">PRODUCT UPDATE</span>
+              <strong style="color:#fff; display:block; margin:0.35rem 0 0.15rem;">Neural Telemetry Engine v2.4 Released</strong>
+              <div style="color:#94a3b8; font-size:0.85rem;">Now live for all Enterprise and Pro tier tenants. Tracing overhead decreased by 40%.</div>
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn--secondary btn--sm">Edit</button>
+              <button class="btn btn--secondary btn--sm" style="color:#f87171;">Disable</button>
+            </div>
+          </div>
+
+          <div style="padding:1rem; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.3); border-radius:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <span class="mono" style="font-size:0.7rem; color:#60a5fa; background:rgba(59,130,246,0.2); padding:2px 6px; border-radius:3px;">MAINTENANCE</span>
+              <strong style="color:#fff; display:block; margin:0.35rem 0 0.15rem;">Scheduled Database Indexing in EU-West-1</strong>
+              <div style="color:#94a3b8; font-size:0.85rem;">Sunday, Oct 18, 02:00 UTC &bull; Zero read downtime expected; write buffers queued.</div>
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn--secondary btn--sm">Edit</button>
+              <button class="btn btn--secondary btn--sm" style="color:#f87171;">Disable</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-card" style="padding:0; overflow:hidden;">
+        <div style="padding:1.25rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+          <h3 style="color:#fff; font-size:1.1rem;">Public Changelog &amp; Release History</h3>
+        </div>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Release Version</th>
+                <th>Summary of Architectural Changes</th>
+                <th>Publish Date</th>
+                <th>Author</th>
+                <th>Audience</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong class="mono" style="color:var(--bronze-300);">v2.4.0-rc1</strong></td>
+                <td>Autonomous Swarm Engine with Redis Cluster fallback and FIDO2 MFA enforcement</td>
+                <td><span class="mono">Oct 01, 2026</span></td>
+                <td>Core Platform Team</td>
+                <td><span class="status-badge is-active">Public</span></td>
+                <td style="text-align:right;"><button class="btn btn--secondary btn--sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong class="mono" style="color:var(--bronze-300);">v2.3.8</strong></td>
+                <td>Real-time Kafka consumer lag alerts and multi-tenant webhook retries</td>
+                <td><span class="mono">Sep 15, 2026</span></td>
+                <td>DevOps Team</td>
+                <td><span class="status-badge is-active">Public</span></td>
+                <td style="text-align:right;"><button class="btn btn--secondary btn--sm">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('admin');
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+    });
+  </script>
+</body>
+</html>

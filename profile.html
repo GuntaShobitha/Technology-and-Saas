@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile & Security — STACKLY SaaS & Technology</title>
+  <meta name="description" content="Manage your STACKLY cloud identity, security credentials, active sessions, and personal API tokens.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);" data-user-role>USER</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="User Navigation">
+      <span class="dash-nav-section-title">Core Workspace</span>
+      <a href="./user-dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./user-dashboard.html#analytics" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Overview</span>
+      </a>
+      <a href="./user-dashboard.html#projects" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>My Projects</span>
+      </a>
+      <a href="./user-dashboard.html#tasks" class="dash-nav-item">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./user-dashboard.html#reports" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+
+      <span class="dash-nav-section-title">Account &amp; Security</span>
+      <a href="./profile.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">person</span>
+        <span>My Profile</span>
+      </a>
+      <a href="#credentials" class="dash-nav-item">
+        <span class="material-symbols-outlined">password</span>
+        <span>Password &amp; 2FA</span>
+      </a>
+      <a href="#sessions" class="dash-nav-item">
+        <span class="material-symbols-outlined">devices</span>
+        <span>Active Sessions</span>
+      </a>
+      <a href="#apiTokens" class="dash-nav-item">
+        <span class="material-symbols-outlined">key</span>
+        <span>Access Tokens</span>
+      </a>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">tune</span>
+        <span>Account Settings</span>
+      </a>
+      <a href="./user-dashboard.html#subscription" class="dash-nav-item">
+        <span class="material-symbols-outlined">credit_card</span>
+        <span>Billing &amp; Plan</span>
+      </a>
+      <a href="./user-dashboard.html#support" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Website</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN WORKSPACE (INDEPENDENTLY SCROLLABLE) ==================== -->
+  <div class="dash-main-area">
+
+    <!-- Top Sticky Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./user-dashboard.html">Workspace</a>
+          <span class="sep">/</span>
+          <span class="current">My Profile</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" placeholder="Search security settings, tokens, sessions...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <!-- Notification Button -->
+        <a href="./user-dashboard.html#notifications" class="dash-action-btn" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot"></span>
+        </a>
+
+        <!-- Help Link -->
+        <a href="./user-dashboard.html#support" class="dash-action-btn" aria-label="Help and Support">
+          <span class="material-symbols-outlined">help_outline</span>
+        </a>
+
+        <!-- Dynamic User Profile Trigger & Dropdown -->
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open user profile menu">
+            <div class="dash-user-avatar">
+              <span data-user-initials>SH</span>
+            </div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Shobitha</span>
+              <span class="dash-user-email" data-user-email>shobitha@gmail.com</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Shobitha</strong>
+              <span data-user-email>shobitha@gmail.com</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;" data-user-plan>Professional Tier</div>
+            </div>
+            <a href="./profile.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <span>My Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Account Settings</span>
+            </a>
+            <a href="./user-dashboard.html">
+              <span class="material-symbols-outlined">dashboard</span>
+              <span>Dashboard Overview</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Substantial, Long Scrollable Content Workspace -->
+    <main class="dash-content">
+
+      <!-- ==================== SECTION 1: PROFILE HERO BANNER ==================== -->
+      <section class="profile-hero-card">
+        <div class="profile-hero-left">
+          <div class="profile-avatar-large" id="profileLargeAvatar">
+            <span data-user-initials>SH</span>
+          </div>
+          <div class="profile-hero-info">
+            <h2>
+              <span data-user-name>Shobitha</span>
+              <span class="material-symbols-outlined" style="color:#4ade80; font-size:22px;" title="Verified Enterprise Identity">verified</span>
+            </h2>
+            <p><a href="mailto:shobitha@gmail.com" data-user-email style="color:#94a3b8; text-decoration:none;">shobitha@gmail.com</a></p>
+            <div class="profile-badges-wrap">
+              <span class="dash-badge badge-active" data-user-role>USER</span>
+              <span class="dash-badge badge-review" data-user-plan>Professional Tier</span>
+              <span class="mono" style="font-size:0.75rem; color:#64748b;">Member since Sept 2024</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-hero-stats">
+          <div class="profile-stat-box">
+            <div class="profile-stat-val">100%</div>
+            <div class="profile-stat-lbl">Security Score</div>
+          </div>
+          <div class="profile-stat-box">
+            <div class="profile-stat-val">3</div>
+            <div class="profile-stat-lbl">Active Sessions</div>
+          </div>
+          <div class="profile-stat-box">
+            <div class="profile-stat-val">2</div>
+            <div class="profile-stat-lbl">API Tokens</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 2: PERSONAL INFORMATION FORM ==================== -->
+      <section class="dash-panel" id="personalInfo">
+        <div class="dash-panel-header">
+          <div>
+            <h3>Personal Information</h3>
+            <p>Update your cloud profile details and public identity display.</p>
+          </div>
+          <span class="mono" style="font-size:0.75rem; color:var(--bronze-300);">Auto-sync enabled</span>
+        </div>
+
+        <div class="dash-panel-body">
+          <form id="profileForm">
+            <div class="dash-form-row col-2">
+              <div class="dash-form-group">
+                <label class="dash-form-label" for="profileFullName">Full Legal Name</label>
+                <input type="text" class="dash-form-input" id="profileFullName" data-bind="userName" required>
+              </div>
+              <div class="dash-form-group">
+                <label class="dash-form-label" for="profileEmail">Primary Email Address</label>
+                <input type="email" class="dash-form-input" id="profileEmail" data-bind="userEmail" required>
+              </div>
+            </div>
+
+            <div class="dash-form-row col-3">
+              <div class="dash-form-group">
+                <label class="dash-form-label" for="profileRole">Job Title / Technical Role</label>
+                <input type="text" class="dash-form-input" id="profileRole" value="Lead Cloud Solutions Architect">
+              </div>
+              <div class="dash-form-group">
+                <label class="dash-form-label" for="profileDept">Department / Team</label>
+                <input type="text" class="dash-form-input" id="profileDept" value="Platform Infrastructure">
+              </div>
+              <div class="dash-form-group">
+                <label class="dash-form-label" for="profilePhone">Work Phone Number</label>
+                <input type="tel" class="dash-form-input" id="profilePhone" value="+1 (555) 382-9014">
+              </div>
+            </div>
+
+            <div class="dash-form-row col-2">
+              <div class="dash-form-group">
+                <label class="dash-form-label" for="profileTimezone">Primary Timezone</label>
+                <select class="dash-form-select" id="profileTimezone">
+                  <option value="UTC-8" selected>Pacific Time (US & Canada) — UTC-08:00</option>
+                  <option value="UTC-5">Eastern Time (US & Canada) — UTC-05:00</option>
+                  <option value="UTC+0">Coordinated Universal Time — UTC+00:00</option>
+                  <option value="UTC+1">Central European Time — UTC+01:00</option>
+                  <option value="UTC+5:30">India Standard Time — UTC+05:30</option>
+                  <option value="UTC+8">Singapore / Tokyo — UTC+08:00</option>
+                </select>
+              </div>
+              <div class="dash-form-group">
+                <label class="dash-form-label" for="profileLocale">Language &amp; Formatting</label>
+                <select class="dash-form-select" id="profileLocale">
+                  <option value="en-US" selected>English (United States)</option>
+                  <option value="en-GB">English (United Kingdom)</option>
+                  <option value="de-DE">Deutsch (Germany)</option>
+                  <option value="fr-FR">Français (France)</option>
+                  <option value="ja-JP">Japanese (日本語)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="profileBio">Bio / Responsibilities</label>
+              <textarea class="dash-form-textarea" id="profileBio" rows="3" placeholder="Brief technical summary...">Overseeing multi-region Kubernetes clusters, automated zero-trust security postures, and telemetry metrics ingestion for enterprise workloads.</textarea>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem;">
+              <button type="reset" class="btn btn-secondary">Reset Changes</button>
+              <button type="submit" class="btn btn-primary">
+                <span class="material-symbols-outlined" style="font-size:18px;">save</span>
+                <span>Save Profile Changes</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 3: CREDENTIALS & 2FA ==================== -->
+      <section class="dash-panel" id="credentials">
+        <div class="dash-panel-header">
+          <div>
+            <h3>Security &amp; Multi-Factor Authentication</h3>
+            <p>Manage your account password, hardware keys, and time-based OTP generators.</p>
+          </div>
+          <span class="dash-badge badge-active">2FA Active</span>
+        </div>
+
+        <div class="dash-panel-body">
+          <div class="dash-form-row col-2" style="margin-bottom:2rem;">
+            <!-- Change Password -->
+            <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:1.5rem;">
+              <h4 style="font-size:1rem; color:#fff; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+                <span class="material-symbols-outlined" style="color:var(--bronze-400);">lock</span>
+                Update Password
+              </h4>
+              <form id="passwordForm">
+                <div class="dash-form-group">
+                  <label class="dash-form-label" for="currPass">Current Password</label>
+                  <input type="password" class="dash-form-input" id="currPass" placeholder="••••••••••••" required>
+                </div>
+                <div class="dash-form-group">
+                  <label class="dash-form-label" for="newPass">New Master Password</label>
+                  <input type="password" class="dash-form-input" id="newPass" placeholder="Minimum 12 characters" required>
+                </div>
+                <div class="dash-form-group">
+                  <label class="dash-form-label" for="confirmPass">Confirm New Password</label>
+                  <input type="password" class="dash-form-input" id="confirmPass" placeholder="Repeat new password" required>
+                </div>
+                <button type="submit" class="btn btn-secondary" style="width:100%; justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:16px;">key</span>
+                  <span>Update Password</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Two-Factor Authentication Management -->
+            <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:1.5rem; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <h4 style="font-size:1rem; color:#fff; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+                  <span class="material-symbols-outlined" style="color:#4ade80;">verified_user</span>
+                  Two-Factor Authentication (2FA)
+                </h4>
+                <p style="font-size:0.825rem; color:#94a3b8; line-height:1.5; margin-bottom:1.5rem;">
+                  Two-factor authentication adds an extra layer of zero-trust verification. When enabled, a 6-digit TOTP code from your mobile authenticator app will be required at login.
+                </p>
+
+                <div class="dash-switch-label">
+                  <div class="dash-switch-info">
+                    <h4>Authenticator App (TOTP)</h4>
+                    <p>Google Authenticator, 1Password, or Authy</p>
+                  </div>
+                  <label class="dash-switch">
+                    <input type="checkbox" checked id="twoFactorToggle">
+                    <span class="dash-slider"></span>
+                  </label>
+                </div>
+
+                <div class="dash-switch-label" style="border-top:1px solid rgba(255,255,255,0.06);">
+                  <div class="dash-switch-info">
+                    <h4>Hardware Security Key (FIDO2)</h4>
+                    <p>YubiKey 5 NFC / WebAuthn Biometric passkey</p>
+                  </div>
+                  <label class="dash-switch">
+                    <input type="checkbox" id="fidoToggle">
+                    <span class="dash-slider"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div style="margin-top:1.5rem; display:flex; gap:0.75rem;">
+                <button type="button" class="btn btn-secondary" id="viewBackupCodesBtn" style="font-size:0.8rem; flex:1; justify-content:center;">
+                  <span>Recovery Codes</span>
+                </button>
+                <button type="button" class="btn btn-secondary" id="addKeyBtn" style="font-size:0.8rem; flex:1; justify-content:center;">
+                  <span>Register Passkey</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 4: ACTIVE SESSIONS ==================== -->
+      <section class="dash-panel" id="sessions">
+        <div class="dash-panel-header">
+          <div>
+            <h3>Active Browser &amp; Hardware Sessions</h3>
+            <p>Signed-in instances across desktop, mobile, and command line tools.</p>
+          </div>
+          <button type="button" class="btn btn-secondary" id="revokeAllSessionsBtn" style="color:#f87171; border-color:rgba(239,68,68,0.3);">
+            <span class="material-symbols-outlined" style="font-size:16px;">power_settings_new</span>
+            <span>Revoke All Other Sessions</span>
+          </button>
+        </div>
+
+        <div class="dash-panel-body" style="padding:0;">
+          <div class="dash-session-row">
+            <div class="dash-session-info">
+              <div class="dash-session-icon">
+                <span class="material-symbols-outlined">laptop_windows</span>
+              </div>
+              <div>
+                <strong style="color:#fff; font-size:0.9rem;">Windows 11 &bull; Chrome 124.0</strong>
+                <div class="mono" style="font-size:0.75rem; color:#64748b;">IP: 192.168.1.104 &bull; Ashburn, VA, United States</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <span class="dash-badge badge-active">CURRENT SESSION</span>
+            </div>
+          </div>
+
+          <div class="dash-session-row">
+            <div class="dash-session-info">
+              <div class="dash-session-icon">
+                <span class="material-symbols-outlined">phone_iphone</span>
+              </div>
+              <div>
+                <strong style="color:#fff; font-size:0.9rem;">Apple iPhone 15 Pro &bull; Safari Mobile</strong>
+                <div class="mono" style="font-size:0.75rem; color:#64748b;">IP: 172.56.21.89 &bull; Washington DC &bull; Active 2 hours ago</div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-secondary session-revoke-btn" style="padding:0.35rem 0.75rem; font-size:0.75rem;">
+              <span>Revoke</span>
+            </button>
+          </div>
+
+          <div class="dash-session-row">
+            <div class="dash-session-info">
+              <div class="dash-session-icon">
+                <span class="material-symbols-outlined">terminal</span>
+              </div>
+              <div>
+                <strong style="color:#fff; font-size:0.9rem;">STACKLY CLI Agent &bull; v2.4.1</strong>
+                <div class="mono" style="font-size:0.75rem; color:#64748b;">IP: 54.210.88.14 &bull; AWS EC2 us-east-1 &bull; Active yesterday</div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-secondary session-revoke-btn" style="padding:0.35rem 0.75rem; font-size:0.75rem;">
+              <span>Revoke</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 5: PERSONAL API TOKENS ==================== -->
+      <section class="dash-panel" id="apiTokens">
+        <div class="dash-panel-header">
+          <div>
+            <h3>Personal API Access Tokens (PAT)</h3>
+            <p>Access tokens for SDK automation, Terraform providers, and CI/CD pipelines.</p>
+          </div>
+          <button type="button" class="btn btn-primary" id="generateTokenBtn">
+            <span class="material-symbols-outlined" style="font-size:18px;">add</span>
+            <span>Generate New Token</span>
+          </button>
+        </div>
+
+        <div class="dash-panel-body">
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Token Name</th>
+                  <th>Key Identifier</th>
+                  <th>Scopes</th>
+                  <th>Created</th>
+                  <th>Expires</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="tokenTableBody">
+                <tr>
+                  <td><strong style="color:#fff;">Production CI/CD Pipeline</strong></td>
+                  <td>
+                    <div class="dash-token-box">
+                      <span>sk_live_9a8f...4e19</span>
+                      <button type="button" class="copy-token-btn" data-key="sk_live_9a8f27c3d1920e8b4e19" title="Copy Key">
+                        <span class="material-symbols-outlined" style="font-size:16px;">content_copy</span>
+                      </button>
+                    </div>
+                  </td>
+                  <td><span class="dash-badge badge-active">read:write:deploy</span></td>
+                  <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Oct 01, 2024</span></td>
+                  <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Never</span></td>
+                  <td>
+                    <button type="button" class="btn btn-secondary token-revoke-btn" style="padding:0.3rem 0.65rem; font-size:0.75rem; color:#f87171;">Revoke</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong style="color:#fff;">Terraform State Sync</strong></td>
+                  <td>
+                    <div class="dash-token-box">
+                      <span>sk_live_12bd...99fa</span>
+                      <button type="button" class="copy-token-btn" data-key="sk_live_12bd7890aae899fa" title="Copy Key">
+                        <span class="material-symbols-outlined" style="font-size:16px;">content_copy</span>
+                      </button>
+                    </div>
+                  </td>
+                  <td><span class="dash-badge badge-review">infra:read</span></td>
+                  <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Sept 15, 2024</span></td>
+                  <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">in 85 days</span></td>
+                  <td>
+                    <button type="button" class="btn btn-secondary token-revoke-btn" style="padding:0.3rem 0.65rem; font-size:0.75rem; color:#f87171;">Revoke</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 6: DANGER ZONE ==================== -->
+      <section class="dash-panel dash-danger-card" id="dangerZone">
+        <div class="dash-panel-header" style="border-bottom-color:rgba(239,68,68,0.2);">
+          <div>
+            <h3 style="color:#f87171; display:flex; align-items:center; gap:0.5rem;">
+              <span class="material-symbols-outlined">warning</span>
+              Danger Zone
+            </h3>
+            <p>Irreversible actions relating to your customer account and stored telemetry data.</p>
+          </div>
+        </div>
+
+        <div class="dash-panel-body">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:0.5rem 0;">
+            <div>
+              <strong style="color:#fff; display:block; margin-bottom:0.25rem;">Export Complete Account Telemetry Archive</strong>
+              <p style="color:#94a3b8; font-size:0.825rem; margin:0;">Download a portable JSON archive of all project metadata, audit trails, and billing history.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" id="exportDataBtn">
+              <span class="material-symbols-outlined" style="font-size:16px;">download</span>
+              <span>Export JSON Archive</span>
+            </button>
+          </div>
+
+          <div class="dash-dropdown-divider" style="margin:1.25rem 0;"></div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:0.5rem 0;">
+            <div>
+              <strong style="color:#f87171; display:block; margin-bottom:0.25rem;">Deactivate Account</strong>
+              <p style="color:#94a3b8; font-size:0.825rem; margin:0;">Temporarily suspend all running instances, webhooks, and automation swarms.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" id="deactivateAccountBtn" style="color:#f87171; border-color:rgba(239,68,68,0.4);">
+              <span>Deactivate Account</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 1. Enforce Auth
+      const user = Auth.requireAuth('user');
+
+      // 2. Mobile Drawer Toggle
+      const sidebar = document.getElementById('dashSidebar');
+      const toggleBtn = document.getElementById('dashSidebarToggle');
+      if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+      }
+
+      // 3. User Menu Dropdown Toggle
+      const userBtn = document.getElementById('dashUserBtn');
+      const userDropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && userDropdown) {
+        userBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          userDropdown.classList.toggle('is-open');
+        });
+        document.addEventListener('click', () => userDropdown.classList.remove('is-open'));
+      }
+
+      // Helper Toast
+      function showToast(msg, icon = 'check_circle') {
+        const container = document.getElementById('dashToastContainer');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = 'dash-toast';
+        toast.innerHTML = `<span class="material-symbols-outlined" style="color:var(--bronze-400);">${icon}</span><span>${msg}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+      }
+
+      // 4. Save Profile Form Handler
+      const profileForm = document.getElementById('profileForm');
+      if (profileForm) {
+        profileForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const newName = document.getElementById('profileFullName').value.trim();
+          const newEmail = document.getElementById('profileEmail').value.trim();
+
+          if (newName) localStorage.setItem('userName', newName);
+          if (newEmail) localStorage.setItem('userEmail', newEmail);
+
+          // Re-bind DOM
+          Auth.bindUserToDOM();
+          showToast('Profile information updated successfully!');
+        });
+      }
+
+      // 5. Password Update Handler
+      const passwordForm = document.getElementById('passwordForm');
+      if (passwordForm) {
+        passwordForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const newP = document.getElementById('newPass').value;
+          const confP = document.getElementById('confirmPass').value;
+          if (newP !== confP) {
+            showToast('New passwords do not match!', 'error');
+            return;
+          }
+          passwordForm.reset();
+          showToast('Master password updated securely!');
+        });
+      }
+
+      // 6. Token Copy & Revocation
+      document.querySelectorAll('.copy-token-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const key = this.getAttribute('data-key');
+          navigator.clipboard.writeText(key).then(() => {
+            showToast('API Token copied to clipboard!');
+          });
+        });
+      });
+
+      document.querySelectorAll('.token-revoke-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const row = this.closest('tr');
+          if (confirm('Are you sure you want to revoke this API token? Any active workloads using it will fail immediately.')) {
+            row.remove();
+            showToast('API token permanently revoked.');
+          }
+        });
+      });
+
+      // 7. Session Revoke
+      document.querySelectorAll('.session-revoke-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const row = this.closest('.dash-session-row');
+          row.style.opacity = '0.4';
+          this.disabled = true;
+          this.textContent = 'Revoked';
+          showToast('Session terminated successfully.');
+        });
+      });
+
+      const revokeAllBtn = document.getElementById('revokeAllSessionsBtn');
+      if (revokeAllBtn) {
+        revokeAllBtn.addEventListener('click', function () {
+          document.querySelectorAll('.session-revoke-btn').forEach(b => {
+            b.disabled = true;
+            b.textContent = 'Revoked';
+            b.closest('.dash-session-row').style.opacity = '0.4';
+          });
+          showToast('All remote sessions have been revoked.');
+        });
+      }
+
+      // 8. Generate Token Modal Simulation
+      const genBtn = document.getElementById('generateTokenBtn');
+      if (genBtn) {
+        genBtn.addEventListener('click', function () {
+          const name = prompt('Enter a label for the new access token:', 'Staging Deploy Swarm');
+          if (!name) return;
+          const randomKey = 'sk_live_' + Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 8);
+          const tbody = document.getElementById('tokenTableBody');
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong style="color:#fff;">${name}</strong></td>
+            <td>
+              <div class="dash-token-box">
+                <span>${randomKey.substring(0, 10)}...</span>
+                <button type="button" class="copy-token-btn" data-key="${randomKey}" title="Copy Key">
+                  <span class="material-symbols-outlined" style="font-size:16px;">content_copy</span>
+                </button>
+              </div>
+            </td>
+            <td><span class="dash-badge badge-active">admin:all</span></td>
+            <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Just now</span></td>
+            <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">in 30 days</span></td>
+            <td>
+              <button type="button" class="btn btn-secondary token-revoke-btn" style="padding:0.3rem 0.65rem; font-size:0.75rem; color:#f87171;">Revoke</button>
+            </td>
+          `;
+          tbody.prepend(tr);
+          tr.querySelector('.copy-token-btn').addEventListener('click', function() {
+            navigator.clipboard.writeText(randomKey).then(() => showToast('Token copied to clipboard!'));
+          });
+          tr.querySelector('.token-revoke-btn').addEventListener('click', function() {
+            tr.remove();
+            showToast('Token revoked.');
+          });
+          showToast(`Generated token "${name}"!`);
+        });
+      }
+
+      // 9. Export Data Archive
+      const exportBtn = document.getElementById('exportDataBtn');
+      if (exportBtn) {
+        exportBtn.addEventListener('click', function () {
+          const data = {
+            user: Auth.getUser(),
+            exportTimestamp: new Date().toISOString(),
+            platform: 'STACKLY Cloud v2.4',
+            posture: 'Enterprise Verified'
+          };
+          const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `stackly-profile-export-${Date.now()}.json`;
+          a.click();
+          URL.revokeObjectURL(url);
+          showToast('Account archive downloaded!');
+        });
+      }
+
+      // 10. Deactivate Account
+      const deactBtn = document.getElementById('deactivateAccountBtn');
+      if (deactBtn) {
+        deactBtn.addEventListener('click', function () {
+          if (confirm('Are you sure you want to deactivate your STACKLY cloud workspace? All automated API tasks will be suspended.')) {
+            showToast('Account deactivation requested. Our compliance team will reach out.');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

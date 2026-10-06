@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billing &amp; Invoices — STACKLY SaaS & Technology</title>
+  <meta name="description" content="Manage payment cards, invoice records, financial transaction history, and accounting receipts.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">WORKSPACE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="User Navigation">
+      <span class="dash-nav-section-title">Core Workspace</span>
+      <a href="./user-dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./overview.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Overview</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>My Projects</span>
+        <span class="dash-nav-badge">8</span>
+      </a>
+      <a href="./tasks.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+
+      <span class="dash-nav-section-title">Communication</span>
+      <a href="./notifications.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">notifications</span>
+        <span>Notifications</span>
+        <span class="dash-nav-badge" style="background:rgba(239,68,68,0.2); color:#fca5a5; border-color:rgba(239,68,68,0.3);">3 New</span>
+      </a>
+      <a href="./activity.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">history</span>
+        <span>Recent Activity</span>
+      </a>
+
+      <span class="dash-nav-section-title">Platform &amp; Finance</span>
+      <a href="./billing.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span>Billing</span>
+      </a>
+      <a href="./subscription.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">credit_card</span>
+        <span>Subscription</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+
+      <span class="dash-nav-section-title">Account</span>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+      <a href="./support.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Website</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN SCROLLABLE CONTENT AREA ==================== -->
+  <div class="dash-main-area">
+
+    <!-- Top Sticky Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./user-dashboard.html">Workspace</a>
+          <span class="sep">/</span>
+          <span class="current">Billing</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" placeholder="Search invoices by ID, date, or amount...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <a href="./notifications.html" class="dash-action-btn" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot"></span>
+        </a>
+
+        <a href="./support.html" class="dash-action-btn" aria-label="Help and Support">
+          <span class="material-symbols-outlined">help_outline</span>
+        </a>
+
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open user profile menu">
+            <div class="dash-user-avatar">
+              <span data-user-initials>SH</span>
+            </div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Shobitha</span>
+              <span class="dash-user-email" data-user-email>shobitha@gmail.com</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Shobitha</strong>
+              <span data-user-email>shobitha@gmail.com</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;" data-user-plan>Professional Tier</div>
+            </div>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <span>My Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Account Settings</span>
+            </a>
+            <a href="./billing.html">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <span>Billing &amp; Invoices</span>
+            </a>
+            <a href="./subscription.html">
+              <span class="material-symbols-outlined">credit_card</span>
+              <span>Subscription</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Deep Scrollable Billing Content -->
+    <main class="dash-content">
+
+      <!-- Header -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1.25rem;">
+        <div>
+          <span class="mono" style="font-size:0.75rem; color:var(--bronze-300); letter-spacing:0.1em; text-transform:uppercase;">Financial &amp; Invoicing Administration</span>
+          <h1 style="font-size:1.85rem; color:#fff; font-weight:700; margin:0.25rem 0 0.5rem 0;">Billing &amp; Payment History</h1>
+          <p style="font-size:0.9rem; color:#94a3b8; margin:0;">Manage primary credit cards, billing cycles, tax receipts, and enterprise wire details.</p>
+        </div>
+        <a href="./subscription.html" class="btn btn-primary">
+          <span class="material-symbols-outlined" style="font-size:18px;">card_membership</span>
+          <span>Manage Plan &amp; Upgrades</span>
+        </a>
+      </div>
+
+      <!-- Plan Summary & Payment Method Cards -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
+        
+        <!-- Current Active Plan Card -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <div>
+              <span class="dash-badge badge-active">Active Plan</span>
+              <h3 style="font-size:1.35rem; color:#fff; margin:0.4rem 0 2px;">Professional Tier</h3>
+              <p style="font-size:0.85rem; color:#94a3b8; margin:0;">Billed monthly &bull; Renews on Nov 01, 2026</p>
+            </div>
+            <div style="text-align:right;">
+              <div class="mono" style="font-size:1.8rem; font-weight:700; color:#fff;">$249.00</div>
+              <span style="font-size:0.75rem; color:#64748b;">per month</span>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid rgba(255,255,255,0.06); padding-top:1rem; margin-top:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-size:0.8rem; color:#cbd5e1;">
+              Auto-renew is <strong style="color:#4ade80;">ON</strong> &bull; Next invoice in 26 days
+            </div>
+            <a href="./subscription.html" class="btn btn-secondary" style="font-size:0.8rem;">Change Tier</a>
+          </div>
+        </div>
+
+        <!-- Payment Method on File -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <div>
+              <span class="dash-badge badge-active">Default Payment</span>
+              <h3 style="font-size:1.35rem; color:#fff; margin:0.4rem 0 2px;">Mastercard &bull;&bull;&bull;&bull; 4242</h3>
+              <p style="font-size:0.85rem; color:#94a3b8; margin:0;">Expires 12/2028 &bull; 3D Secure Verified</p>
+            </div>
+            <div style="width:48px; height:32px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--bronze-300);">
+              <span class="material-symbols-outlined">credit_card</span>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid rgba(255,255,255,0.06); padding-top:1rem; margin-top:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-size:0.8rem; color:#94a3b8;">
+              Billing Email: <span data-user-email style="color:#cbd5e1;">shobitha@gmail.com</span>
+            </div>
+            <button type="button" class="btn btn-secondary" id="updateCardBtn" style="font-size:0.8rem;">Update Card</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Invoices & Transactions Table -->
+      <section class="dash-panel" style="padding:0; overflow:hidden; margin-bottom:2rem;">
+        <div style="padding:1.5rem 1.75rem; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h3 style="font-size:1.15rem; color:#fff; margin:0 0 4px 0;">Invoice &amp; Transaction History</h3>
+            <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Download official accounting statements and VAT receipts.</p>
+          </div>
+          <button type="button" class="btn btn-secondary" id="downloadAllInvoicesBtn" style="font-size:0.8rem;">
+            <span class="material-symbols-outlined" style="font-size:16px;">download</span>
+            <span>Download All Invoices</span>
+          </button>
+        </div>
+
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Invoice ID</th>
+                <th>Billing Period</th>
+                <th>Payment Date</th>
+                <th>Amount</th>
+                <th>Payment Method</th>
+                <th>Status</th>
+                <th>Receipt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong class="mono" style="color:#fff;">INV-2026-10</strong></td>
+                <td><span>Oct 01, 2026 &ndash; Oct 31, 2026</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Oct 01, 2026</span></td>
+                <td><span class="mono" style="font-weight:700; color:#fff;">$249.00 USD</span></td>
+                <td><span style="font-size:0.85rem; color:#cbd5e1;">Mastercard &bull;&bull;&bull;&bull; 4242</span></td>
+                <td><span class="dash-badge badge-active" style="color:#4ade80;">Paid</span></td>
+                <td>
+                  <button type="button" class="btn btn-secondary download-single-inv" style="padding:0.25rem 0.5rem; font-size:0.75rem; color:var(--bronze-300);">PDF</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong class="mono" style="color:#fff;">INV-2026-09</strong></td>
+                <td><span>Sep 01, 2026 &ndash; Sep 30, 2026</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Sep 01, 2026</span></td>
+                <td><span class="mono" style="font-weight:700; color:#fff;">$249.00 USD</span></td>
+                <td><span style="font-size:0.85rem; color:#cbd5e1;">Mastercard &bull;&bull;&bull;&bull; 4242</span></td>
+                <td><span class="dash-badge badge-active" style="color:#4ade80;">Paid</span></td>
+                <td>
+                  <button type="button" class="btn btn-secondary download-single-inv" style="padding:0.25rem 0.5rem; font-size:0.75rem; color:var(--bronze-300);">PDF</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong class="mono" style="color:#fff;">INV-2026-08</strong></td>
+                <td><span>Aug 01, 2026 &ndash; Aug 31, 2026</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Aug 01, 2026</span></td>
+                <td><span class="mono" style="font-weight:700; color:#fff;">$249.00 USD</span></td>
+                <td><span style="font-size:0.85rem; color:#cbd5e1;">Mastercard &bull;&bull;&bull;&bull; 4242</span></td>
+                <td><span class="dash-badge badge-active" style="color:#4ade80;">Paid</span></td>
+                <td>
+                  <button type="button" class="btn btn-secondary download-single-inv" style="padding:0.25rem 0.5rem; font-size:0.75rem; color:var(--bronze-300);">PDF</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong class="mono" style="color:#fff;">INV-2026-07</strong></td>
+                <td><span>Jul 01, 2026 &ndash; Jul 31, 2026</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Jul 01, 2026</span></td>
+                <td><span class="mono" style="font-weight:700; color:#fff;">$249.00 USD</span></td>
+                <td><span style="font-size:0.85rem; color:#cbd5e1;">Mastercard &bull;&bull;&bull;&bull; 4242</span></td>
+                <td><span class="dash-badge badge-active" style="color:#4ade80;">Paid</span></td>
+                <td>
+                  <button type="button" class="btn btn-secondary download-single-inv" style="padding:0.25rem 0.5rem; font-size:0.75rem; color:var(--bronze-300);">PDF</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Tax & Billing Contact Configuration -->
+      <div class="dash-panel" style="margin-bottom:1rem;">
+        <div class="dash-panel-header">
+          <div>
+            <h3 style="font-size:1.15rem; color:#fff; margin:0 0 4px 0;">Tax Identification &amp; Entity Profile</h3>
+            <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Details shown on monthly tax invoices and VAT declarations.</p>
+          </div>
+          <button type="button" class="btn btn-secondary" id="saveTaxBtn" style="font-size:0.8rem;">Save Details</button>
+        </div>
+
+        <div class="dash-form-row col-3">
+          <div class="dash-form-group">
+            <label class="dash-form-label" for="taxEntity">Legal Company Entity</label>
+            <input type="text" class="dash-form-input" id="taxEntity" value="Nexi Labs Technologies Inc.">
+          </div>
+          <div class="dash-form-group">
+            <label class="dash-form-label" for="taxVat">VAT / Tax ID Number</label>
+            <input type="text" class="dash-form-input mono" id="taxVat" value="US-EIN 82-4910291">
+          </div>
+          <div class="dash-form-group">
+            <label class="dash-form-label" for="taxAddress">Billing Country</label>
+            <select class="dash-form-select" id="taxAddress">
+              <option value="US" selected>United States</option>
+              <option value="UK">United Kingdom</option>
+              <option value="DE">Germany</option>
+              <option value="SG">Singapore</option>
+              <option value="IN">India</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('user');
+
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+
+      function showToast(msg) {
+        const c = document.getElementById('dashToastContainer');
+        const t = document.createElement('div');
+        t.className = 'dash-toast';
+        t.innerHTML = `<span class="material-symbols-outlined" style="color:var(--bronze-400);">check_circle</span><span>${msg}</span>`;
+        c.appendChild(t);
+        setTimeout(() => t.remove(), 3500);
+      }
+
+      document.querySelectorAll('.download-single-inv').forEach(b => {
+        b.addEventListener('click', () => showToast('Downloading invoice PDF receipt...'));
+      });
+
+      const dlAll = document.getElementById('downloadAllInvoicesBtn');
+      if (dlAll) dlAll.addEventListener('click', () => showToast('Archiving all 4 invoices into a ZIP bundle...'));
+
+      const updateCard = document.getElementById('updateCardBtn');
+      if (updateCard) updateCard.addEventListener('click', () => showToast('Opening secure Stripe card update sheet...'));
+
+      const saveTax = document.getElementById('saveTaxBtn');
+      if (saveTax) saveTax.addEventListener('click', () => showToast('Billing tax details updated!'));
+    });
+  </script>
+</body>
+</html>

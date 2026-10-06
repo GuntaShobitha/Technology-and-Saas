@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — Create Account | NEXI SaaS & Technology</title>
+  <meta name="description" content="Join NEXI platform to deploy autonomous AI agents, cloud architectures, and enterprise microservices.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      background-color: var(--paper);
+    }
+    .auth-brand-side {
+      background-color: var(--bg-dark);
+      color: var(--paper);
+      padding: clamp(2.5rem, 5vw, 4.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+    .auth-form-side {
+      padding: clamp(2.5rem, 5vw, 4.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 540px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .password-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .toggle-password-btn {
+      position: absolute;
+      right: 12px;
+      color: var(--ink-500);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .auth-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 15, 18, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .auth-modal-content {
+      background: var(--paper-card);
+      border-radius: 16px;
+      max-width: 440px;
+      width: 100%;
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-dark);
+      border: 1px solid rgba(184, 130, 79, 0.3);
+      animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalPop {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @media (max-width: 960px) {
+      .auth-page {
+        grid-template-columns: 1fr;
+      }
+      .auth-brand-side {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="site-preloader" id="sitePreloader">
+    <div class="preloader-brand">
+      <div class="preloader-symbol">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <span class="preloader-title">NEXI</span>
+    </div>
+    <div class="preloader-track"><div class="preloader-progress"></div></div>
+    <span class="preloader-status">Allocating sandbox environment...</span>
+  </div>
+
+  <div class="auth-page">
+    
+    <!-- Left Visual & Highlights -->
+    <div class="auth-brand-side">
+      <div>
+        <a href="./index.html" class="brand" aria-label="NEXI — Home">
+          <svg class="brand-icon" viewBox="0 0 32 32" width="28" height="28" fill="none">
+            <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+            <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+            <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+            <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+            <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+          </svg>
+          <span class="brand-name" style="color: #ffffff;">NEXI</span>
+        </a>
+      </div>
+
+      <div style="margin: 2.5rem 0;">
+        <span class="eyebrow" style="color: var(--bronze-300); display: flex; align-items: center; gap: 0.5rem;">
+          <span class="pulse-dot pulse-dot--cyan"></span>
+          Enterprise Onboarding · 14-Day Full Trial
+        </span>
+        <h2 style="color: #ffffff; font-size: clamp(1.8rem, 3.2vw, 2.4rem); line-height: 1.2; margin: 1rem 0 1.2rem;">
+          Architect Next-Generation Cloud Systems
+        </h2>
+        <p style="color: var(--paper-sand); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem;">
+          Join over 120,000+ developers and Fortune 500 enterprises accelerating deployments with NEXI.
+        </p>
+
+        <!-- Realistic WebP Preview -->
+        <div class="realistic-img-wrap glow-card" style="height: 240px; margin-bottom: 1.75rem;" data-tilt>
+          <img src="./assets/images/hero-saas.webp" alt="NEXI Cloud Workspace" style="filter: brightness(0.9);">
+          <div class="img-overlay-badge">
+            <span class="pulse-dot"></span>
+            <span>INSTANT CLOUD PROVISIONING</span>
+          </div>
+        </div>
+
+        <div style="background-color: #151921; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.25rem;">
+          <ul style="list-style: none; margin: 0; padding: 0;">
+            <li style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.65rem; font-size: 0.88rem; color: var(--paper-sand);">
+              <span class="pulse-dot pulse-dot--cyan"></span>
+              <span>No credit card required for standard developer tier</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.65rem; font-size: 0.88rem; color: var(--paper-sand);">
+              <span class="pulse-dot pulse-dot--cyan"></span>
+              <span>Compliant with SOC-2, GDPR, and HIPAA standards</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.88rem; color: var(--paper-sand);">
+              <span class="pulse-dot pulse-dot--cyan"></span>
+              <span>Unlimited microservice integrations and webhook triggers</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; font-size: 0.8rem; color: var(--ink-400);">
+        <span>Instant Cluster Deployment</span>
+        <span class="mono">Global Edge Mesh</span>
+      </div>
+    </div>
+
+    <!-- Right: Registration Form -->
+    <div class="auth-form-side">
+      <div style="margin-bottom: 1.5rem;">
+        <a href="./index.html" class="mono" style="font-size: 0.85rem; color: var(--bronze-600); display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 1.25rem;">
+          <span class="material-symbols-outlined" style="font-size: 1.1rem;">arrow_back</span> Return to Website
+        </a>
+
+        <!-- Account Role Selection -->
+        <label class="form-label" style="margin-bottom: 0.5rem; display: block;">Select Account Role</label>
+        <div class="role-switcher-container" style="margin-bottom: 1.25rem;">
+          <button type="button" class="role-switcher-btn active" id="btnRegisterUser" onclick="selectRegisterRole('user')">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">person</span>
+            <span>Developer / User</span>
+          </button>
+          <button type="button" class="role-switcher-btn" id="btnRegisterAdmin" onclick="selectRegisterRole('admin')">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">admin_panel_settings</span>
+            <span>Enterprise Admin</span>
+          </button>
+        </div>
+
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Create Your Account</h1>
+        <p style="color: var(--ink-600); font-size: 0.92rem; line-height: 1.5;">
+          Get started with your free cloud sandbox in less than two minutes.
+        </p>
+      </div>
+
+      <form id="registerForm" novalidate>
+        <input type="hidden" id="registerRoleInput" name="role" value="user">
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+          <div class="form-group">
+            <label for="regFirstName" class="form-label">First Name</label>
+            <input type="text" id="regFirstName" name="firstName" class="form-control" placeholder="Jane" required>
+          </div>
+          <div class="form-group">
+            <label for="regLastName" class="form-label">Last Name</label>
+            <input type="text" id="regLastName" name="lastName" class="form-control" placeholder="Doe" required>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label for="regEmail" class="form-label">Work Email</label>
+          <input type="email" id="regEmail" name="email" class="form-control" placeholder="jane@company.com" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label for="regPassword" class="form-label">Create Password</label>
+          <div class="password-input-wrap">
+            <input type="password" id="regPassword" name="password" class="form-control" placeholder="••••••••••••" required>
+            <button type="button" class="toggle-password-btn" data-target="regPassword" aria-label="Toggle password view">
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+          </div>
+          <div style="display: flex; gap: 4px; margin-top: 6px;">
+            <div style="height: 4px; flex: 1; border-radius: 2px; background: #10b981;"></div>
+            <div style="height: 4px; flex: 1; border-radius: 2px; background: #10b981;"></div>
+            <div style="height: 4px; flex: 1; border-radius: 2px; background: #10b981;"></div>
+            <div style="height: 4px; flex: 1; border-radius: 2px; background: rgba(0,0,0,0.1);"></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.75rem;">
+          <label style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: var(--ink-600); cursor: pointer;">
+            <input type="checkbox" name="terms" required checked style="accent-color: var(--bronze-500); margin-top: 3px;">
+            <span>I agree to the <a href="#" style="color: var(--bronze-600);">Terms of Service</a> and <a href="#" style="color: var(--bronze-600);">Privacy Policy</a>.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn--solid btn--lg" style="width: 100%; justify-content: center; gap: 0.6rem;">
+          <span class="material-symbols-outlined">rocket_launch</span>
+          <span>Create Account</span>
+        </button>
+      </form>
+
+      <div style="margin-top: 2rem; text-align: center; font-size: 0.88rem; color: var(--ink-600);">
+        Already have an account? 
+        <a href="./login.html" style="color: var(--bronze-600); font-weight: 600;">Sign in here</a>
+      </div>
+
+      <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,0.06); display: flex; justify-content: center; gap: 1.25rem; font-size: 0.8rem; color: var(--ink-500);">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./services.html">Services</a>
+        <a href="./contact.html">Support</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Registration Success Modal -->
+  <div class="auth-modal" id="regSuccessModal">
+    <div class="auth-modal-content">
+      <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(16, 185, 129, 0.12); color: #10b981; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">
+        <span class="material-symbols-outlined" style="font-size: 2rem;">check_circle</span>
+      </div>
+      <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Registration Complete!</h3>
+      <p style="color: var(--ink-600); font-size: 0.92rem; margin-bottom: 1.5rem; line-height: 1.5;">
+        Your <strong id="regConfirmedRole">Developer</strong> account has been initialized. You can now log into the platform.
+      </p>
+      <div style="display: flex; gap: 0.75rem; justify-content: center;">
+        <a href="./login.html" class="btn btn--solid btn--md" style="flex: 1; justify-content: center;">Proceed to Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/lenis.min.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/animations.js"></script>
+  <script src="./js/script.js"></script>
+  <script>
+    function selectRegisterRole(role) {
+      const uBtn = document.getElementById('btnRegisterUser');
+      const aBtn = document.getElementById('btnRegisterAdmin');
+      const roleInput = document.getElementById('registerRoleInput');
+      roleInput.value = role;
+      if (role === 'admin') {
+        aBtn.classList.add('active');
+        uBtn.classList.remove('active');
+      } else {
+        uBtn.classList.add('active');
+        aBtn.classList.remove('active');
+      }
+    }
+
+    const regForm = document.getElementById('registerForm');
+    if (regForm) {
+      regForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const role = document.getElementById('registerRoleInput').value;
+        const firstName = document.getElementById('regFirstName').value.trim();
+        const lastName = document.getElementById('regLastName').value.trim();
+        const fullName = `${firstName} ${lastName}`.trim();
+        const email = document.getElementById('regEmail').value.trim();
+
+        if (window.Auth) {
+          window.Auth.login(email, role, fullName);
+        } else {
+          localStorage.setItem('userEmail', email);
+          localStorage.setItem('userRole', role);
+          localStorage.setItem('userName', fullName || email.split('@')[0]);
+        }
+
+        const submitBtn = regForm.querySelector('button[type="submit"]');
+        const orig = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">sync</span> Creating...';
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = orig;
+          document.getElementById('regConfirmedRole').textContent = role === 'admin' ? 'Enterprise Admin' : 'Developer';
+          const targetUrl = role === 'admin' ? './admin-dashboard.html' : './user-dashboard.html';
+          const modalLink = document.querySelector('#regSuccessModal a');
+          if (modalLink) {
+            modalLink.href = targetUrl;
+            modalLink.textContent = 'Enter Dashboard Directly';
+          }
+          document.getElementById('regSuccessModal').style.display = 'flex';
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 800);
+        }, 900);
+      });
+    }
+  </script>
+</body>
+</html>

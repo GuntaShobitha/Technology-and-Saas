@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" fill="none">
+  <rect width="600" height="400" rx="12" fill="#111419"/>
+  <defs>
+    <radialGradient id="secGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2D7A54" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#111419" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="300" cy="190" r="140" fill="url(#secGlow)"/>
+
+  <!-- Shield Shape -->
+  <path d="M 300 90 L 390 130 V 210 C 390 270 300 310 300 310 C 300 310 210 270 210 210 V 130 Z" fill="#151921" stroke="#CCA072" stroke-width="2"/>
+  <path d="M 300 110 L 370 142 V 205 C 370 252 300 286 300 286 C 300 286 230 252 230 205 V 142 Z" fill="#1A1F27" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+
+  <!-- Lock Core -->
+  <rect x="280" y="195" width="40" height="32" rx="4" fill="#B8824F"/>
+  <path d="M 287 195 V 183 C 287 175 313 175 313 183 V 195" stroke="#FAF8F5" stroke-width="3" fill="none"/>
+  <circle cx="300" cy="211" r="3" fill="#0D0F12"/>
+
+  <!-- Orbiting Verification Nodes -->
+  <circle cx="150" cy="190" r="28" fill="#151921" stroke="#4ADE80" stroke-width="1.5"/>
+  <text x="150" y="194" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#4ADE80" text-anchor="middle">mTLS</text>
+
+  <circle cx="450" cy="190" r="28" fill="#151921" stroke="#CCA072" stroke-width="1.5"/>
+  <text x="450" y="194" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#CCA072" text-anchor="middle">RBAC</text>
+
+  <!-- Status Bar -->
+  <rect x="180" y="340" width="240" height="30" rx="4" fill="#151921" stroke="rgba(255,255,255,0.08)"/>
+  <text x="300" y="359" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#4ADE80" text-anchor="middle">SOC2 TYPE II · ISO/IEC 27001</text>
+</svg>

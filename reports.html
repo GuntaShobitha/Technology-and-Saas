@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports &amp; Compliance — STACKLY SaaS & Technology</title>
+  <meta name="description" content="Generate, schedule, and download compliance audits, uptime SLA reports, and FinOps telemetry documents.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <!-- ==================== 1. FIXED LEFT SIDEBAR ==================== -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand" aria-label="STACKLY — Back to Home">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">WORKSPACE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav" aria-label="User Navigation">
+      <span class="dash-nav-section-title">Core Workspace</span>
+      <a href="./user-dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="./overview.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Overview</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>My Projects</span>
+        <span class="dash-nav-badge">8</span>
+      </a>
+      <a href="./tasks.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Tasks</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+
+      <span class="dash-nav-section-title">Communication</span>
+      <a href="./notifications.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">notifications</span>
+        <span>Notifications</span>
+        <span class="dash-nav-badge" style="background:rgba(239,68,68,0.2); color:#fca5a5; border-color:rgba(239,68,68,0.3);">3 New</span>
+      </a>
+      <a href="./activity.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">history</span>
+        <span>Recent Activity</span>
+      </a>
+
+      <span class="dash-nav-section-title">Platform &amp; Finance</span>
+      <a href="./billing.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span>Billing</span>
+      </a>
+      <a href="./subscription.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">credit_card</span>
+        <span>Subscription</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+
+      <span class="dash-nav-section-title">Account</span>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+      <a href="./support.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-300);">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Website</span>
+      </a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;">
+        <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. MAIN SCROLLABLE CONTENT AREA ==================== -->
+  <div class="dash-main-area">
+
+    <!-- Top Sticky Header -->
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./user-dashboard.html">Workspace</a>
+          <span class="sep">/</span>
+          <span class="current">Reports</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" id="reportSearchInput" placeholder="Search reports by title or format...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <a href="./notifications.html" class="dash-action-btn" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot"></span>
+        </a>
+
+        <a href="./support.html" class="dash-action-btn" aria-label="Help and Support">
+          <span class="material-symbols-outlined">help_outline</span>
+        </a>
+
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open user profile menu">
+            <div class="dash-user-avatar">
+              <span data-user-initials>SH</span>
+            </div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Shobitha</span>
+              <span class="dash-user-email" data-user-email>shobitha@gmail.com</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
+          </button>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Shobitha</strong>
+              <span data-user-email>shobitha@gmail.com</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;" data-user-plan>Professional Tier</div>
+            </div>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <span>My Profile</span>
+            </a>
+            <a href="./settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Account Settings</span>
+            </a>
+            <a href="./billing.html">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <span>Billing &amp; Invoices</span>
+            </a>
+            <a href="./subscription.html">
+              <span class="material-symbols-outlined">credit_card</span>
+              <span>Subscription</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Deep Scrollable Reports Content -->
+    <main class="dash-content">
+
+      <!-- Header & Action -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1.25rem;">
+        <div>
+          <span class="mono" style="font-size:0.75rem; color:var(--bronze-300); letter-spacing:0.1em; text-transform:uppercase;">Compliance &amp; Telemetry Exports</span>
+          <h1 style="font-size:1.85rem; color:#fff; font-weight:700; margin:0.25rem 0 0.5rem 0;">Executive Reports &amp; Audits</h1>
+          <p style="font-size:0.9rem; color:#94a3b8; margin:0;">Download cryptographically verified compliance audits, SLA uptime sheets, and cost forecasts.</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="openGenerateReportModal">
+          <span class="material-symbols-outlined" style="font-size:18px;">note_add</span>
+          <span>Generate New Report</span>
+        </button>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-pill-bar" id="reportTabFilters" style="margin-bottom:1.75rem;">
+        <button type="button" class="filter-pill is-active" data-tab="generated">Generated Reports (6)</button>
+        <button type="button" class="filter-pill" data-tab="scheduled">Scheduled Dispatches (3)</button>
+        <button type="button" class="filter-pill" data-tab="templates">Report Templates (4)</button>
+      </div>
+
+      <!-- Generated Reports Table Panel -->
+      <section class="dash-panel" id="generatedReportsPanel" style="padding:0; overflow:hidden; margin-bottom:2rem;">
+        <div class="dash-table-wrap">
+          <table class="dash-table" id="reportsTable">
+            <thead>
+              <tr>
+                <th>Report Name</th>
+                <th>Category</th>
+                <th>Generated Date</th>
+                <th>Generated By</th>
+                <th>Format</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <span class="material-symbols-outlined" style="color:var(--bronze-400); font-size:22px;">verified</span>
+                    <div>
+                      <strong style="color:#fff;">SOC-2 Type II Annual Security Posture</strong>
+                      <div style="font-size:0.75rem; color:#64748b;">SHA-256: 9a8f...21c0</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="dash-badge badge-active">Security &amp; IAM</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Oct 01, 2026</span></td>
+                <td><span data-user-name style="color:#fff;">Shobitha</span></td>
+                <td><span class="mono" style="color:var(--bronze-300);">PDF (3.4 MB)</span></td>
+                <td><span class="dash-badge badge-active">Ready</span></td>
+                <td>
+                  <div style="display:flex; gap:0.5rem;">
+                    <button type="button" class="btn btn-secondary view-report-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;">View</button>
+                    <button type="button" class="btn btn-secondary download-report-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem; color:var(--bronze-300);">Download</button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <span class="material-symbols-outlined" style="color:#4ade80; font-size:22px;">speed</span>
+                    <div>
+                      <strong style="color:#fff;">Q3 Global SLA Uptime &amp; Latency Telemetry</strong>
+                      <div style="font-size:0.75rem; color:#64748b;">99.998% Uptime across 4 Regions</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="dash-badge badge-review">Performance</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Sep 30, 2026</span></td>
+                <td><span>Auto-Scheduler</span></td>
+                <td><span class="mono" style="color:var(--bronze-300);">CSV (820 KB)</span></td>
+                <td><span class="dash-badge badge-active">Ready</span></td>
+                <td>
+                  <div style="display:flex; gap:0.5rem;">
+                    <button type="button" class="btn btn-secondary view-report-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;">View</button>
+                    <button type="button" class="btn btn-secondary download-report-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem; color:var(--bronze-300);">Download</button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <span class="material-symbols-outlined" style="color:#60a5fa; font-size:22px;">payments</span>
+                    <div>
+                      <strong style="color:#fff;">September FinOps Cloud Cost Allocation</strong>
+                      <div style="font-size:0.75rem; color:#64748b;">Detailed compute, storage &amp; egress</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="dash-badge badge-active">Billing</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Oct 01, 2026</span></td>
+                <td><span>Marcus Chen</span></td>
+                <td><span class="mono" style="color:var(--bronze-300);">PDF (1.8 MB)</span></td>
+                <td><span class="dash-badge badge-active">Ready</span></td>
+                <td>
+                  <div style="display:flex; gap:0.5rem;">
+                    <button type="button" class="btn btn-secondary view-report-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;">View</button>
+                    <button type="button" class="btn btn-secondary download-report-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem; color:var(--bronze-300);">Download</button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <span class="material-symbols-outlined" style="color:#c084fc; font-size:22px;">shield</span>
+                    <div>
+                      <strong style="color:#fff;">GDPR &amp; HIPAA Data Boundary Certification</strong>
+                      <div style="font-size:0.75rem; color:#64748b;">Frankfurt POP storage verification</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="dash-badge badge-active">Compliance</span></td>
+                <td><span class="mono" style="font-size:0.8rem; color:#94a3b8;">Sep 15, 2026</span></td>
+                <td><span data-user-name style="color:#fff;">Shobitha</span></td>
+                <td><span class="mono" style="color:var(--bronze-300);">PDF (4.2 MB)</span></td>
+                <td><span class="dash-badge badge-active">Ready</span></td>
+                <td>
+                  <div style="display:flex; gap:0.5rem;">
+                    <button type="button" class="btn btn-secondary view-report-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;">View</button>
+                    <button type="button" class="btn btn-secondary download-report-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem; color:var(--bronze-300);">Download</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Report Templates Grid (Visible under Templates tab or directly below) -->
+      <h3 style="font-size:1.15rem; color:#fff; margin-bottom:1rem;">Pre-Configured Report Templates</h3>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.25rem; margin-bottom:2rem;">
+        <div class="dash-panel" style="margin-bottom:0;">
+          <h4 style="color:#fff; font-size:1rem; margin-bottom:0.4rem;">Infrastructure Health Snapshot</h4>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem; line-height:1.5;">Single-page executive executive summary covering CPU quotas, error budgets, and network saturation.</p>
+          <button type="button" class="btn btn-secondary trigger-template-btn" style="width:100%; justify-content:center; font-size:0.8rem;">Run Template</button>
+        </div>
+
+        <div class="dash-panel" style="margin-bottom:0;">
+          <h4 style="color:#fff; font-size:1rem; margin-bottom:0.4rem;">Zero-Trust Audit Log Export</h4>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem; line-height:1.5;">Raw cryptographically hashed JSON lines of every IAM permission change and API invocation.</p>
+          <button type="button" class="btn btn-secondary trigger-template-btn" style="width:100%; justify-content:center; font-size:0.8rem;">Run Template</button>
+        </div>
+
+        <div class="dash-panel" style="margin-bottom:0;">
+          <h4 style="color:#fff; font-size:1rem; margin-bottom:0.4rem;">Sprint Velocity Telemetry</h4>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem; line-height:1.5;">Comprehensive task burn-down, PR merge velocity, and developer contribution metrics.</p>
+          <button type="button" class="btn btn-secondary trigger-template-btn" style="width:100%; justify-content:center; font-size:0.8rem;">Run Template</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Generate Report Modal -->
+  <div class="dash-modal" id="generateReportModal">
+    <div class="dash-modal-dialog">
+      <div class="dash-modal-header">
+        <h3>Generate Executive Report</h3>
+        <button type="button" class="dash-modal-close-btn" id="closeReportModal">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <form id="newReportForm">
+        <div class="dash-modal-body">
+          <div class="dash-form-group">
+            <label class="dash-form-label" for="reportTypeSelect">Report Type</label>
+            <select class="dash-form-select" id="reportTypeSelect">
+              <option value="SOC-2 Compliance">SOC-2 Type II Compliance Audit</option>
+              <option value="SLA Performance">SLA Uptime &amp; Latency Telemetry</option>
+              <option value="FinOps Billing">FinOps Cloud Cost Allocation</option>
+              <option value="IAM Security">Zero-Trust IAM Access Review</option>
+            </select>
+          </div>
+          <div class="dash-form-row col-2">
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="reportDateRange">Date Range</label>
+              <select class="dash-form-select" id="reportDateRange">
+                <option value="Last 7 Days">Last 7 Days</option>
+                <option value="Last 30 Days" selected>Last 30 Days</option>
+                <option value="Quarter to Date">Quarter to Date</option>
+                <option value="Trailing 1 Year">Trailing 1 Year</option>
+              </select>
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label" for="reportFormat">Output Format</label>
+              <select class="dash-form-select" id="reportFormat">
+                <option value="PDF">PDF (Executive Summary)</option>
+                <option value="CSV">CSV (Raw Metrics)</option>
+                <option value="JSON">JSON (Cryptographic Dump)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="dash-modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelReportModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="material-symbols-outlined" style="font-size:18px;">download_done</span>
+            <span>Compile &amp; Download</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('user');
+
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+
+      function showToast(msg) {
+        const c = document.getElementById('dashToastContainer');
+        const t = document.createElement('div');
+        t.className = 'dash-toast';
+        t.innerHTML = `<span class="material-symbols-outlined" style="color:var(--bronze-400);">check_circle</span><span>${msg}</span>`;
+        c.appendChild(t);
+        setTimeout(() => t.remove(), 3500);
+      }
+
+      // Download Actions
+      document.querySelectorAll('.download-report-btn, .trigger-template-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          showToast('Compiling document... Download starting in a moment.');
+        });
+      });
+
+      document.querySelectorAll('.view-report-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          showToast('Opening verified report in viewer...');
+        });
+      });
+
+      // Modal Controls
+      const modal = document.getElementById('generateReportModal');
+      const openBtn = document.getElementById('openGenerateReportModal');
+      const closeBtn = document.getElementById('closeReportModal');
+      const cancelBtn = document.getElementById('cancelReportModal');
+      const form = document.getElementById('newReportForm');
+
+      if (openBtn) openBtn.addEventListener('click', () => modal.classList.add('is-open'));
+      if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('is-open'));
+      if (cancelBtn) cancelBtn.addEventListener('click', () => modal.classList.remove('is-open'));
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const type = document.getElementById('reportTypeSelect').value;
+          modal.classList.remove('is-open');
+          showToast(`Report "${type}" generated successfully!`);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

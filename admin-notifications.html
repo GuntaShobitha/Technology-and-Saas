@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification Dispatcher &amp; Alerts — STACKLY Admin</title>
+  <meta name="description" content="Global platform push notifications, incident alerts, broadcast dispatcher, delivery telemetry, and webhook relays.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./index.html" class="dash-sidebar__brand">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300); background:rgba(184,130,79,0.15); padding:2px 6px; border-radius:3px;">ADMIN</span>
+    </div>
+
+    <nav class="dash-sidebar__nav">
+      <span class="dash-nav-section-title">Core Operations</span>
+      <a href="./admin-dashboard.html" class="dash-nav-item"><span class="material-symbols-outlined">space_dashboard</span><span>Dashboard</span></a>
+      <a href="./admin-users.html" class="dash-nav-item"><span class="material-symbols-outlined">manage_accounts</span><span>Users</span><span class="dash-nav-badge">14.2k</span></a>
+      <a href="./admin-customers.html" class="dash-nav-item"><span class="material-symbols-outlined">corporate_fare</span><span>Customers</span></a>
+      <a href="./admin-projects.html" class="dash-nav-item"><span class="material-symbols-outlined">folder_special</span><span>Projects</span></a>
+      <a href="./admin-tasks.html" class="dash-nav-item"><span class="material-symbols-outlined">assignment</span><span>Tasks</span></a>
+      <a href="./admin-subscriptions.html" class="dash-nav-item"><span class="material-symbols-outlined">card_membership</span><span>Subscriptions</span></a>
+      <a href="./admin-payments.html" class="dash-nav-item"><span class="material-symbols-outlined">receipt_long</span><span>Payments</span></a>
+
+      <span class="dash-nav-section-title">Platform &amp; Intelligence</span>
+      <a href="./admin-analytics.html" class="dash-nav-item"><span class="material-symbols-outlined">query_stats</span><span>Analytics</span></a>
+      <a href="./admin-reports.html" class="dash-nav-item"><span class="material-symbols-outlined">analytics</span><span>Reports</span></a>
+      <a href="./admin-content.html" class="dash-nav-item"><span class="material-symbols-outlined">newspaper</span><span>Content</span></a>
+      <a href="./admin-notifications.html" class="dash-nav-item is-active"><span class="material-symbols-outlined">campaign</span><span>Notifications</span></a>
+      <a href="./admin-integrations.html" class="dash-nav-item"><span class="material-symbols-outlined">hub</span><span>Integrations</span></a>
+
+      <span class="dash-nav-section-title">Security &amp; Health</span>
+      <a href="./admin-security.html" class="dash-nav-item"><span class="material-symbols-outlined">security</span><span>Security</span></a>
+      <a href="./admin-logs.html" class="dash-nav-item"><span class="material-symbols-outlined">reorder</span><span>System Logs</span></a>
+      <a href="./admin-settings.html" class="dash-nav-item"><span class="material-symbols-outlined">settings</span><span>Settings</span></a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./user-dashboard.html" class="dash-nav-item" style="color:var(--bronze-300);"><span class="material-symbols-outlined">switch_account</span><span>Customer View</span></a>
+      <button type="button" class="dash-nav-item" data-action="logout" style="background:transparent; border:none; width:100%; text-align:left; color:#f87171; cursor:pointer;"><span class="material-symbols-outlined" style="color:#f87171;">logout</span><span>Logout Session</span></button>
+    </div>
+  </aside>
+
+  <div class="dash-main-area">
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle"><span class="material-symbols-outlined">menu</span></button>
+        <div>
+          <div class="dash-breadcrumb"><a href="./admin-dashboard.html">Admin</a><span class="separator">/</span><span class="current">Notifications</span></div>
+          <h1 class="dash-page-title">Platform Broadcast Center</h1>
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <button class="btn btn--bronze btn--sm" onclick="alert('Broadcast compose modal opened.');">
+          <span class="material-symbols-outlined" style="font-size:1rem;">send</span>
+          <span>Dispatch Broadcast</span>
+        </button>
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn">
+            <div class="dash-avatar" data-user-initials>AD</div>
+            <div class="dash-user-meta hide-mobile">
+              <span class="dash-user-name" data-user-name>Admin</span>
+              <span class="dash-user-role" data-user-email>admin@nexi.tech</span>
+            </div>
+            <span class="material-symbols-outlined">expand_more</span>
+          </button>
+          <div class="dash-dropdown-menu" id="dashUserDropdown">
+            <div style="padding:0.75rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+              <div style="font-weight:600; font-size:0.875rem;" data-user-name>Admin</div>
+              <div class="mono" style="font-size:0.75rem; color:#64748b;" data-user-email>admin@nexi.tech</div>
+            </div>
+            <a href="./admin-settings.html" class="dash-dropdown-item"><span class="material-symbols-outlined">settings</span> Platform Settings</a>
+            <a href="./user-dashboard.html" class="dash-dropdown-item"><span class="material-symbols-outlined">switch_account</span> Customer View</a>
+            <button type="button" class="dash-dropdown-item" data-action="logout" style="width:100%; text-align:left; color:#f87171;"><span class="material-symbols-outlined" style="color:#f87171;">logout</span> Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-content-container">
+      <div class="dash-kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom:1.75rem;">
+        <div class="dash-kpi-card">
+          <div class="kpi-header"><span class="kpi-title">Broadcasts Sent</span><div class="kpi-icon-wrap"><span class="material-symbols-outlined">campaign</span></div></div>
+          <div class="kpi-value mono">184</div>
+          <div class="kpi-footer"><span class="kpi-trend positive">99.8% Delivered</span></div>
+        </div>
+        <div class="dash-kpi-card">
+          <div class="kpi-header"><span class="kpi-title">Recipients Reached</span><div class="kpi-icon-wrap" style="background:rgba(204,160,114,0.15); color:var(--bronze-300);"><span class="material-symbols-outlined">mark_email_read</span></div></div>
+          <div class="kpi-value mono">42,890</div>
+          <div class="kpi-footer"><span class="kpi-trend positive">In-App + Email</span></div>
+        </div>
+        <div class="dash-kpi-card">
+          <div class="kpi-header"><span class="kpi-title">Webhook Relays</span><div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.1); color:#4ade80;"><span class="material-symbols-outlined">webhook</span></div></div>
+          <div class="kpi-value mono">1.2M</div>
+          <div class="kpi-footer"><span class="kpi-trend positive">0.01% retry rate</span></div>
+        </div>
+      </div>
+
+      <div class="dash-card" style="padding:0; overflow:hidden;">
+        <div style="padding:1.25rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+          <h3 style="color:#fff; font-size:1.1rem;">Dispatched Broadcast History</h3>
+        </div>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Subject / Headline</th>
+                <th>Target Audience</th>
+                <th>Channel</th>
+                <th>Sent At</th>
+                <th>Open Rate</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Security Notice: Mandatory FIDO2 2FA Requirement</strong></td>
+                <td>Global Enterprise Admins (48)</td>
+                <td><span class="mono">In-App + Email</span></td>
+                <td><span class="mono">Oct 02, 2026</span></td>
+                <td><span class="mono" style="color:#4ade80;">98.4%</span></td>
+                <td><span class="status-badge is-active">Delivered</span></td>
+              </tr>
+              <tr>
+                <td><strong>Maintenance Schedule: EU-Central-1 Cluster Upgrade</strong></td>
+                <td>EU Tenant Users (3,420)</td>
+                <td><span class="mono">In-App Banner</span></td>
+                <td><span class="mono">Sep 28, 2026</span></td>
+                <td><span class="mono" style="color:#4ade80;">92.1%</span></td>
+                <td><span class="status-badge is-active">Delivered</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="./js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Auth.requireAuth('admin');
+      const sidebar = document.getElementById('dashSidebar');
+      const toggle = document.getElementById('dashSidebarToggle');
+      if (toggle && sidebar) toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+      const userBtn = document.getElementById('dashUserBtn');
+      const dropdown = document.getElementById('dashUserDropdown');
+      if (userBtn && dropdown) {
+        userBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('is-open'); });
+        document.addEventListener('click', () => dropdown.classList.remove('is-open'));
+      }
+    });
+  </script>
+</body>
+</html>

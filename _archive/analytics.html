@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Analytics &amp; Telemetry — STACKLY</title>
+  <meta name="description" content="Comprehensive revenue metrics, conversion funnels, user retention, and traffic telemetry.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
+</head>
+<body class="dashboard-body">
+
+  <div class="site-preloader" id="dashPreloader">
+    <div class="preloader-brand">
+      <div class="preloader-symbol"><span></span><span></span><span></span><span></span></div>
+      <span class="preloader-title">STACKLY</span>
+    </div>
+    <div class="preloader-track"><div class="preloader-progress"></div></div>
+    <span class="preloader-status">Initializing workspace...</span>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__header">
+      <a href="./dashboard.html" class="dash-sidebar__brand">
+        <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="#CCA072" />
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="#FAF8F5" />
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#CCA072" />
+          <circle cx="16" cy="16" r="3" fill="#B8824F" stroke="#0D0F12" stroke-width="1.5" />
+        </svg>
+        <span class="brand-name">STACKLY</span>
+      </a>
+      <span class="mono" style="font-size:0.65rem; color:var(--bronze-300);">ENTERPRISE</span>
+    </div>
+
+    <nav class="dash-sidebar__nav">
+      <a href="./dashboard.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Overview</span>
+      </a>
+      <a href="./analytics.html" class="dash-nav-item is-active">
+        <span class="material-symbols-outlined">insights</span>
+        <span>Analytics</span>
+      </a>
+      <a href="./projects.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">folder</span>
+        <span>Projects</span>
+      </a>
+      <a href="./automation.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">bolt</span>
+        <span>Automation</span>
+      </a>
+      <a href="./users.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">group</span>
+        <span>Users</span>
+      </a>
+      <a href="./integrations.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">hub</span>
+        <span>Integrations</span>
+      </a>
+      <a href="./reports.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">description</span>
+        <span>Reports</span>
+      </a>
+      <a href="./settings.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">settings</span>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <a href="./contact.html" class="dash-nav-item">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help &amp; Support</span>
+      </a>
+      <a href="./index.html" class="dash-nav-item" style="color:var(--bronze-400);">
+        <span class="material-symbols-outlined">home</span>
+        <span>Back to Website</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main View -->
+  <div class="dash-main-area">
+    <header class="dash-topbar">
+      <div class="dash-topbar__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle"><span class="material-symbols-outlined">menu</span></button>
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#667085;">search</span>
+          <input type="text" placeholder="Search analytics metrics, funnels...">
+        </div>
+      </div>
+
+      <div class="dash-topbar__right">
+        <div class="dash-user-menu">
+          <button class="dash-user-btn" id="dashUserBtn">
+            <div class="dash-user-avatar">SK</div>
+            <div class="dash-user-meta">
+              <span class="dash-user-name">Shobitha</span>
+              <span class="dash-user-role">Lead Architect</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#838e9e;">expand_more</span>
+          </button>
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <a href="./profile.html"><span class="material-symbols-outlined">person</span><span>Operator Profile</span></a>
+            <a href="./settings.html"><span class="material-symbols-outlined">tune</span><span>Preferences</span></a>
+            <div class="dash-dropdown-divider"></div>
+            <a href="./login.html" style="color:#f87171;"><span class="material-symbols-outlined">logout</span><span>Sign Out</span></a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-content">
+      <div class="dash-page-header">
+        <div>
+          <h1>Analytics &amp; Intelligence Telemetry</h1>
+          <p>Real-time observability across platform conversion, retention, revenue, and infrastructure throughput.</p>
+        </div>
+
+        <!-- Range Filters -->
+        <div class="time-filter-group">
+          <button class="time-filter-btn" onclick="alert('Filtered: Today');">Today</button>
+          <button class="time-filter-btn" onclick="alert('Filtered: 7 Days');">7 Days</button>
+          <button class="time-filter-btn is-active" onclick="alert('Filtered: 30 Days');">30 Days</button>
+          <button class="time-filter-btn" onclick="alert('Filtered: 90 Days');">90 Days</button>
+          <button class="time-filter-btn" onclick="alert('Filtered: 1 Year');">1 Year</button>
+          <button class="time-filter-btn" onclick="alert('Custom date modal simulated.');">Custom</button>
+        </div>
+      </div>
+
+      <!-- Conversion Funnel & Revenue Row -->
+      <div style="display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+        
+        <!-- SVG Trajectory Line -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <div>
+              <h3 class="dash-panel-title">Revenue Trajectory ($ ARR)</h3>
+              <div class="mono" style="font-size:0.75rem; color:#4ade80;">$4,920,500 Current Run-rate</div>
+            </div>
+            <span class="status-badge active">AUDITED</span>
+          </div>
+
+          <div class="svg-chart-container" style="height:220px;">
+            <svg viewBox="0 0 600 220" width="100%" height="220" fill="none">
+              <defs>
+                <linearGradient id="anGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#CCA072" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="#CCA072" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <line x1="20" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4,4"/>
+              <line x1="20" y1="110" x2="580" y2="110" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4,4"/>
+              <line x1="20" y1="170" x2="580" y2="170" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4,4"/>
+              <path d="M 20 180 Q 150 140 280 120 T 450 70 T 580 30 L 580 200 L 20 200 Z" fill="url(#anGrad)"/>
+              <path d="M 20 180 Q 150 140 280 120 T 450 70 T 580 30" stroke="#CCA072" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="280" cy="120" r="4" fill="#FAF8F5" stroke="#B8824F" stroke-width="2"/>
+              <circle cx="580" cy="30" r="4" fill="#4ADE80" stroke="#0D0F12" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Conversion Funnel Visualizer -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <h3 class="dash-panel-title">Conversion Funnel</h3>
+            <span class="mono" style="font-size:0.75rem; color:var(--bronze-300);">END-TO-END</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:1.15rem;">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.8125rem; margin-bottom: 4px;">
+                <span>Total Ingestion Requests</span>
+                <span class="mono">1,240,000 (100%)</span>
+              </div>
+              <div class="progress-bar-wrap" style="max-width:100%; height:10px;">
+                <div class="progress-bar-fill" style="width:100%; background-color:#838e9e;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.8125rem; margin-bottom: 4px;">
+                <span>Authenticated API Consumers</span>
+                <span class="mono">342,000 (27.5%)</span>
+              </div>
+              <div class="progress-bar-wrap" style="max-width:100%; height:10px;">
+                <div class="progress-bar-fill" style="width:68%; background-color:var(--bronze-300);"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.8125rem; margin-bottom: 4px;">
+                <span>Paid Enterprise Workspaces</span>
+                <span class="mono">60,200 (4.86%)</span>
+              </div>
+              <div class="progress-bar-wrap" style="max-width:100%; height:10px;">
+                <div class="progress-bar-fill" style="width:38%; background-color:var(--bronze-500);"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.8125rem; margin-bottom: 4px;">
+                <span>Multi-Year Dedicated Clusters</span>
+                <span class="mono">14,200 (1.14%)</span>
+              </div>
+              <div class="progress-bar-wrap" style="max-width:100%; height:10px;">
+                <div class="progress-bar-fill" style="width:18%; background-color:#4ade80;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Traffic Sources + Geography + Devices -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+        
+        <!-- Traffic Sources -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <h3 class="dash-panel-title">Traffic Sources</h3>
+            <span class="mono" style="font-size:0.7rem; color:#838e9e;">INGESTION</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>API Gateway (gRPC/REST)</span>
+              <strong>58.4%</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>SDK Integrations (Go/Rust/Python)</span>
+              <strong>24.2%</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>Web Portal Telemetry</span>
+              <strong>12.6%</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>Autonomous Cron Daemons</span>
+              <strong>4.8%</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Geography -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <h3 class="dash-panel-title">Regional Footprint</h3>
+            <span class="mono" style="font-size:0.7rem; color:#838e9e;">DISTRIBUTION</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>North America (AWS us-east / us-west)</span>
+              <strong>48%</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>EMEA (Frankfurt / Dublin / London)</span>
+              <strong>32%</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>Asia-Pacific (Singapore / Tokyo)</span>
+              <strong>16%</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>Latin America (São Paulo)</span>
+              <strong>4%</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Device & Platform Telemetry -->
+        <div class="dash-panel" style="margin-bottom:0;">
+          <div class="dash-panel-header">
+            <h3 class="dash-panel-title">Execution Environment</h3>
+            <span class="mono" style="font-size:0.7rem; color:#838e9e;">PLATFORM</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>Linux x86_64 / arm64 Clusters</span>
+              <strong>64.2%</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>Kubernetes Pod Workers</span>
+              <strong>21.8%</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>Serverless Edge Workers</span>
+              <strong>10.4%</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+              <span>Browser Telemetry Sessions</span>
+              <strong>3.6%</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="./js/dashboard.js"></script>
+</body>
+</html>
