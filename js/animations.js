@@ -92,7 +92,7 @@
      3. INTERSECTION OBSERVER FOR SCROLL REVEALS
      -------------------------------------------------------------------------- */
   function initScrollReveals() {
-    const revealElements = document.querySelectorAll('.reveal, .slide-up, .slide-left, .slide-right');
+    const revealElements = document.querySelectorAll('.reveal, .slide-up, .slide-left, .slide-right, .smooth-fade-up, .smooth-slide-left, .smooth-slide-right, .smooth-scale-in');
     if (!revealElements.length) return;
 
     if (prefersReducedMotion) {

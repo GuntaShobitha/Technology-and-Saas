@@ -77,7 +77,12 @@
 
   <main>
     <!-- Services Hero -->
-    <section class="hero">
+    <section class="hero hero--has-bg" style="padding-bottom: 4.5rem;">
+      <div class="hero-bg-media">
+        <img src="./assets/images/hero-services-bg.webp" alt="Enterprise Capabilities and Cloud Runtimes" class="hero-bg-img">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-bg-mesh"></div>
+      </div>
       <div class="shell">
         <div style="max-width: 800px;">
           <p class="eyebrow reveal reveal--fade-up">
@@ -100,7 +105,7 @@
         <div style="display: flex; flex-direction: column; gap: 3.5rem;">
           
           <!-- Service 1: AI & Automation -->
-          <div class="case-study-card glow-card reveal reveal--fade-up" id="ai-automation" data-tilt>
+          <div class="case-study-card glow-card smooth-slide-left" id="ai-automation" data-tilt>
             <div class="case-study-details">
               <span class="mono" style="color: var(--bronze-500); font-size: 0.72rem; letter-spacing: 0.1em;">CORE SERVICE · 01</span>
               <h2 style="font-size: 2rem; margin-top: 0.4rem; margin-bottom: 1rem;">AI &amp; Autonomous Systems</h2>
@@ -127,7 +132,7 @@
           </div>
 
           <!-- Service 2: Turnkey SaaS Development -->
-          <div class="case-study-card glow-card reveal reveal--fade-up" id="saas-development" data-tilt>
+          <div class="case-study-card glow-card smooth-slide-right" id="saas-development" data-tilt>
             <div class="case-study-details">
               <span class="mono" style="color: var(--bronze-500); font-size: 0.72rem; letter-spacing: 0.1em;">CORE SERVICE · 02</span>
               <h2 style="font-size: 2rem; margin-top: 0.4rem; margin-bottom: 1rem;">Turnkey SaaS Engineering</h2>
@@ -154,7 +159,7 @@
           </div>
 
           <!-- Service 3: Distributed Cloud -->
-          <div class="case-study-card glow-card reveal reveal--fade-up" id="cloud-infrastructure" data-tilt>
+          <div class="case-study-card glow-card smooth-slide-left" id="cloud-infrastructure" data-tilt>
             <div class="case-study-details">
               <span class="mono" style="color: var(--bronze-500); font-size: 0.72rem; letter-spacing: 0.1em;">CORE SERVICE · 03</span>
               <h2 style="font-size: 2rem; margin-top: 0.4rem; margin-bottom: 1rem;">Distributed Cloud Architecture</h2>
@@ -181,7 +186,7 @@
           </div>
 
           <!-- Service 4: Data Mesh & Real-time Analytics -->
-          <div class="case-study-card glow-card reveal reveal--fade-up" id="data-analytics" data-tilt>
+          <div class="case-study-card glow-card smooth-slide-right" id="data-analytics" data-tilt>
             <div class="case-study-details">
               <span class="mono" style="color: var(--bronze-500); font-size: 0.72rem; letter-spacing: 0.1em;">CORE SERVICE · 04</span>
               <h2 style="font-size: 2rem; margin-top: 0.4rem; margin-bottom: 1rem;">Data Mesh &amp; Real-time Analytics</h2>
@@ -208,7 +213,7 @@
           </div>
 
           <!-- Service 5: Cybersecurity -->
-          <div class="case-study-card glow-card reveal reveal--fade-up" id="cybersecurity" data-tilt>
+          <div class="case-study-card glow-card smooth-slide-left" id="cybersecurity" data-tilt>
             <div class="case-study-details">
               <span class="mono" style="color: var(--bronze-500); font-size: 0.72rem; letter-spacing: 0.1em;">CORE SERVICE · 05</span>
               <h2 style="font-size: 2rem; margin-top: 0.4rem; margin-bottom: 1rem;">Zero-Trust Cybersecurity</h2>
@@ -235,7 +240,7 @@
           </div>
 
           <!-- Service 6: Workflow Automation -->
-          <div class="case-study-card glow-card reveal reveal--fade-up" id="workflow-automation" data-tilt>
+          <div class="case-study-card glow-card smooth-slide-right" id="workflow-automation" data-tilt>
             <div class="case-study-details">
               <span class="mono" style="color: var(--bronze-500); font-size: 0.72rem; letter-spacing: 0.1em;">CORE SERVICE · 06</span>
               <h2 style="font-size: 2rem; margin-top: 0.4rem; margin-bottom: 1rem;">Autonomous Workflow Orchestration</h2>
@@ -261,6 +266,162 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. Architectural Delivery Lifecycle (New Section) -->
+    <section class="lifecycle-section smooth-fade-up" id="deliveryLifecycle">
+      <div class="shell">
+        <div style="max-width: 780px;">
+          <p class="eyebrow">
+            <span class="pulse-dot"></span>
+            Execution Methodology
+          </p>
+          <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); margin-top: 0.5rem; margin-bottom: 1rem;">
+            From Telemetry Audit to Production SLA in 4 Disciplined Sprints.
+          </h2>
+          <p style="color: var(--ink-700); font-size: 1.05rem; line-height: 1.65;">
+            We do not rely on ad-hoc trial and error. Every enterprise platform is engineered through an immutable, phase-gated execution pipeline with full telemetry transparency.
+          </p>
+        </div>
+
+        <div class="lifecycle-grid">
+          <div class="lifecycle-step-card glow-card">
+            <div class="step-badge">01</div>
+            <h3>Discovery &amp; Ingress Audit</h3>
+            <p>Comprehensive inspection of existing database schemas, API bottlenecks, traffic spikes, and security vulnerabilities to define baseline performance SLAs.</p>
+          </div>
+
+          <div class="lifecycle-step-card glow-card">
+            <div class="step-badge">02</div>
+            <h3>IaC &amp; Schema Blueprinting</h3>
+            <p>Complete multi-region Terraform IaC specification, zero-copy database partitioning, and sandboxed AI agent verification before any production cutover.</p>
+          </div>
+
+          <div class="lifecycle-step-card glow-card">
+            <div class="step-badge">03</div>
+            <h3>Phased Canary Cutover</h3>
+            <p>Gradual blue/green traffic diversion using real-time automated rollback guardrails, ensuring 0% packet loss and zero unexpected downtime for active users.</p>
+          </div>
+
+          <div class="lifecycle-step-card glow-card">
+            <div class="step-badge">04</div>
+            <h3>24/7 SRE SLA Enforcement</h3>
+            <p>Continuous synthetic health probes, automated chaos engineering drills, and contractual sub-15ms latency enforcement with direct architect escalations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Contractual Performance SLAs & Guarantees (New Section) -->
+    <section class="sla-section smooth-fade-up" id="serviceSLAs">
+      <div class="shell">
+        <div style="max-width: 780px;">
+          <p class="eyebrow" style="color: var(--bronze-300);">
+            <span class="pulse-dot pulse-dot--cyan"></span>
+            Contractual Reliability
+          </p>
+          <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); color: #ffffff; margin-top: 0.5rem; margin-bottom: 1rem;">
+            Engineered Commitments, Backed by Financial Credits.
+          </h2>
+          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.65;">
+            We reject the industry norm of evasive "best effort" disclaimers. Our SLAs are contractually enforceable benchmarks guaranteed across our entire global edge infrastructure.
+          </p>
+        </div>
+
+        <div class="sla-grid">
+          <div class="sla-card glow-card">
+            <div class="sla-target-val">99.99%</div>
+            <h3>Availability SLA</h3>
+            <p>Contractual uptime guarantee with financial penalty rebates if monthly availability falls below four nines across any cluster.</p>
+          </div>
+
+          <div class="sla-card glow-card">
+            <div class="sla-target-val">&lt; 15ms</div>
+            <h3>Global Latency Boundary</h3>
+            <p>Guaranteed 99th percentile end-to-end edge-to-compute round-trip latency across all Tier-1 metropolitan markets.</p>
+          </div>
+
+          <div class="sla-card glow-card">
+            <div class="sla-target-val">100%</div>
+            <h3>Data &amp; Code Sovereignty</h3>
+            <p>Full intellectual property and data ownership transfer. Zero proprietary runtime locks, vendor hooks, or obfuscated binaries.</p>
+          </div>
+
+          <div class="sla-card glow-card">
+            <div class="sla-target-val">15 Min</div>
+            <h3>P1 Incident Response</h3>
+            <p>Direct line to principal distributed systems architects for Critical Tier-1 events with automated war room orchestration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Enterprise Tech Stack Ecosystem (New Section) -->
+    <section class="tech-stack-section smooth-fade-up" id="techEcosystem">
+      <div class="shell">
+        <div style="max-width: 780px;">
+          <p class="eyebrow">
+            <span class="pulse-dot"></span>
+            Battle-Tested Ecosystem
+          </p>
+          <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); margin-top: 0.5rem; margin-bottom: 1rem;">
+            Modern High-Performance Technology Stack.
+          </h2>
+          <p style="color: var(--ink-700); font-size: 1.05rem; line-height: 1.65;">
+            We build exclusively with high-throughput, memory-safe, and horizontally scalable technologies designed to withstand decades of enterprise growth.
+          </p>
+        </div>
+
+        <div class="tech-ecosystem-grid">
+          <div class="tech-group-box glow-card">
+            <div class="tech-group-title"><span class="pulse-dot pulse-dot--cyan"></span> Compute &amp; Runtimes</div>
+            <div class="tech-chips">
+              <span class="tech-chip">Kubernetes</span>
+              <span class="tech-chip">Rust</span>
+              <span class="tech-chip">WebAssembly</span>
+              <span class="tech-chip">Go / Golang</span>
+              <span class="tech-chip">Docker</span>
+              <span class="tech-chip">Terraform IaC</span>
+            </div>
+          </div>
+
+          <div class="tech-group-box glow-card">
+            <div class="tech-group-title"><span class="pulse-dot"></span> Ingestion &amp; Storage</div>
+            <div class="tech-chips">
+              <span class="tech-chip">Apache Kafka</span>
+              <span class="tech-chip">ClickHouse</span>
+              <span class="tech-chip">PostgreSQL</span>
+              <span class="tech-chip">Redis Cluster</span>
+              <span class="tech-chip">DuckDB</span>
+              <span class="tech-chip">gRPC Protocols</span>
+            </div>
+          </div>
+
+          <div class="tech-group-box glow-card">
+            <div class="tech-group-title"><span class="pulse-dot pulse-dot--cyan"></span> AI &amp; Autonomous Ops</div>
+            <div class="tech-chips">
+              <span class="tech-chip">PyTorch</span>
+              <span class="tech-chip">vLLM Engine</span>
+              <span class="tech-chip">Triton Inference</span>
+              <span class="tech-chip">LangGraph</span>
+              <span class="tech-chip">Qdrant Vector</span>
+              <span class="tech-chip">Formal Verifier</span>
+            </div>
+          </div>
+
+          <div class="tech-group-box glow-card">
+            <div class="tech-group-title"><span class="pulse-dot pulse-dot--amber"></span> Security &amp; Compliance</div>
+            <div class="tech-chips">
+              <span class="tech-chip">HashiCorp Vault</span>
+              <span class="tech-chip">SPIFFE / SPIRE</span>
+              <span class="tech-chip">WireGuard Mesh</span>
+              <span class="tech-chip">OpenID Connect</span>
+              <span class="tech-chip">eBPF Security</span>
+              <span class="tech-chip">SOC2 Enclaves</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

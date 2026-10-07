@@ -2857,5 +2857,561 @@ html.lenis, html.lenis body {
   }
 }
 
+/* ==========================================================================
+   27. HERO WITH REALISTIC WEBP BACKGROUND IMAGE & DUAL-LAYER OVERLAY
+   ========================================================================== */
+.hero--has-bg {
+  position: relative;
+  background-color: #080a0d !important;
+  color: #ffffff;
+  overflow: hidden;
+  isolation: isolate;
+}
 
+.hero-bg-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
 
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.32) contrast(1.2) saturate(1.15);
+  transform: scale(1.04);
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.hero--has-bg:hover .hero-bg-img {
+  transform: scale(1.08);
+}
+
+/* Multi-Stop Cinematic Gradient Overlay for crisp AAA readability */
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 65% 25%, rgba(184, 130, 79, 0.22) 0%, transparent 55%),
+    linear-gradient(to bottom, rgba(13, 15, 18, 0.68) 0%, rgba(13, 15, 18, 0.88) 65%, rgba(13, 15, 18, 0.98) 100%),
+    linear-gradient(to right, rgba(13, 15, 18, 0.94) 0%, rgba(13, 15, 18, 0.72) 50%, rgba(13, 15, 18, 0.88) 100%);
+  pointer-events: none;
+}
+
+.hero-bg-mesh {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(204, 160, 114, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(204, 160, 114, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.hero--has-bg .shell {
+  position: relative;
+  z-index: 2;
+}
+
+.hero--has-bg .hero__title {
+  color: #ffffff !important;
+}
+
+.hero--has-bg .hero__title em {
+  color: var(--bronze-300) !important;
+}
+
+.hero--has-bg .lede {
+  color: #cbd5e1 !important;
+}
+
+.hero--has-bg .trust-item dt {
+  color: #94a3b8 !important;
+}
+
+.hero--has-bg .trust-item dd {
+  color: #ffffff !important;
+}
+
+.hero--has-bg .hero__trust {
+  border-top-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* ==========================================================================
+   28. NEW SECTIONS FOR ABOUT PAGE
+   ========================================================================== */
+
+/* A. Global Edge Infrastructure & Telemetry POPs */
+.edge-mesh-section {
+  position: relative;
+  background: #0d0f12;
+  color: #ffffff;
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.edge-telemetry-board {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+@media (max-width: 992px) {
+  .edge-telemetry-board {
+    grid-template-columns: 1fr;
+  }
+}
+
+.edge-map-visual {
+  position: relative;
+  background: #141820;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2.5rem;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.edge-radar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.edge-node-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 1.1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.edge-node-card:hover {
+  background: rgba(184, 130, 79, 0.1);
+  border-color: rgba(204, 160, 114, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.edge-node-city {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edge-node-latency {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--bronze-300);
+  font-weight: 600;
+}
+
+.edge-node-status {
+  font-size: 0.72rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.edge-stats-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.edge-metric-hero {
+  background: #141820;
+  border: 1px solid rgba(204, 160, 114, 0.25);
+  border-radius: 14px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.edge-metric-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--bronze-400);
+}
+
+/* B. Foundational Engineering Principles Grid */
+.principles-section {
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  background-color: var(--paper-sand);
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+  margin-top: 3.5rem;
+}
+
+.principle-card {
+  background: #ffffff;
+  border: 1px solid rgba(13, 15, 18, 0.08);
+  border-radius: 14px;
+  padding: 2.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.principle-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--bronze-400);
+  box-shadow: 0 16px 36px rgba(184, 130, 79, 0.14);
+}
+
+.principle-num {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--bronze-500);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.85rem;
+}
+
+.principle-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: var(--ink-900);
+}
+
+.principle-card p {
+  color: var(--ink-700);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+/* C. Architectural Milestones Timeline */
+.milestones-section {
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  background: #0d0f12;
+  color: #ffffff;
+}
+
+.milestones-timeline {
+  position: relative;
+  max-width: 860px;
+  margin: 3.5rem auto 0;
+  padding-left: 2.5rem;
+}
+
+.milestones-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--bronze-400) 0%, rgba(204, 160, 114, 0.2) 100%);
+}
+
+.milestone-item {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 1.5rem;
+  transition: all 0.4s ease;
+}
+
+.milestone-item:last-child {
+  margin-bottom: 0;
+}
+
+.milestone-dot {
+  position: absolute;
+  left: -2.5rem;
+  top: 0.2rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0d0f12;
+  border: 3px solid var(--bronze-400);
+  box-shadow: 0 0 12px rgba(184, 130, 79, 0.6);
+}
+
+.milestone-year {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--bronze-300);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.milestone-title {
+  font-size: 1.35rem;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.milestone-desc {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   29. NEW SECTIONS FOR SERVICES PAGE
+   ========================================================================== */
+
+/* A. 4-Stage Architectural Delivery Lifecycle */
+.lifecycle-section {
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  background-color: var(--paper-sand);
+}
+
+.lifecycle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.75rem;
+  margin-top: 3.5rem;
+  position: relative;
+}
+
+.lifecycle-step-card {
+  background: #ffffff;
+  border: 1px solid rgba(13, 15, 18, 0.08);
+  border-radius: 14px;
+  padding: 2.25rem 1.85rem;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lifecycle-step-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--bronze-400);
+  box-shadow: 0 16px 36px rgba(184, 130, 79, 0.16);
+}
+
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--bronze-400), var(--bronze-500));
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 12px rgba(184, 130, 79, 0.35);
+}
+
+.lifecycle-step-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.65rem;
+  color: var(--ink-900);
+}
+
+.lifecycle-step-card p {
+  color: var(--ink-700);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* B. Contractual Performance SLAs & Guarantees */
+.sla-section {
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  background: #0d0f12;
+  color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sla-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+  margin-top: 3.5rem;
+}
+
+.sla-card {
+  background: #141820;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 2.25rem;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sla-card:hover {
+  border-color: rgba(204, 160, 114, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(184, 130, 79, 0.15);
+}
+
+.sla-target-val {
+  font-family: var(--font-mono);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--bronze-300);
+  margin-bottom: 0.5rem;
+}
+
+.sla-card h3 {
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin-bottom: 0.65rem;
+}
+
+.sla-card p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* C. Enterprise Tech Stack Ecosystem */
+.tech-stack-section {
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  background: var(--paper);
+}
+
+.tech-ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+
+.tech-group-box {
+  background: #ffffff;
+  border: 1px solid rgba(13, 15, 18, 0.08);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.tech-group-box:hover {
+  border-color: var(--bronze-400);
+  box-shadow: 0 12px 30px rgba(184, 130, 79, 0.12);
+}
+
+.tech-group-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--bronze-500);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  background: var(--paper-sand);
+  border: 1px solid rgba(13, 15, 18, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-800);
+  transition: all 0.2s ease;
+}
+
+.tech-chip:hover {
+  background: var(--ink-900);
+  color: #ffffff;
+  border-color: var(--ink-900);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   30. ULTRA-SMOOTH, NON-INTERRUPTING SECTION ANIMATIONS (PRESERVES LENIS)
+   ========================================================================== */
+/* All animations use pure passive GPU-accelerated transitions via IntersectionObserver.
+   NO wheel hijacking, NO scroll locking, NO interruption to smooth momentum. */
+
+.smooth-fade-up {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.smooth-fade-up.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.smooth-slide-left {
+  opacity: 0;
+  transform: translate3d(-40px, 0, 0);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.smooth-slide-left.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.smooth-slide-right {
+  opacity: 0;
+  transform: translate3d(40px, 0, 0);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.smooth-slide-right.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.smooth-scale-in {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.smooth-scale-in.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger Delays for child cards */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
