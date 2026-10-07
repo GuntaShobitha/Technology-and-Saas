@@ -484,35 +484,96 @@
   }
 
   /* --------------------------------------------------------------------------
-     10. FOOTER NEWSLETTER DISPATCH HANDLER
+     10. FOOTER NEWSLETTER DISPATCH HANDLER (PURE JS VALIDATION & 404 REDIRECT)
      -------------------------------------------------------------------------- */
   function initNewsletterForms() {
     const forms = document.querySelectorAll('.newsletter-form');
     forms.forEach(form => {
+      // Disable default browser HTML5 validation bubbles
+      form.setAttribute('novalidate', 'true');
+
+      const input = form.querySelector('.newsletter-input');
+      const btn = form.querySelector('.newsletter-submit-btn');
+      let errorEl = form.parentElement ? form.parentElement.querySelector('.newsletter-error-msg') : null;
+      if (!errorEl) {
+        errorEl = form.querySelector('.newsletter-error-msg');
+      }
+      if (!errorEl) {
+        errorEl = document.createElement('div');
+        errorEl.className = 'newsletter-error-msg';
+        errorEl.setAttribute('role', 'alert');
+        errorEl.setAttribute('aria-live', 'assertive');
+        form.appendChild(errorEl);
+      }
+
+      function showError(msg) {
+        if (input) {
+          input.classList.remove('has-error');
+          // Force DOM reflow to re-trigger shake animation
+          void input.offsetWidth;
+          input.classList.add('has-error');
+          input.focus();
+        }
+        if (errorEl) {
+          errorEl.textContent = msg;
+          errorEl.classList.add('is-visible');
+        }
+      }
+
+      function clearError() {
+        if (input) input.classList.remove('has-error');
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.classList.remove('is-visible');
+        }
+      }
+
+      if (input) {
+        input.addEventListener('input', () => {
+          if (input.classList.contains('has-error')) {
+            clearError();
+          }
+        });
+      }
+
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const input = form.querySelector('.newsletter-input');
-        const btn = form.querySelector('.newsletter-submit-btn');
-        if (!input || !input.value.trim()) return;
+        clearError();
 
-        const origHtml = btn ? btn.innerHTML : 'Subscribe';
+        if (!input) return;
+        const val = input.value.trim();
+
+        // 1. Empty Check
+        if (!val) {
+          showError('Please enter your work email address.');
+          return;
+        }
+
+        // 2. Strict Email Format Check (JS Validation)
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+        if (!emailRegex.test(val)) {
+          showError('Please provide a valid email format (e.g. name@company.com).');
+          return;
+        }
+
+        // 3. Domain structure validation
+        const domainParts = val.split('@')[1].split('.');
+        const tld = domainParts[domainParts.length - 1];
+        if (tld.length < 2) {
+          showError('Please enter a valid top-level domain (e.g. .com, .io, .org).');
+          return;
+        }
+
+        // Validated! Show sending state and redirect to 404 page
         if (btn) {
           btn.disabled = true;
-          btn.innerHTML = '<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">sync</span>';
+          btn.innerHTML = '<span class="material-symbols-outlined" style="animation: spin 0.8s linear infinite; display: inline-block;">sync</span> <span>Submitting...</span>';
         }
 
         setTimeout(() => {
-          if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = '<span class="material-symbols-outlined">check</span>';
-          }
-          input.value = '';
-          input.placeholder = 'Subscribed successfully!';
-          setTimeout(() => {
-            if (btn) btn.innerHTML = origHtml;
-            input.placeholder = 'your.work@company.com';
-          }, 2500);
-        }, 600);
+          // Redirect to 404 page as requested by user
+          window.location.href = './404.html';
+        }, 550);
       });
     });
   }
