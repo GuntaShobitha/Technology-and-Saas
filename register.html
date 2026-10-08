@@ -9,82 +9,355 @@
   <link rel="stylesheet" href="./css/responsive.css">
   <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
   <style>
-    .auth-page {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      background-color: var(--paper);
-    }
-    .auth-brand-side {
-      background-color: var(--bg-dark);
-      color: var(--paper);
-      padding: clamp(2.5rem, 5vw, 4.5rem);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-    .auth-form-side {
-      padding: clamp(2.5rem, 5vw, 4.5rem);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      max-width: 540px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .password-input-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .toggle-password-btn {
-      position: absolute;
-      right: 12px;
-      color: var(--ink-500);
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .auth-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(13, 15, 18, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-    .auth-modal-content {
-      background: var(--paper-card);
-      border-radius: 16px;
-      max-width: 440px;
-      width: 100%;
-      padding: 2.5rem;
-      text-align: center;
-      box-shadow: var(--shadow-dark);
-      border: 1px solid rgba(184, 130, 79, 0.3);
-      animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @keyframes modalPop {
-      from { transform: scale(0.92); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    @media (max-width: 960px) {
-      .auth-page {
-        grid-template-columns: 1fr;
-      }
-      .auth-brand-side {
-        display: none;
-      }
-    }
+    /* =========================================
+   REGISTER PAGE RESPONSIVE FIX
+   ========================================= */
+
+/* Base auth layout */
+.auth-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  background-color: var(--paper);
+}
+
+/* Left side */
+.auth-brand-side {
+  background-color: var(--bg-dark);
+  color: var(--paper);
+  padding: clamp(2rem, 5vw, 4.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Right side */
+.auth-form-side {
+  padding: clamp(2rem, 5vw, 4.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 540px;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Prevent form elements from overflowing */
+.auth-form-side *,
+.auth-brand-side * {
+  box-sizing: border-box;
+}
+
+.auth-form-side form {
+  width: 100%;
+}
+
+.form-group {
+  min-width: 0;
+}
+
+.form-control {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Password */
+.password-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-input-wrap .form-control {
+  padding-right: 3rem;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 12px;
+  color: var(--ink-500);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+/* Role buttons */
+.role-switcher-container {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.role-switcher-btn {
+  min-width: 0;
+  flex: 1;
+}
+
+/* Left image */
+.realistic-img-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.realistic-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Modal */
+.auth-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 15, 18, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.auth-modal-content {
+  background: var(--paper-card);
+  border-radius: 16px;
+  max-width: 440px;
+  width: 100%;
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  text-align: center;
+  box-shadow: var(--shadow-dark);
+  border: 1px solid rgba(184, 130, 79, 0.3);
+  animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1100px) {
+
+  .auth-page {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .auth-brand-side {
+    padding: 2.5rem;
+  }
+
+  .auth-form-side {
+    padding: 2.5rem;
+  }
+
+  .realistic-img-wrap {
+    height: 200px !important;
+  }
+}
+
+
+/* =========================================
+   TABLET / SMALL LAPTOP
+   ========================================= */
+
+@media (max-width: 960px) {
+
+  .auth-page {
+    grid-template-columns: 1fr;
+    min-height: 100dvh;
+  }
+
+  .auth-brand-side {
+    display: none;
+  }
+
+  .auth-form-side {
+    max-width: 620px;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    justify-content: center;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  .auth-page {
+    display: block;
+    min-height: 100dvh;
+  }
+
+  .auth-form-side {
+    width: 100%;
+    max-width: none;
+    min-height: 100dvh;
+    padding: 2rem 1.25rem;
+    justify-content: flex-start;
+  }
+
+  /* Header */
+  .auth-form-side > div:first-child {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .auth-form-side h1 {
+    font-size: 1.65rem !important;
+    line-height: 1.25;
+  }
+
+  .auth-form-side p {
+    font-size: 0.88rem !important;
+  }
+
+  /* Role switcher */
+  .role-switcher-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .role-switcher-btn {
+    width: 100%;
+    min-height: 46px;
+    justify-content: center;
+  }
+
+  /* First + Last Name */
+  #registerForm > div:first-of-type {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Inputs */
+  .form-control {
+    width: 100%;
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  /* Password */
+  .password-input-wrap {
+    width: 100%;
+  }
+
+  .toggle-password-btn {
+    right: 8px;
+  }
+
+  /* Terms */
+  #registerForm label {
+    line-height: 1.45;
+  }
+
+  /* Submit button */
+  #registerForm button[type="submit"] {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  /* Bottom links */
+  .auth-form-side > div:last-child {
+    flex-wrap: wrap;
+  }
+
+  /* Footer navigation */
+  .auth-form-side > div:last-of-type {
+    flex-wrap: wrap !important;
+    gap: 0.75rem 1rem !important;
+  }
+
+  /* Modal */
+  .auth-modal {
+    padding: 1rem;
+  }
+
+  .auth-modal-content {
+    padding: 1.5rem;
+    border-radius: 14px;
+  }
+
+  .auth-modal-content h3 {
+    font-size: 1.3rem !important;
+  }
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+   ========================================= */
+
+@media (max-width: 380px) {
+
+  .auth-form-side {
+    padding: 1.5rem 1rem;
+  }
+
+  .auth-form-side h1 {
+    font-size: 1.45rem !important;
+  }
+
+  .auth-form-side > div:first-child {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .role-switcher-btn {
+    font-size: 0.82rem;
+  }
+
+  .form-label {
+    font-size: 0.82rem;
+  }
+
+  .auth-modal-content {
+    padding: 1.25rem;
+  }
+}
+
+
+/* =========================================
+   LANDSCAPE MOBILE
+   ========================================= */
+
+@media (max-width: 700px) and (orientation: landscape) {
+
+  .auth-form-side {
+    min-height: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -208,7 +481,7 @@
           <input type="email" id="regEmail" name="email" class="form-control" placeholder="jane@company.com" required>
         </div>
 
-        <div class="form-group" style="margin-bottom: 1.25rem;">
+        <!-- <div class="form-group" style="margin-bottom: 1.25rem;">
           <label for="regPassword" class="form-label">Create Password</label>
           <div class="password-input-wrap">
             <input type="password" id="regPassword" name="password" class="form-control" placeholder="••••••••••••" required>
@@ -222,7 +495,85 @@
             <div style="height: 4px; flex: 1; border-radius: 2px; background: #10b981;"></div>
             <div style="height: 4px; flex: 1; border-radius: 2px; background: rgba(0,0,0,0.1);"></div>
           </div>
-        </div>
+        </div> -->
+
+        <!-- Create Password -->
+<div class="form-group" style="margin-bottom: 1.25rem;">
+  <label for="regPassword" class="form-label">
+    Create Password
+  </label>
+
+  <div class="password-input-wrap">
+    <input
+      type="password"
+      id="regPassword"
+      name="password"
+      class="form-control"
+      placeholder="••••••••••••"
+      required
+    >
+
+    <button
+      type="button"
+      class="toggle-password-btn"
+      data-target="regPassword"
+      aria-label="Show password"
+    >
+      <span class="material-symbols-outlined">
+        visibility
+      </span>
+    </button>
+  </div>
+
+  <!-- Password strength -->
+  <div style="display: flex; gap: 4px; margin-top: 6px;">
+    <div class="password-bar"
+         style="height: 4px; flex: 1; border-radius: 2px; background: rgba(0,0,0,0.1);">
+    </div>
+
+    <div class="password-bar"
+         style="height: 4px; flex: 1; border-radius: 2px; background: rgba(0,0,0,0.1);">
+    </div>
+
+    <div class="password-bar"
+         style="height: 4px; flex: 1; border-radius: 2px; background: rgba(0,0,0,0.1);">
+    </div>
+
+    <div class="password-bar"
+         style="height: 4px; flex: 1; border-radius: 2px; background: rgba(0,0,0,0.1);">
+    </div>
+  </div>
+</div>
+
+
+<!-- Confirm Password -->
+<div class="form-group" style="margin-bottom: 1.25rem;">
+  <label for="regConfirmPassword" class="form-label">
+    Confirm Password
+  </label>
+
+  <div class="password-input-wrap">
+    <input
+      type="password"
+      id="regConfirmPassword"
+      name="confirmPassword"
+      class="form-control"
+      placeholder="••••••••••••"
+      required
+    >
+
+    <button
+      type="button"
+      class="toggle-password-btn"
+      data-target="regConfirmPassword"
+      aria-label="Show password"
+    >
+      <span class="material-symbols-outlined">
+        visibility
+      </span>
+    </button>
+  </div>
+</div>
 
         <div style="margin-bottom: 1.75rem;">
           <label style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: var(--ink-600); cursor: pointer;">
@@ -273,59 +624,634 @@
   <script src="./js/animations.js"></script>
   <script src="./js/script.js"></script>
   <script>
-    function selectRegisterRole(role) {
-      const uBtn = document.getElementById('btnRegisterUser');
-      const aBtn = document.getElementById('btnRegisterAdmin');
-      const roleInput = document.getElementById('registerRoleInput');
-      roleInput.value = role;
-      if (role === 'admin') {
-        aBtn.classList.add('active');
-        uBtn.classList.remove('active');
-      } else {
-        uBtn.classList.add('active');
-        aBtn.classList.remove('active');
+(function () {
+  'use strict';
+
+  /* =========================================
+     ROLE SELECTION
+     ========================================= */
+
+  window.selectRegisterRole = function (role) {
+
+    const userBtn = document.getElementById('btnRegisterUser');
+    const adminBtn = document.getElementById('btnRegisterAdmin');
+    const roleInput = document.getElementById('registerRoleInput');
+
+    roleInput.value = role;
+
+    if (role === 'admin') {
+      adminBtn.classList.add('active');
+      userBtn.classList.remove('active');
+    } else {
+      userBtn.classList.add('active');
+      adminBtn.classList.remove('active');
+    }
+  };
+
+
+  /* =========================================
+     FORM ELEMENTS
+     ========================================= */
+
+  const form = document.getElementById('registerForm');
+
+  if (!form) return;
+
+  const firstName =
+    document.getElementById('regFirstName');
+
+  const lastName =
+    document.getElementById('regLastName');
+
+  const email =
+    document.getElementById('regEmail');
+
+  const password =
+    document.getElementById('regPassword');
+
+  const confirmPassword =
+    document.getElementById('regConfirmPassword');
+
+  const roleInput =
+    document.getElementById('registerRoleInput');
+
+  const terms =
+    form.querySelector('input[name="terms"]');
+
+  const submitBtn =
+    form.querySelector('button[type="submit"]');
+
+
+  /* =========================================
+     ERROR MESSAGE
+     ========================================= */
+
+  function showError(input, message) {
+
+    removeError(input);
+
+    input.style.borderColor = '#dc2626';
+
+    const error = document.createElement('small');
+
+    error.className = 'register-error';
+
+    error.style.cssText = `
+      display: block;
+      color: #dc2626;
+      font-size: 0.78rem;
+      margin-top: 5px;
+      line-height: 1.4;
+    `;
+
+    error.textContent = message;
+
+    input.parentElement.appendChild(error);
+  }
+
+
+  function removeError(input) {
+
+    if (!input) return;
+
+    input.style.borderColor = '';
+
+    const error =
+      input.parentElement.querySelector('.register-error');
+
+    if (error) {
+      error.remove();
+    }
+  }
+
+
+  /* =========================================
+     FIRST NAME / LAST NAME
+     ========================================= */
+
+  function validateName(input, fieldName) {
+
+    const value = input.value.trim();
+
+    if (value === '') {
+      showError(
+        input,
+        `${fieldName} is required.`
+      );
+      return false;
+    }
+
+    if (value.length < 2) {
+      showError(
+        input,
+        `${fieldName} must be at least 2 characters.`
+      );
+      return false;
+    }
+
+    if (!/^[A-Za-z\s'-]+$/.test(value)) {
+      showError(
+        input,
+        `${fieldName} can contain only letters.`
+      );
+      return false;
+    }
+
+    removeError(input);
+    return true;
+  }
+
+
+  /* =========================================
+     EMAIL
+     ========================================= */
+
+  function validateEmail() {
+
+    const value = email.value.trim();
+
+    if (value === '') {
+      showError(
+        email,
+        'Work email is required.'
+      );
+      return false;
+    }
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    if (!emailPattern.test(value)) {
+      showError(
+        email,
+        'Please enter a valid email address.'
+      );
+      return false;
+    }
+
+    removeError(email);
+    return true;
+  }
+
+
+  /* =========================================
+     PASSWORD
+     ========================================= */
+
+  function validatePassword() {
+
+    const value = password.value;
+
+    if (value === '') {
+      showError(
+        password,
+        'Password is required.'
+      );
+      return false;
+    }
+
+    if (value.length < 8) {
+      showError(
+        password,
+        'Password must be at least 8 characters.'
+      );
+      return false;
+    }
+
+    if (!/[A-Z]/.test(value)) {
+      showError(
+        password,
+        'Password must contain at least one uppercase letter.'
+      );
+      return false;
+    }
+
+    if (!/[a-z]/.test(value)) {
+      showError(
+        password,
+        'Password must contain at least one lowercase letter.'
+      );
+      return false;
+    }
+
+    if (!/[0-9]/.test(value)) {
+      showError(
+        password,
+        'Password must contain at least one number.'
+      );
+      return false;
+    }
+
+    removeError(password);
+
+    return true;
+  }
+
+
+  /* =========================================
+     CONFIRM PASSWORD
+     ========================================= */
+
+  function validateConfirmPassword() {
+
+    const passwordValue =
+      password.value;
+
+    const confirmValue =
+      confirmPassword.value;
+
+    if (confirmValue === '') {
+
+      showError(
+        confirmPassword,
+        'Please confirm your password.'
+      );
+
+      return false;
+    }
+
+    if (passwordValue !== confirmValue) {
+
+      showError(
+        confirmPassword,
+        'Passwords do not match.'
+      );
+
+      return false;
+    }
+
+    removeError(confirmPassword);
+
+    return true;
+  }
+
+
+  /* =========================================
+     TERMS
+     ========================================= */
+
+  function validateTerms() {
+
+    const oldError =
+      terms.parentElement.querySelector('.register-error');
+
+    if (!terms.checked) {
+
+      if (!oldError) {
+
+        const error =
+          document.createElement('small');
+
+        error.className =
+          'register-error';
+
+        error.style.cssText = `
+          display: block;
+          color: #dc2626;
+          font-size: 0.78rem;
+          margin-top: 6px;
+          line-height: 1.4;
+        `;
+
+        error.textContent =
+          'You must agree to the Terms of Service and Privacy Policy.';
+
+        terms.parentElement.appendChild(error);
       }
+
+      return false;
     }
 
-    const regForm = document.getElementById('registerForm');
-    if (regForm) {
-      regForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const role = document.getElementById('registerRoleInput').value;
-        const firstName = document.getElementById('regFirstName').value.trim();
-        const lastName = document.getElementById('regLastName').value.trim();
-        const fullName = `${firstName} ${lastName}`.trim();
-        const email = document.getElementById('regEmail').value.trim();
+    if (oldError) {
+      oldError.remove();
+    }
 
-        if (window.Auth) {
-          window.Auth.login(email, role, fullName);
-        } else {
-          localStorage.setItem('userEmail', email);
-          localStorage.setItem('userRole', role);
-          localStorage.setItem('userName', fullName || email.split('@')[0]);
+    return true;
+  }
+
+
+  /* =========================================
+     PASSWORD STRENGTH
+     ========================================= */
+
+  const passwordBars =
+    document.querySelectorAll('.password-bar');
+
+
+  function updatePasswordStrength() {
+
+    const value =
+      password.value;
+
+    let strength = 0;
+
+    if (value.length >= 8) strength++;
+
+    if (/[A-Z]/.test(value)) strength++;
+
+    if (/[a-z]/.test(value)) strength++;
+
+    if (/[0-9]/.test(value)) strength++;
+
+    if (/[^A-Za-z0-9]/.test(value)) strength++;
+
+
+    passwordBars.forEach(function (bar, index) {
+
+      if (index < strength) {
+        bar.style.background = '#10b981';
+      } else {
+        bar.style.background =
+          'rgba(0,0,0,0.1)';
+      }
+
+    });
+  }
+
+
+  /* =========================================
+     PASSWORD SHOW / HIDE
+     ========================================= */
+
+  const toggleButtons =
+    document.querySelectorAll(
+      '.toggle-password-btn'
+    );
+
+
+  toggleButtons.forEach(function (button) {
+
+    button.addEventListener('click', function () {
+
+      const target =
+        button.getAttribute('data-target');
+
+      const input =
+        document.getElementById(target);
+
+      const icon =
+        button.querySelector(
+          '.material-symbols-outlined'
+        );
+
+
+      if (input.type === 'password') {
+
+        input.type = 'text';
+
+        icon.textContent =
+          'visibility_off';
+
+        button.setAttribute(
+          'aria-label',
+          'Hide password'
+        );
+
+      } else {
+
+        input.type = 'password';
+
+        icon.textContent =
+          'visibility';
+
+        button.setAttribute(
+          'aria-label',
+          'Show password'
+        );
+      }
+
+    });
+
+  });
+
+
+  /* =========================================
+     LIVE VALIDATION
+     ========================================= */
+
+  firstName.addEventListener('blur', function () {
+    validateName(firstName, 'First Name');
+  });
+
+  lastName.addEventListener('blur', function () {
+    validateName(lastName, 'Last Name');
+  });
+
+  email.addEventListener('blur', function () {
+    validateEmail();
+  });
+
+  password.addEventListener('blur', function () {
+    validatePassword();
+  });
+
+  confirmPassword.addEventListener('blur', function () {
+    validateConfirmPassword();
+  });
+
+
+  firstName.addEventListener('input', function () {
+    removeError(firstName);
+  });
+
+  lastName.addEventListener('input', function () {
+    removeError(lastName);
+  });
+
+  email.addEventListener('input', function () {
+    removeError(email);
+  });
+
+  password.addEventListener('input', function () {
+
+    removeError(password);
+
+    removeError(confirmPassword);
+
+    updatePasswordStrength();
+
+  });
+
+  confirmPassword.addEventListener('input', function () {
+
+    removeError(confirmPassword);
+
+    if (
+      confirmPassword.value !== '' &&
+      password.value === confirmPassword.value
+    ) {
+      confirmPassword.style.borderColor =
+        '#10b981';
+    }
+
+  });
+
+  terms.addEventListener('change', function () {
+    validateTerms();
+  });
+
+
+  /* =========================================
+     REGISTER BUTTON
+     ========================================= */
+
+  form.addEventListener('submit', function (e) {
+
+    e.preventDefault();
+
+
+    /* Run ALL validation */
+
+    const validFirstName =
+      validateName(
+        firstName,
+        'First Name'
+      );
+
+    const validLastName =
+      validateName(
+        lastName,
+        'Last Name'
+      );
+
+    const validEmail =
+      validateEmail();
+
+    const validPassword =
+      validatePassword();
+
+    const validConfirmPassword =
+      validateConfirmPassword();
+
+    const validTerms =
+      validateTerms();
+
+
+    /* =========================================
+       STOP IF INVALID
+       ========================================= */
+
+    if (
+      !validFirstName ||
+      !validLastName ||
+      !validEmail ||
+      !validPassword ||
+      !validConfirmPassword ||
+      !validTerms
+    ) {
+
+      const firstError =
+        form.querySelector(
+          '.register-error'
+        );
+
+      if (firstError) {
+
+        const parent =
+          firstError.parentElement;
+
+        const input =
+          parent.querySelector('input');
+
+        if (input) {
+          input.focus();
         }
+      }
 
-        const submitBtn = regForm.querySelector('button[type="submit"]');
-        const orig = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">sync</span> Creating...';
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = orig;
-          document.getElementById('regConfirmedRole').textContent = role === 'admin' ? 'Enterprise Admin' : 'Developer';
-          const targetUrl = role === 'admin' ? './admin-dashboard.html' : './user-dashboard.html';
-          const modalLink = document.querySelector('#regSuccessModal a');
-          if (modalLink) {
-            modalLink.href = targetUrl;
-            modalLink.textContent = 'Enter Dashboard Directly';
-          }
-          document.getElementById('regSuccessModal').style.display = 'flex';
-          setTimeout(() => {
-            window.location.href = targetUrl;
-          }, 800);
-        }, 900);
-      });
+      return;
     }
-  </script>
+
+
+    /* =========================================
+       ALL VALID
+       ========================================= */
+
+    const role =
+      roleInput.value;
+
+    const fullName =
+      `${firstName.value.trim()} ${lastName.value.trim()}`;
+
+    const userEmail =
+      email.value.trim();
+
+
+    /* =========================================
+       SAVE USER
+       ========================================= */
+
+    if (window.Auth) {
+
+      window.Auth.login(
+        userEmail,
+        role,
+        fullName
+      );
+
+    } else {
+
+      localStorage.setItem(
+        'userEmail',
+        userEmail
+      );
+
+      localStorage.setItem(
+        'userRole',
+        role
+      );
+
+      localStorage.setItem(
+        'userName',
+        fullName
+      );
+    }
+
+
+    /* =========================================
+       BUTTON LOADING
+       ========================================= */
+
+    const originalHTML =
+      submitBtn.innerHTML;
+
+    submitBtn.disabled = true;
+
+    submitBtn.innerHTML = `
+      <span
+        class="material-symbols-outlined"
+        style="animation: spin 1s linear infinite;"
+      >
+        sync
+      </span>
+      <span>Creating...</span>
+    `;
+
+
+    /* =========================================
+       SUCCESS → LOGIN PAGE
+       ========================================= */
+
+    setTimeout(function () {
+
+      submitBtn.disabled = false;
+
+      submitBtn.innerHTML =
+        originalHTML;
+
+
+      /*
+       * Registration is successful.
+       * Send user to login page.
+       */
+
+      window.location.href =
+        './login.html';
+
+    }, 900);
+
+  });
+
+})();
+</script>
 </body>
 </html>
