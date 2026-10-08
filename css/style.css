@@ -1596,7 +1596,8 @@ h4 { font-size: clamp(1.15rem, 1.6vw, 1.35rem); font-variation-settings: "opsz" 
 
 .footer-main {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr; */
   gap: clamp(2rem, 3.5vw, 3.5rem);
   margin-bottom: 4rem;
 }
@@ -2046,7 +2047,8 @@ html.lenis, html.lenis body {
    ========================================================================== */
 .footer-main {
   display: grid;
-  grid-template-columns: 1.4fr 0.9fr 1fr 1fr 1.3fr;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-columns: 1.4fr 0.9fr 1fr 1fr 1.3fr; */
   gap: clamp(1.5rem, 3vw, 2.5rem);
   padding-bottom: 3.5rem;
 }
@@ -4793,3 +4795,525 @@ width: 300px;
   background: #1e1e22;
   color: var(--gold-light);
 }
+
+
+
+
+
+
+/* =========================================================
+   NEXI SAAS FOOTER
+   All classes use the "saas-" prefix
+   ========================================================= */
+
+.saas-footer {
+  --saas-bg: #0d0f12;
+  --saas-bg-light: #121519;
+  --saas-border: rgba(255, 255, 255, 0.09);
+  --saas-text: #faf8f5;
+  --saas-text-muted: #9a9da3;
+  --saas-bronze: #cca072;
+  --saas-bronze-dark: #b8824f;
+
+  width: 100%;
+  background: var(--saas-bg);
+  color: var(--saas-text);
+  border-top: 1px solid var(--saas-border);
+  overflow: hidden;
+}
+
+.saas-footer *,
+.saas-footer *::before,
+.saas-footer *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FOOTER SHELL
+   ========================================================= */
+
+.saas-footer__shell {
+  width: min(100% - 40px, 1440px);
+  margin-inline: auto;
+}
+
+
+/* =========================================================
+   MAIN FOOTER
+   ========================================================= */
+
+.saas-footer__main {
+  display: grid;
+
+  /*
+    Brand gets more space.
+    Remaining 3 columns share the available width.
+  */
+  grid-template-columns:
+    minmax(280px, 1.8fr)
+    repeat(3, minmax(150px, 1fr));
+
+  gap: 60px;
+
+  padding: 70px 0 65px;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.saas-footer__brand-col {
+  min-width: 0;
+}
+
+.saas-footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--saas-text);
+  text-decoration: none;
+
+  margin-bottom: 20px;
+}
+
+.saas-footer__brand-icon {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.saas-footer__brand-name {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.saas-footer__description {
+  max-width: 390px;
+
+  margin: 0;
+
+  color: var(--saas-text-muted);
+
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   REFERENCE
+   ========================================================= */
+
+.saas-footer__reference {
+  margin-top: 16px;
+
+  color: var(--saas-bronze);
+
+  font-family: monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   SOCIAL ICONS
+   ========================================================= */
+
+.saas-footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 24px;
+}
+
+.saas-footer__social {
+  width: 38px;
+  height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--saas-border);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  color: #aeb1b6;
+
+  text-decoration: none;
+
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.saas-footer__social svg {
+  width: 17px;
+  height: 17px;
+
+  display: block;
+
+  fill: currentColor;
+}
+
+.saas-footer__social:hover {
+  color: var(--saas-bronze);
+
+  background: rgba(204, 160, 114, 0.08);
+
+  border-color: rgba(204, 160, 114, 0.45);
+
+  transform: translateY(-2px);
+}
+
+.saas-footer__social:focus-visible {
+  outline: 2px solid var(--saas-bronze);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   FOOTER COLUMNS
+   ========================================================= */
+
+.saas-footer__column {
+  min-width: 0;
+}
+
+.saas-footer__heading {
+  margin: 3px 0 22px;
+
+  color: #ffffff;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.saas-footer__links {
+  display: flex;
+  flex-direction: column;
+
+  gap: 13px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.saas-footer__links a {
+  display: inline-block;
+
+  color: var(--saas-text-muted);
+
+  font-size: 0.88rem;
+  line-height: 1.5;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.saas-footer__links a:hover {
+  color: var(--saas-bronze);
+  transform: translateX(3px);
+}
+
+.saas-footer__links a:focus-visible {
+  outline: 2px solid var(--saas-bronze);
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+   ========================================================= */
+
+.saas-footer__bottom {
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding: 22px 0;
+
+  border-top: 1px solid var(--saas-border);
+}
+
+.saas-footer__copyright {
+  color: #73777e;
+
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.saas-footer__bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  flex-wrap: wrap;
+
+  gap: 20px;
+}
+
+.saas-footer__bottom-nav a {
+  color: #73777e;
+
+  font-size: 0.75rem;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.saas-footer__bottom-nav a:hover {
+  color: var(--saas-bronze);
+}
+
+.saas-footer__bottom-nav a:focus-visible {
+  outline: 2px solid var(--saas-bronze);
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   TABLET
+   1024px and below
+   ========================================================= */
+
+@media (max-width: 1010px) {
+
+  .saas-footer__main {
+    grid-template-columns:
+      minmax(240px, 1.5fr)
+      repeat(2, minmax(150px, 1fr));
+
+    gap: 45px 35px;
+
+    padding: 60px 0 55px;
+  }
+
+  /*
+    Brand spans the first row.
+    Navigation columns continue underneath.
+  */
+  .saas-footer__brand-col {
+    grid-column: 1 / -1;
+  }
+
+  .saas-footer__description {
+    max-width: 600px;
+  }
+
+  .saas-footer__bottom {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .saas-footer__bottom-nav {
+    justify-content: flex-start;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   768px and below
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .saas-footer__shell {
+    width: min(100% - 32px, 640px);
+  }
+
+  .saas-footer__main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 40px 25px;
+
+    padding: 50px 0 45px;
+  }
+
+  
+
+  .saas-footer__description {
+    max-width: 100%;
+  }
+
+  .saas-footer__column {
+    width: 100%;
+  }
+
+  .saas-footer__heading {
+    margin-bottom: 18px;
+  }
+
+  .saas-footer__bottom {
+    padding: 20px 0 25px;
+  }
+
+  .saas-footer__copyright {
+    max-width: 100%;
+  }
+
+  .saas-footer__bottom-nav {
+    gap: 12px 18px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   480px and below
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .saas-footer__shell {
+    width: calc(100% - 28px);
+  }
+
+  .saas-footer__main {
+    grid-template-columns: 1fr;
+
+    gap: 34px;
+
+    padding: 42px 0 38px;
+  }
+
+  .saas-footer__brand-col {
+    grid-column: auto;
+  }
+
+  .saas-footer__brand {
+    margin-bottom: 17px;
+  }
+
+  .saas-footer__brand-name {
+    font-size: 1.15rem;
+  }
+
+  .saas-footer__description {
+    font-size: 0.86rem;
+    line-height: 1.7;
+  }
+
+  .saas-footer__reference {
+    font-size: 0.64rem;
+  }
+
+  .saas-footer__socials {
+    margin-top: 20px;
+  }
+
+  .saas-footer__social {
+    width: 36px;
+    height: 36px;
+  }
+
+  .saas-footer__column {
+    padding-top: 2px;
+  }
+
+  .saas-footer__heading {
+    font-size: 0.74rem;
+    margin-bottom: 15px;
+  }
+
+  .saas-footer__links {
+    gap: 11px;
+  }
+
+  .saas-footer__links a {
+    font-size: 0.84rem;
+  }
+
+  .saas-footer__bottom {
+    gap: 16px;
+  }
+
+  .saas-footer__copyright {
+    font-size: 0.7rem;
+  }
+
+  .saas-footer__bottom-nav {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+  }
+
+  .saas-footer__bottom-nav a {
+    font-size: 0.72rem;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+   360px and below
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .saas-footer__shell {
+    width: calc(100% - 24px);
+  }
+
+  .saas-footer__main {
+    padding-top: 35px;
+  }
+
+  .saas-footer__social {
+    width: 34px;
+    height: 34px;
+  }
+
+  .saas-footer__social svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .saas-footer__social,
+  .saas-footer__links a,
+  .saas-footer__bottom-nav a {
+    transition: none;
+  }
+
+  .saas-footer__social:hover,
+  .saas-footer__links a:hover {
+    transform: none;
+  }
+}
+

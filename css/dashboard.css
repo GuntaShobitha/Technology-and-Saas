@@ -701,6 +701,7 @@
   border-radius: 12px;
   padding: 1.75rem;
   margin-bottom: 2rem;
+  overflow-x: auto;
   position: relative;
 }
 
