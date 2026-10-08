@@ -9,6 +9,146 @@
   <link rel="stylesheet" href="./css/responsive.css">
   <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg">
 </head>
+<style>
+
+/* ================================
+   Testimonials Carousel
+================================ */
+
+.testimonials-carousel-wrap {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.testimonial-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* 3 cards visible */
+.testimonial-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  min-width: 0;
+}
+
+/* Author */
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.testimonial-author img {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--bronze-500);
+}
+
+.author-info h4 {
+  margin: 0 0 4px;
+}
+
+.author-info p {
+  margin: 0;
+}
+
+/* Controls */
+.testimonial-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.testimonial-btn {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--bronze-500);
+  background: transparent;
+  color: var(--bronze-500);
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.testimonial-btn:hover:not(:disabled) {
+  background: var(--bronze-500);
+  color: #111;
+  transform: translateY(-2px);
+}
+
+.testimonial-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ================================
+   Tablet
+================================ */
+
+@media (max-width: 900px) {
+  .testimonial-card {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+/* ================================
+   Mobile
+================================ */
+
+@media (max-width: 600px) {
+  .testimonial-card {
+    flex: 0 0 100%;
+  }
+
+  .testimonial-controls {
+    margin-top: 20px;
+  }
+
+  #testimonialsSection .shell > div:first-child {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+}
+
+
+
+/* Perspective slider disabled buttons */
+
+.perspective-ctrl-btn:disabled,
+.perspective-ctrl-btn.is-disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+}
+
+/* Optional: prevent hover effect on disabled buttons */
+.perspective-ctrl-btn:disabled:hover,
+.perspective-ctrl-btn.is-disabled:hover {
+  opacity: 0.25;
+  transform: none !important;
+}
+
+
+
+</style>
 <body>
 
   <!-- ======================== PRELOADER ======================== -->
@@ -801,62 +941,118 @@
     </section>
 
     <!-- ==================== 7. TESTIMONIALS (WITH REALISTIC AVATARS) ==================== -->
-    <section class="section section--dim" id="testimonialsSection">
-      <div class="shell">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem;">
-          <div>
-            <p class="eyebrow reveal reveal--fade-up">Client Endorsements</p>
-            <h2 class="reveal reveal--fade-up delay-1">Trusted by architectural leaders.</h2>
-          </div>
-        </div>
 
-        <div class="testimonials-carousel-wrap">
-          <div class="testimonial-track">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-card glow-card reveal reveal--fade-up delay-1" data-tilt>
-              <div class="testimonial-quote">
-                "NEXI re-engineered our core payment settlement engine in four months. The architecture is immaculate, resilient, and ready for our next decade of growth."
-              </div>
-              <div class="testimonial-author">
-                <img src="./assets/images/avatar-1.webp" alt="Alexander Thorne" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bronze-500);">
-                <div class="author-info">
-                  <h4>Alexander Thorne</h4>
-                  <p>Chief Technology Officer · Meridian Capital</p>
-                </div>
-              </div>
-            </div>
+<section class="section section--dim" id="testimonialsSection">
+  <div class="shell">
 
-            <!-- Testimonial 2 -->
-            <div class="testimonial-card glow-card reveal reveal--fade-up delay-2" data-tilt>
-              <div class="testimonial-quote">
-                "Their AI agent workflows eliminated thousands of manual review hours for our compliance analysts. The deterministic accuracy is unlike anything else on the market."
-              </div>
-              <div class="testimonial-author">
-                <img src="./assets/images/avatar-2.webp" alt="Elena Vance" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bronze-500);">
-                <div class="author-info">
-                  <h4>Elena Vance</h4>
-                  <p>VP of Engineering · Kinetix Health</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Testimonial 3 -->
-            <div class="testimonial-card glow-card reveal reveal--fade-up delay-3" data-tilt>
-              <div class="testimonial-quote">
-                "The transparency, editorial precision, and deep engineering discipline NEXI brings to the table makes them an irreplaceable partner in our cloud roadmap."
-              </div>
-              <div class="testimonial-author">
-                <img src="./assets/images/avatar-3.webp" alt="Marcus Sterling" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bronze-500);">
-                <div class="author-info">
-                  <h4>Marcus Sterling</h4>
-                  <p>Head of Infrastructure · OmniRetail Group</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem;">
+      <div>
+        <p class="eyebrow reveal reveal--fade-up">Client Endorsements</p>
+        <h2 class="reveal reveal--fade-up delay-1">Trusted by architectural leaders.</h2>
       </div>
-    </section>
+
+      <!-- Carousel Buttons -->
+      <div class="testimonial-controls">
+        <button class="testimonial-btn" id="testimonialPrev" aria-label="Previous testimonials">
+          &#8592;
+        </button>
+
+        <button class="testimonial-btn" id="testimonialNext" aria-label="Next testimonials">
+          &#8594;
+        </button>
+      </div>
+    </div>
+
+    <div class="testimonials-carousel-wrap">
+      <div class="testimonial-track" id="testimonialTrack">
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card glow-card reveal reveal--fade-up delay-1" data-tilt>
+          <div class="testimonial-quote">
+            "NEXI re-engineered our core payment settlement engine in four months. The architecture is immaculate, resilient, and ready for our next decade of growth."
+          </div>
+
+          <div class="testimonial-author">
+            <img src="./assets/images/avatar-1.webp"
+                 alt="Alexander Thorne">
+            <div class="author-info">
+              <h4>Alexander Thorne</h4>
+              <p>Chief Technology Officer · Meridian Capital</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card glow-card reveal reveal--fade-up delay-2" data-tilt>
+          <div class="testimonial-quote">
+            "Their AI agent workflows eliminated thousands of manual review hours for our compliance analysts. The deterministic accuracy is unlike anything else on the market."
+          </div>
+
+          <div class="testimonial-author">
+            <img src="./assets/images/avatar-2.webp"
+                 alt="Elena Vance">
+            <div class="author-info">
+              <h4>Elena Vance</h4>
+              <p>VP of Engineering · Kinetix Health</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card glow-card reveal reveal--fade-up delay-3" data-tilt>
+          <div class="testimonial-quote">
+            "The transparency, editorial precision, and deep engineering discipline NEXI brings to the table makes them an irreplaceable partner in our cloud roadmap."
+          </div>
+
+          <div class="testimonial-author">
+            <img src="./assets/images/avatar-3.webp"
+                 alt="Marcus Sterling">
+            <div class="author-info">
+              <h4>Marcus Sterling</h4>
+              <p>Head of Infrastructure · OmniRetail Group</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card glow-card" data-tilt>
+          <div class="testimonial-quote">
+            "NEXI transformed a fragmented technology landscape into a scalable platform. Their engineering team understood the business problem as deeply as the technical one."
+          </div>
+
+          <div class="testimonial-author">
+            <img src="./assets/images/avatar-4.webp"
+                 alt="Sophia Bennett">
+            <div class="author-info">
+              <h4>Sophia Bennett</h4>
+              <p>Chief Product Officer · Vertex Systems</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="testimonial-card glow-card" data-tilt>
+          <div class="testimonial-quote">
+            "From strategy through implementation, NEXI delivered with exceptional precision. Our infrastructure is faster, more reliable, and significantly easier to operate."
+          </div>
+
+          <div class="testimonial-author">
+            <img src="./assets/images/avatar-5.webp"
+                 alt="Daniel Richardson">
+            <div class="author-info">
+              <h4>Daniel Richardson</h4>
+              <p>CTO · Northstar Technologies</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+```
+
 
     <!-- ==================== 8. ENGINEERING BLOG (WITH REALISTIC WEBP IMAGES) ==================== -->
     <section class="section" id="blogSection">
@@ -1111,5 +1307,95 @@
   <script src="./js/lenis.min.js"></script>
   <script src="./js/animations.js"></script>
   <script src="./js/script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const track = document.getElementById("testimonialTrack");
+  const prevBtn = document.getElementById("testimonialPrev");
+  const nextBtn = document.getElementById("testimonialNext");
+
+  const cards = track.querySelectorAll(".testimonial-card");
+
+  let currentIndex = 0;
+
+  function getVisibleCards() {
+    if (window.innerWidth <= 600) {
+      return 1;
+    }
+
+    if (window.innerWidth <= 900) {
+      return 2;
+    }
+
+    return 3;
+  }
+
+  function getGap() {
+    const styles = window.getComputedStyle(track);
+    return parseFloat(styles.gap) || 0;
+  }
+
+  function updateCarousel() {
+
+    const visibleCards = getVisibleCards();
+
+    // Maximum position
+    const maxIndex = cards.length - visibleCards;
+
+    // Prevent going outside range
+    currentIndex = Math.max(
+      0,
+      Math.min(currentIndex, maxIndex)
+    );
+
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const gap = getGap();
+
+    const moveAmount = (cardWidth + gap) * currentIndex;
+
+    track.style.transform =
+      `translateX(-${moveAmount}px)`;
+
+    // Disable Previous at beginning
+    prevBtn.disabled = currentIndex === 0;
+
+    // Disable Next at end
+    nextBtn.disabled = currentIndex === maxIndex;
+  }
+
+  /* NEXT */
+  nextBtn.addEventListener("click", function () {
+
+    const visibleCards = getVisibleCards();
+    const maxIndex = cards.length - visibleCards;
+
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+
+  /* PREVIOUS */
+  prevBtn.addEventListener("click", function () {
+
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+
+  /* Update when screen size changes */
+  window.addEventListener("resize", function () {
+    updateCarousel();
+  });
+
+  /* Initial state */
+  updateCarousel();
+
+});
+</script>
+
+
 </body>
 </html>

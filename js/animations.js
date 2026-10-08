@@ -245,140 +245,378 @@
   /* --------------------------------------------------------------------------
      7. SCREENSHOT 2: PERSPECTIVE COVERFLOW SHOWCASE WITH ZOOM & ACTIVE CONTENT
      -------------------------------------------------------------------------- */
-  function initPerspectiveShowcase() {
-    const section = document.querySelector('.perspective-showcase-section');
-    if (!section) return;
 
-    const cards = Array.from(section.querySelectorAll('.perspective-card-item'));
-    const cardsRow = section.querySelector('.perspective-cards-row');
-    const detailsWrap = section.querySelector('.perspective-active-details');
-    const prevBtn = section.querySelector('.perspective-ctrl-btn--prev');
-    const nextBtn = section.querySelector('.perspective-ctrl-btn--next');
 
-    if (!cards.length) return;
 
-    // Start with middle item active (index 2 for 5 cards)
-    let activeIdx = Math.floor(cards.length / 2);
 
-    function updateShowcase(newIndex) {
-      if (newIndex < 0) newIndex = 0;
-      if (newIndex >= cards.length) newIndex = cards.length - 1;
-      activeIdx = newIndex;
 
-      // Translate row so active item glides smoothly into the center
-      if (cardsRow && cards[activeIdx]) {
-        const defaultCenterIdx = Math.floor(cards.length / 2);
-        const shiftFactor = defaultCenterIdx - activeIdx;
-        const gap = window.innerWidth <= 768 ? 12 : 20;
-        const cardStep = cards[activeIdx].offsetWidth + gap;
-        cardsRow.style.transform = `translateX(${shiftFactor * cardStep}px)`;
-      }
+function initPerspectiveShowcase() {
+  const section = document.querySelector('.perspective-showcase-section');
+  if (!section) return;
 
-      cards.forEach((card, i) => {
-        const offset = i - activeIdx;
-        const absOffset = Math.abs(offset);
+  const cards = Array.from(
+    section.querySelectorAll('.perspective-card-item')
+  );
 
-        card.classList.remove('is-active');
+  const cardsRow = section.querySelector('.perspective-cards-row');
+  const detailsWrap = section.querySelector('.perspective-active-details');
+  const prevBtn = section.querySelector('.perspective-ctrl-btn--prev');
+  const nextBtn = section.querySelector('.perspective-ctrl-btn--next');
 
-        if (offset === 0) {
-          card.classList.add('is-active');
-          card.style.transform = 'scale(1.08) translateZ(0)';
-          card.style.opacity = '1';
-          card.style.zIndex = '10';
-        } else if (absOffset === 1) {
-          card.style.transform = `scale(0.88) translateX(${offset * 10}px)`;
-          card.style.opacity = '0.55';
-          card.style.zIndex = '5';
-        } else {
-          card.style.transform = `scale(0.72) translateX(${offset * 15}px)`;
-          card.style.opacity = '0.28';
-          card.style.zIndex = '1';
-        }
-      });
+  if (!cards.length) return;
 
-      // Update Active Content Details Box (Display only for center item)
-      if (detailsWrap) {
-        const activeCard = cards[activeIdx];
-        const badgeText = activeCard.getAttribute('data-badge') || 'PLATFORM CAPABILITY';
-        const titleText = activeCard.getAttribute('data-title') || 'Next-Gen Cloud Architecture';
-        const descText = activeCard.getAttribute('data-desc') || 'Architected for enterprise scale with surgical reliability and real-time observability.';
-        const linkUrl = activeCard.getAttribute('data-link') || './services.html';
+  // Start with middle item active
+  let activeIdx = Math.floor(cards.length / 2);
 
-        detailsWrap.style.opacity = '0';
-        detailsWrap.style.transform = 'translateY(8px)';
+  function updateShowcase(newIndex) {
 
-        setTimeout(() => {
-          const badgeEl = detailsWrap.querySelector('.badge span:last-child');
-          const titleEl = detailsWrap.querySelector('h3');
-          const descEl = detailsWrap.querySelector('p');
-          const linkEl = detailsWrap.querySelector('a');
-
-          if (badgeEl) badgeEl.textContent = badgeText;
-          if (titleEl) titleEl.textContent = titleText;
-          if (descEl) descEl.textContent = descText;
-          if (linkEl) linkEl.href = linkUrl;
-
-          detailsWrap.style.opacity = '1';
-          detailsWrap.style.transform = 'translateY(0)';
-        }, 180);
-      }
+    // Keep index within available cards
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= cards.length) {
+      newIndex = cards.length - 1;
     }
 
-    // Click to select
-    cards.forEach((card, i) => {
-      card.addEventListener('click', () => updateShowcase(i));
-    });
+    activeIdx = newIndex;
+
+    /* =========================================
+       UPDATE PREVIOUS / NEXT BUTTONS
+    ========================================= */
 
     if (prevBtn) {
-      prevBtn.addEventListener('click', () => updateShowcase(activeIdx - 1));
+      const isFirstCard = activeIdx === 0;
+
+      prevBtn.disabled = isFirstCard;
+      prevBtn.setAttribute('aria-disabled', isFirstCard);
+
+      if (isFirstCard) {
+        prevBtn.classList.add('is-disabled');
+      } else {
+        prevBtn.classList.remove('is-disabled');
+      }
     }
+
     if (nextBtn) {
-      nextBtn.addEventListener('click', () => updateShowcase(activeIdx + 1));
+      const isLastCard = activeIdx === cards.length - 1;
+
+      nextBtn.disabled = isLastCard;
+      nextBtn.setAttribute('aria-disabled', isLastCard);
+
+      if (isLastCard) {
+        nextBtn.classList.add('is-disabled');
+      } else {
+        nextBtn.classList.remove('is-disabled');
+      }
     }
 
-    // Scroll-triggered Coverflow Zoom & Slide
-    let lastWheelTime = 0;
-    section.addEventListener('wheel', (e) => {
-      const now = Date.now();
-      if (now - lastWheelTime > 450) {
-        if (Math.abs(e.deltaY) > 25 || Math.abs(e.deltaX) > 25) {
-          const delta = e.deltaY > 0 || e.deltaX > 0 ? 1 : -1;
-          const target = activeIdx + delta;
-          if (target >= 0 && target < cards.length) {
-            updateShowcase(target);
-            lastWheelTime = now;
-          }
-        }
+
+    /* =========================================
+       MOVE CARD ROW
+    ========================================= */
+
+    if (cardsRow && cards[activeIdx]) {
+
+      const defaultCenterIdx = Math.floor(cards.length / 2);
+
+      const shiftFactor =
+        defaultCenterIdx - activeIdx;
+
+      const gap =
+        window.innerWidth <= 768 ? 12 : 20;
+
+      const cardStep =
+        cards[activeIdx].offsetWidth + gap;
+
+      cardsRow.style.transform =
+        `translateX(${shiftFactor * cardStep}px)`;
+    }
+
+
+    /* =========================================
+       CARD ACTIVE / INACTIVE STATES
+    ========================================= */
+
+    cards.forEach((card, i) => {
+
+      const offset = i - activeIdx;
+      const absOffset = Math.abs(offset);
+
+      card.classList.remove('is-active');
+
+      if (offset === 0) {
+
+        card.classList.add('is-active');
+
+        card.style.transform =
+          'scale(1.08) translateZ(0)';
+
+        card.style.opacity = '1';
+        card.style.zIndex = '10';
+
+      } else if (absOffset === 1) {
+
+        card.style.transform =
+          `scale(0.88) translateX(${offset * 10}px)`;
+
+        card.style.opacity = '0.55';
+        card.style.zIndex = '5';
+
+      } else {
+
+        card.style.transform =
+          `scale(0.72) translateX(${offset * 15}px)`;
+
+        card.style.opacity = '0.28';
+        card.style.zIndex = '1';
       }
-    }, { passive: true });
-
-    // Touch swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    section.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    section.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const swipeDiff = touchEndX - touchStartX;
-      if (Math.abs(swipeDiff) > 40) {
-        if (swipeDiff < 0) {
-          updateShowcase(activeIdx + 1); // Swipe left -> next
-        } else {
-          updateShowcase(activeIdx - 1); // Swipe right -> prev
-        }
-      }
-    }, { passive: true });
-
-    // Recalculate on window resize
-    window.addEventListener('resize', () => {
-      updateShowcase(activeIdx);
     });
 
-    // Initial render
-    updateShowcase(activeIdx);
+
+    /* =========================================
+       UPDATE ACTIVE CONTENT DETAILS
+    ========================================= */
+
+    if (detailsWrap) {
+
+      const activeCard = cards[activeIdx];
+
+      const badgeText =
+        activeCard.getAttribute('data-badge') ||
+        'PLATFORM CAPABILITY';
+
+      const titleText =
+        activeCard.getAttribute('data-title') ||
+        'Next-Gen Cloud Architecture';
+
+      const descText =
+        activeCard.getAttribute('data-desc') ||
+        'Architected for enterprise scale with surgical reliability and real-time observability.';
+
+      const linkUrl =
+        activeCard.getAttribute('data-link') ||
+        './services.html';
+
+
+      detailsWrap.style.opacity = '0';
+      detailsWrap.style.transform =
+        'translateY(8px)';
+
+
+      setTimeout(() => {
+
+        const badgeEl =
+          detailsWrap.querySelector(
+            '.badge span:last-child'
+          );
+
+        const titleEl =
+          detailsWrap.querySelector('h3');
+
+        const descEl =
+          detailsWrap.querySelector('p');
+
+        const linkEl =
+          detailsWrap.querySelector('a');
+
+
+        if (badgeEl) {
+          badgeEl.textContent = badgeText;
+        }
+
+        if (titleEl) {
+          titleEl.textContent = titleText;
+        }
+
+        if (descEl) {
+          descEl.textContent = descText;
+        }
+
+        if (linkEl) {
+          linkEl.href = linkUrl;
+        }
+
+
+        detailsWrap.style.opacity = '1';
+        detailsWrap.style.transform =
+          'translateY(0)';
+
+      }, 180);
+    }
   }
+
+
+  /* =========================================
+     CARD CLICK
+  ========================================= */
+
+  cards.forEach((card, i) => {
+
+    card.addEventListener('click', () => {
+      updateShowcase(i);
+    });
+
+  });
+
+
+  /* =========================================
+     PREVIOUS BUTTON
+  ========================================= */
+
+  if (prevBtn) {
+
+    prevBtn.addEventListener('click', () => {
+
+      if (activeIdx > 0) {
+        updateShowcase(activeIdx - 1);
+      }
+
+    });
+
+  }
+
+
+  /* =========================================
+     NEXT BUTTON
+  ========================================= */
+
+  if (nextBtn) {
+
+    nextBtn.addEventListener('click', () => {
+
+      if (activeIdx < cards.length - 1) {
+        updateShowcase(activeIdx + 1);
+      }
+
+    });
+
+  }
+
+
+  /* =========================================
+     MOUSE WHEEL
+  ========================================= */
+
+  let lastWheelTime = 0;
+
+  section.addEventListener(
+    'wheel',
+    (e) => {
+
+      const now = Date.now();
+
+      if (now - lastWheelTime > 450) {
+
+        if (
+          Math.abs(e.deltaY) > 25 ||
+          Math.abs(e.deltaX) > 25
+        ) {
+
+          const delta =
+            e.deltaY > 0 || e.deltaX > 0
+              ? 1
+              : -1;
+
+          const target =
+            activeIdx + delta;
+
+
+          if (
+            target >= 0 &&
+            target < cards.length
+          ) {
+
+            updateShowcase(target);
+
+            lastWheelTime = now;
+          }
+
+        }
+
+      }
+
+    },
+    { passive: true }
+  );
+
+
+  /* =========================================
+     TOUCH SWIPE
+  ========================================= */
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+
+  section.addEventListener(
+    'touchstart',
+    (e) => {
+
+      touchStartX =
+        e.changedTouches[0].screenX;
+
+    },
+    { passive: true }
+  );
+
+
+  section.addEventListener(
+    'touchend',
+    (e) => {
+
+      touchEndX =
+        e.changedTouches[0].screenX;
+
+      const swipeDiff =
+        touchEndX - touchStartX;
+
+
+      if (Math.abs(swipeDiff) > 40) {
+
+        if (swipeDiff < 0) {
+
+          // Swipe left = next
+          if (activeIdx < cards.length - 1) {
+            updateShowcase(activeIdx + 1);
+          }
+
+        } else {
+
+          // Swipe right = previous
+          if (activeIdx > 0) {
+            updateShowcase(activeIdx - 1);
+          }
+
+        }
+
+      }
+
+    },
+    { passive: true }
+  );
+
+
+  /* =========================================
+     RESIZE
+  ========================================= */
+
+  window.addEventListener(
+    'resize',
+    () => {
+      updateShowcase(activeIdx);
+    }
+  );
+
+
+  /* =========================================
+     INITIAL RENDER
+  ========================================= */
+
+  updateShowcase(activeIdx);
+}
+
+
+
+
+
 
   /* --------------------------------------------------------------------------
      8. SCREENSHOT 3: FULL-WIDTH PARALLAX STATEMENT BANNER
