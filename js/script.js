@@ -243,6 +243,7 @@
         if (submitBtn) {
           submitBtn.disabled = true;
           submitBtn.innerHTML = '<span class="material-symbols-outlined">sync</span> Processing...';
+          window.location.href='./404.html';
         }
 
         setTimeout(() => {
