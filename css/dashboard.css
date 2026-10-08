@@ -1330,6 +1330,10 @@
   padding: 1.75rem;
 }
 
+.dash-form-select{
+  background-color: red;
+}
+
 .dash-modal-footer {
   padding: 1.25rem 1.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);

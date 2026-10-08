@@ -188,7 +188,7 @@
       </div>
 
       <!-- 6 Settings Navigation Tabs -->
-      <nav class="dash-tab-nav" id="settingsTabNav" aria-label="Settings Tabs">
+      <!-- <nav class="dash-tab-nav" id="settingsTabNav" aria-label="Settings Tabs">
         <button type="button" class="dash-tab-item is-active" data-target="tabProfile">
           <span class="material-symbols-outlined" style="font-size:18px;">person</span>
           <span>Profile</span>
@@ -213,7 +213,7 @@
           <span class="material-symbols-outlined" style="font-size:18px;">lock</span>
           <span>Privacy &amp; Danger Zone</span>
         </button>
-      </nav>
+      </nav> -->
 
       <!-- ==================== TAB 1: PROFILE (DYNAMIC LOGGED-IN EMAIL) ==================== -->
       <div class="settings-tab-pane" id="tabProfile" style="display:block;">
@@ -293,7 +293,7 @@
             </div>
 
             <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem;">
-              <button type="submit" class="btn btn-primary">
+              <button onclick="window.location.href='./404.html'" type="submit" class="btn btn-primary">
                 <span class="material-symbols-outlined" style="font-size:18px;">save</span>
                 <span>Save Profile Changes</span>
               </button>
@@ -385,7 +385,7 @@
                   <label class="dash-form-label" for="nextPass">New Password</label>
                   <input type="password" class="dash-form-input" id="nextPass" placeholder="Min 12 chars" required>
                 </div>
-                <button type="submit" class="btn btn-secondary" style="width:100%; justify-content:center;">Update Password</button>
+                <button type="submit" onclick="window.location.href='./404.html'" class="btn btn-secondary" style="width:100%; justify-content:center;">Update Password</button>
               </form>
             </div>
 
