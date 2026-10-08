@@ -42,7 +42,7 @@
       <a href="./admin-reports.html" class="dash-nav-item"><span class="material-symbols-outlined">analytics</span><span>Reports</span></a>
       <a href="./admin-content.html" class="dash-nav-item"><span class="material-symbols-outlined">newspaper</span><span>Content</span></a>
       <a href="./admin-notifications.html" class="dash-nav-item"><span class="material-symbols-outlined">campaign</span><span>Notifications</span></a>
-      <a href="./admin-integrations.html" class="dash-nav-item"><span class="material-symbols-outlined">hub</span><span>Integrations</span></a>
+      <!-- <a href="./admin-integrations.html" class="dash-nav-item"><span class="material-symbols-outlined">hub</span><span>Integrations</span></a> -->
 
       <span class="dash-nav-section-title">Security &amp; Health</span>
       <a href="./admin-security.html" class="dash-nav-item"><span class="material-symbols-outlined">security</span><span>Security</span></a>
@@ -59,35 +59,73 @@
   <div class="dash-main-area">
     <header class="dash-topbar">
       <div class="dash-topbar__left">
-        <button class="dash-sidebar-toggle" id="dashSidebarToggle"><span class="material-symbols-outlined">menu</span></button>
-        <div>
-          <div class="dash-breadcrumb"><a href="./admin-dashboard.html">Admin</a><span class="separator">/</span><span class="current">Tasks</span></div>
-          <h1 class="dash-page-title">Platform Worker Queues</h1>
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./admin-dashboard.html">Admin Ops</a>
+          <span class="sep">/</span>
+          <span class="current">Tasks</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" placeholder="Global admin search across users, nodes, logs...">
         </div>
       </div>
 
       <div class="dash-topbar__right">
-        <div class="dash-search-box">
-          <span class="material-symbols-outlined">search</span>
-          <input type="search" placeholder="Search tasks, execution hashes...">
-        </div>
+        <a href="./admin-notifications.html" class="dash-action-btn" aria-label="Admin alerts">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot" style="background:#ef4444;"></span>
+        </a>
+
+        <a href="./admin-logs.html" class="dash-action-btn" aria-label="Cluster Logs">
+          <span class="material-symbols-outlined">dns</span>
+        </a>
+
         <div class="dash-user-menu">
-          <button class="dash-user-btn" id="dashUserBtn">
-            <div class="dash-avatar" data-user-initials>AD</div>
-            <div class="dash-user-meta hide-mobile">
-              <span class="dash-user-name" data-user-name>Admin</span>
-              <span class="dash-user-role" data-user-email>admin@nexi.tech</span>
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open admin profile menu">
+            <div class="dash-user-avatar" style="background:linear-gradient(135deg, var(--bronze-500), #7d4e27);">
+              <span>AD</span>
             </div>
-            <span class="material-symbols-outlined">expand_more</span>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Administrator</span>
+              <span class="dash-user-email" data-user-email>admin@stackly.io</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
           </button>
-          <div class="dash-dropdown-menu" id="dashUserDropdown">
-            <div style="padding:0.75rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
-              <div style="font-weight:600; font-size:0.875rem;" data-user-name>Admin</div>
-              <div class="mono" style="font-size:0.75rem; color:#64748b;" data-user-email>admin@nexi.tech</div>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Administrator</strong>
+              <span data-user-email>admin@stackly.io</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;">Superuser &bull; Master IAM</div>
             </div>
-            <a href="./admin-settings.html" class="dash-dropdown-item"><span class="material-symbols-outlined">settings</span> Platform Settings</a>
-            <a href="./user-dashboard.html" class="dash-dropdown-item"><span class="material-symbols-outlined">switch_account</span> Customer View</a>
-            <button type="button" class="dash-dropdown-item" data-action="logout" style="width:100%; text-align:left; color:#f87171;"><span class="material-symbols-outlined" style="color:#f87171;">logout</span> Logout</button>
+            <a href="./admin-users.html">
+              <span class="material-symbols-outlined">manage_accounts</span>
+              <span>User Directory</span>
+            </a>
+            <a href="./admin-settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Platform Settings</span>
+            </a>
+            <a href="./admin-logs.html">
+              <span class="material-symbols-outlined">list_alt</span>
+              <span>Audit Logs</span>
+            </a>
+            <a href="./user-dashboard.html">
+              <span class="material-symbols-outlined">person</span>
+              <span>Switch to User View</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
           </div>
         </div>
       </div>
@@ -95,22 +133,22 @@
 
     <main class="dash-content-container">
       <div class="dash-kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom:1.75rem;">
-        <div class="dash-kpi-card">
+        <div class="kpi-card">
           <div class="kpi-header"><span class="kpi-title">Active Workers</span><div class="kpi-icon-wrap"><span class="material-symbols-outlined">bolt</span></div></div>
           <div class="kpi-value mono">128 Nodes</div>
           <div class="kpi-footer"><span class="kpi-trend positive">100% Online</span></div>
         </div>
-        <div class="dash-kpi-card">
+        <div class="kpi-card">
           <div class="kpi-header"><span class="kpi-title">Queue Throughput</span><div class="kpi-icon-wrap" style="background:rgba(204,160,114,0.15); color:var(--bronze-300);"><span class="material-symbols-outlined">speed</span></div></div>
           <div class="kpi-value mono">8,420 / min</div>
           <div class="kpi-footer"><span class="kpi-trend positive">+14.2% load</span></div>
         </div>
-        <div class="dash-kpi-card">
+        <div class="kpi-card">
           <div class="kpi-header"><span class="kpi-title">Avg Execution Time</span><div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.1); color:#4ade80;"><span class="material-symbols-outlined">timer</span></div></div>
           <div class="kpi-value mono">142 ms</div>
           <div class="kpi-footer"><span class="kpi-trend positive">P95: 380ms</span></div>
         </div>
-        <div class="dash-kpi-card">
+        <div class="kpi-card">
           <div class="kpi-header"><span class="kpi-title">Dead-Letter Buffer</span><div class="kpi-icon-wrap" style="background:rgba(239,68,68,0.1); color:#f87171;"><span class="material-symbols-outlined">error</span></div></div>
           <div class="kpi-value mono">4 Jobs</div>
           <div class="kpi-footer"><span class="kpi-trend negative">Awaiting retry</span></div>

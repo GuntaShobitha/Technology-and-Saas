@@ -694,6 +694,10 @@
   margin-left: 0.35rem;
 }
 
+.dash-content-container {
+  padding: 20px;
+}
+
 /* Dashboard Panel & Cards */
 .dash-panel {
   background-color: #13171d;
@@ -1336,7 +1340,19 @@
 
 /* Forms */
 .dash-form-group {
+  background-color: #161b22;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.25rem;
   margin-bottom: 1.25rem;
+}
+
+.dash-card {
+  background-color: #161b22;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .dash-form-label {

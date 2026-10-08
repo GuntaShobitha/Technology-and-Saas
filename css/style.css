@@ -5317,3 +5317,14 @@ width: 300px;
   }
 }
 
+.btn--outline {
+  border: 1px solid #fff;
+}
+
+
+.nav-logo-image {
+      height: 34px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(2) invert(1);
+}

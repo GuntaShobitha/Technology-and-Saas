@@ -42,7 +42,7 @@
       <a href="./admin-reports.html" class="dash-nav-item"><span class="material-symbols-outlined">analytics</span><span>Reports</span></a>
       <a href="./admin-content.html" class="dash-nav-item"><span class="material-symbols-outlined">newspaper</span><span>Content</span></a>
       <a href="./admin-notifications.html" class="dash-nav-item"><span class="material-symbols-outlined">campaign</span><span>Notifications</span></a>
-      <a href="./admin-integrations.html" class="dash-nav-item"><span class="material-symbols-outlined">hub</span><span>Integrations</span></a>
+      <!-- <a href="./admin-integrations.html" class="dash-nav-item"><span class="material-symbols-outlined">hub</span><span>Integrations</span></a> -->
 
       <span class="dash-nav-section-title">Security &amp; Health</span>
       <a href="./admin-security.html" class="dash-nav-item"><span class="material-symbols-outlined">security</span><span>Security</span></a>
@@ -57,60 +57,98 @@
   </aside>
 
   <div class="dash-main-area">
-    <header class="dash-topbar">
+     <header class="dash-topbar">
       <div class="dash-topbar__left">
-        <button class="dash-sidebar-toggle" id="dashSidebarToggle"><span class="material-symbols-outlined">menu</span></button>
-        <div>
-          <div class="dash-breadcrumb"><a href="./admin-dashboard.html">Admin</a><span class="separator">/</span><span class="current">Subscriptions</span></div>
-          <h1 class="dash-page-title">Tenant Subscriptions &amp; ARR</h1>
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle navigation drawer">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <div class="dash-breadcrumb-trail">
+          <a href="./index.html">STACKLY</a>
+          <span class="sep">/</span>
+          <a href="./admin-dashboard.html">Admin Ops</a>
+          <span class="sep">/</span>
+          <span class="current">Subscriptions</span>
+        </div>
+
+        <div class="dash-search-box">
+          <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">search</span>
+          <input type="text" placeholder="Global admin search across users, nodes, logs...">
         </div>
       </div>
 
       <div class="dash-topbar__right">
-        <div class="dash-search-box">
-          <span class="material-symbols-outlined">search</span>
-          <input type="search" placeholder="Search subscription contracts...">
-        </div>
+        <a href="./admin-notifications.html" class="dash-action-btn" aria-label="Admin alerts">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="dash-badge-dot" style="background:#ef4444;"></span>
+        </a>
+
+        <a href="./admin-logs.html" class="dash-action-btn" aria-label="Cluster Logs">
+          <span class="material-symbols-outlined">dns</span>
+        </a>
+
         <div class="dash-user-menu">
-          <button class="dash-user-btn" id="dashUserBtn">
-            <div class="dash-avatar" data-user-initials>AD</div>
-            <div class="dash-user-meta hide-mobile">
-              <span class="dash-user-name" data-user-name>Admin</span>
-              <span class="dash-user-role" data-user-email>admin@nexi.tech</span>
+          <button class="dash-user-btn" id="dashUserBtn" aria-label="Open admin profile menu">
+            <div class="dash-user-avatar" style="background:linear-gradient(135deg, var(--bronze-500), #7d4e27);">
+              <span>AD</span>
             </div>
-            <span class="material-symbols-outlined">expand_more</span>
+            <div class="dash-user-meta">
+              <span class="dash-user-name" data-user-name>Administrator</span>
+              <span class="dash-user-email" data-user-email>admin@stackly.io</span>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px; color:#64748b;">expand_more</span>
           </button>
-          <div class="dash-dropdown-menu" id="dashUserDropdown">
-            <div style="padding:0.75rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
-              <div style="font-weight:600; font-size:0.875rem;" data-user-name>Admin</div>
-              <div class="mono" style="font-size:0.75rem; color:#64748b;" data-user-email>admin@nexi.tech</div>
+
+          <div class="dash-dropdown" id="dashUserDropdown">
+            <div class="dash-dropdown-header">
+              <strong data-user-name>Administrator</strong>
+              <span data-user-email>admin@stackly.io</span>
+              <div class="mono" style="font-size:0.65rem; color:var(--bronze-300); margin-top:3px;">Superuser &bull; Master IAM</div>
             </div>
-            <a href="./admin-settings.html" class="dash-dropdown-item"><span class="material-symbols-outlined">settings</span> Platform Settings</a>
-            <a href="./user-dashboard.html" class="dash-dropdown-item"><span class="material-symbols-outlined">switch_account</span> Customer View</a>
-            <button type="button" class="dash-dropdown-item" data-action="logout" style="width:100%; text-align:left; color:#f87171;"><span class="material-symbols-outlined" style="color:#f87171;">logout</span> Logout</button>
+            <a href="./admin-users.html">
+              <span class="material-symbols-outlined">manage_accounts</span>
+              <span>User Directory</span>
+            </a>
+            <a href="./admin-settings.html">
+              <span class="material-symbols-outlined">tune</span>
+              <span>Platform Settings</span>
+            </a>
+            <a href="./admin-logs.html">
+              <span class="material-symbols-outlined">list_alt</span>
+              <span>Audit Logs</span>
+            </a>
+            <a href="./user-dashboard.html">
+              <span class="material-symbols-outlined">person</span>
+              <span>Switch to User View</span>
+            </a>
+            <div class="dash-dropdown-divider"></div>
+            <button type="button" data-action="logout">
+              <span class="material-symbols-outlined" style="color:#f87171;">logout</span>
+              <span style="color:#f87171;">Sign Out</span>
+            </button>
           </div>
         </div>
       </div>
     </header>
 
     <main class="dash-content-container">
-      <div class="dash-kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom:1.75rem;">
-        <div class="dash-kpi-card">
+      <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom:1.75rem;">
+        <div class="kpi-card" style="margin-bottom:20px;">
           <div class="kpi-header"><span class="kpi-title">Monthly Recurring (MRR)</span><div class="kpi-icon-wrap" style="background:rgba(204,160,114,0.15); color:var(--bronze-300);"><span class="material-symbols-outlined">payments</span></div></div>
           <div class="kpi-value mono">$412,800</div>
           <div class="kpi-footer"><span class="kpi-trend positive"><span class="material-symbols-outlined">trending_up</span>+16.4% MoM</span></div>
         </div>
-        <div class="dash-kpi-card">
+        <div class="kpi-card" style="margin-bottom:20px;">
           <div class="kpi-header"><span class="kpi-title">ARR Run Rate</span><div class="kpi-icon-wrap"><span class="material-symbols-outlined">trending_up</span></div></div>
           <div class="kpi-value mono">$4.95M</div>
           <div class="kpi-footer"><span class="kpi-trend positive">Annual Target: $5.2M</span></div>
         </div>
-        <div class="dash-kpi-card">
+        <div class="kpi-card" style="margin-bottom:20px;">
           <div class="kpi-header"><span class="kpi-title">Active Subscriptions</span><div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.1); color:#4ade80;"><span class="material-symbols-outlined">credit_card</span></div></div>
           <div class="kpi-value mono">3,840</div>
           <div class="kpi-footer"><span class="kpi-trend positive">+118 this month</span></div>
         </div>
-        <div class="dash-kpi-card">
+        <div class="kpi-card" style="margin-bottom:20px;">
           <div class="kpi-header"><span class="kpi-title">Net Dollar Retention</span><div class="kpi-icon-wrap"><span class="material-symbols-outlined">autorenew</span></div></div>
           <div class="kpi-value mono">124%</div>
           <div class="kpi-footer"><span class="kpi-trend positive">Strong expansion</span></div>
@@ -119,7 +157,7 @@
 
       <!-- Plan Distribution Cards -->
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1.25rem; margin-bottom:1.75rem;">
-        <div class="dash-card">
+        <div class="kpi-card">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
             <h4 style="color:#fff; font-size:1.05rem;">Starter Tier</h4>
             <span class="mono" style="color:#94a3b8; font-size:0.8rem;">$29 / mo</span>
@@ -128,7 +166,7 @@
           <div style="font-size:0.85rem; color:#94a3b8;">Total MRR: <strong style="color:var(--bronze-300);">$41,180</strong></div>
         </div>
 
-        <div class="dash-card">
+        <div class="kpi-card">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
             <h4 style="color:#fff; font-size:1.05rem;">Professional Tier</h4>
             <span class="mono" style="color:#94a3b8; font-size:0.8rem;">$99 / mo</span>
@@ -137,14 +175,14 @@
           <div style="font-size:0.85rem; color:#94a3b8;">Total MRR: <strong style="color:var(--bronze-300);">$182,160</strong></div>
         </div>
 
-        <div class="dash-card" style="border-color:rgba(204,160,114,0.3); background:rgba(184,130,79,0.06);">
+        <!-- <div class="dash-card" style="border-color:rgba(204,160,114,0.3); background:rgba(184,130,79,0.06);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
             <h4 style="color:#fff; font-size:1.05rem;">Enterprise Custom</h4>
             <span class="mono" style="color:var(--bronze-300); font-size:0.8rem;">$499+ / mo</span>
           </div>
           <div class="mono" style="font-size:1.8rem; font-weight:700; color:#fff; margin-bottom:0.5rem;">580 <span style="font-size:0.85rem; color:#64748b; font-weight:400;">accounts</span></div>
           <div style="font-size:0.85rem; color:#94a3b8;">Total MRR: <strong style="color:var(--bronze-300);">$189,460</strong></div>
-        </div>
+        </div> -->
       </div>
 
       <div class="dash-card" style="padding:0; overflow:hidden;">
