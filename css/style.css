@@ -5039,6 +5039,9 @@ width: 300px;
 }
 
 
+
+
+
 /* =========================================================
    FOOTER BOTTOM
    ========================================================= */
@@ -5155,6 +5158,12 @@ width: 300px;
     padding: 50px 0 45px;
   }
 
+  .responsive-site-enginerring {
+    flex-direction: column;
+  }
+.small-screen-styling {
+  margin-top: 10px;
+}
   
 
   .saas-footer__description {
